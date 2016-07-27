@@ -10,10 +10,10 @@ from lxml import etree
 
 class WeixinInterface:
 
-    def __init__(self):
-        self.app_root = os.path.dirname(__file__)
-        self.tampleates_root = os.path.join(self.app_root, 'templates')
-        self.render = web.template.render(self.templates_root)
+#    def __init__(self):
+#        self.app_root = os.path.dirname(__file__)
+#        self.tampleates_root = os.path.join(self.app_root, 'templates')
+#        self.render = web.template.render(self.templates_root)
 
     def GET(self):
 
