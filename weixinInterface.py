@@ -1,3 +1,5 @@
+#coding:UTF-8
+
 import hashlib
 import web
 import lxml
