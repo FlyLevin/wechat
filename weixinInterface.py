@@ -12,7 +12,7 @@ class WeixinInterface:
 
     def __init__(self):
         self.app_root = os.path.dirname(__file__)
-        self.tamplates_root = os.path.join(self.app_root, 'templates')
+        self.templates_root = os.path.join(self.app_root, 'templates')
         self.render = web.template.render(self.templates_root)
 
     def GET(self):
@@ -41,14 +41,14 @@ class WeixinInterface:
         else:
             return "Hello"
 
-#    def POST(self):
-#        str_xml = web.data()
-#        xml = etree.fromstring(str_xml)
+    def POST(self):
+        str_xml = web.data()
+        xml = etree.fromstring(str_xml)
 
         # get the information
-#       content = xml.find("Content").text
-#        msgType = xml.find("MsgType").text
-#        fromUser = xml.find("FromUserName").text
-#        toUser = xml.find("ToUserName").text
+        content = xml.find("Content").text
+        msgType = xml.find("MsgType").text
+        fromUser = xml.find("FromUserName").text
+        toUser = xml.find("ToUserName").text
 
-#        return self.render.reply_text(fromUser, toUser, int(time.time()), u"Hello what you just said is:"+content)
+        return self.render.reply_text(fromUser, toUser, int(time.time()), u"Hello what you just said is:"+content)
