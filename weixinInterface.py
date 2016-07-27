@@ -38,3 +38,5 @@ class WeixinInterface:
         # if the request from wechat, return echostr
         if hashcode == signature:
             return echostr
+        else:
+            return "Hello"
