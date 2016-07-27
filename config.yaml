@@ -3,7 +3,7 @@ version: 1
 
 libraries:
 - name: web.py
-  version:"0.38"
+  version:"0.36"
 
-- name: lxml:
+- name: lxml
   version:"2.3.4"
