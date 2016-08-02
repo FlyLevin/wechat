@@ -10,7 +10,7 @@ import os
 import urllib2,json
 from lxml import etree
 from django.views.generic.base import View
-from django.shortcuts import render
+from django.shortcuts import render, render_to_response
 class WeixinInterfaceView(View):
 	def get(self, request):
 		#get the request content
@@ -43,5 +43,5 @@ class WeixinInterfaceView(View):
 		content = xml.find('Content').text
 		msgId = xml.find('MsgId').text
                 print msgType, content
-		return render(request, 'reply_text.xml', {'toUserName': fromUserName, 'fromUserName': toUserName, 'createTime': time.time(), 'msgType': msgType, 'content': content}, content_type = 'application/xml')
+		return render_to_response('reply_text.xml', {'toUserName': fromUserName, 'fromUserName': toUserName, 'createTime': time.time(), 'msgType': msgType, 'content': content}, content_type = 'application/xml')
 						
