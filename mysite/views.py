@@ -23,6 +23,7 @@ class WeixinInterfaceView(View):
 		token = 'flylevin'
 		
 		tmpList = [token, timestamp, nonce]
+                print tmpList, echostr
 		tmpList.sort()
 		tmpstr = '%s%s%s' % tuple(tmpList)
                 print tmpList
