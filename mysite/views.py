@@ -16,7 +16,7 @@ class WeixinInterfaceView(View):
 		#get the request content
 		signature = request.GET.get('signature', None)
 		timestamp = request.GET.get('timestamp', None)
-		none = request.GET.get('nonce', None)
+		nonce = request.GET.get('nonce', None)
 		echostr = request.GET.get('echostr', None)
 		
 		#token yourself
