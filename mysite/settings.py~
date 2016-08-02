@@ -116,9 +116,9 @@ AUTH_PASSWORD_VALIDATORS = [
 # Internationalization
 # https://docs.djangoproject.com/en/1.10/topics/i18n/
 
-LANGUAGE_CODE = 'Asia/Shanghai'
+LANGUAGE_CODE = 'en-us'
 
-TIME_ZONE = 'zh-cn'
+TIME_ZONE = 'UTC'
 
 USE_I18N = True
 
@@ -126,10 +126,6 @@ USE_L10N = True
 
 USE_TZ = True
 
-# Add the template folder
-TEMPLATE_DIRS = (
-    './mysite/templates',
-)
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.10/howto/static-files/

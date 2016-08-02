@@ -13,9 +13,11 @@ Including another URLconf
     1. Import the include() function: from django.conf.urls import url, include
     2. Add a URL to urlpatterns:  url(r'^blog/', include('blog.urls'))
 """
-from django.conf.urls import url
-from django.contrib import admin
+from django.conf.urls import patterns, include, url
+from mysite.views import WeixinInterfaceView
+#from django.contrib import admin
+from django.views.decorators.csrf import csrf_exempt #remotve csrf
 
-urlpatterns = [
-    url(r'^admin/', admin.site.urls),
+urlpatterns = patterns('',
+    url(r'^weixin/', csrf_exempt(WeixinInterfaceView.as_view())),
 ]
