@@ -12,6 +12,15 @@ https://docs.djangoproject.com/en/1.10/ref/settings/
 
 import os
 
+if 'SERVER_SOFTWARE' in os.environ:
+    from sae.const import(MYSQL_HOST, MYSQL_PORT, MYSQL_USER, MYSQL_PASS, MYSQL_DB)
+else:
+    MYSQL_HOST = 'localhost'
+    MYSQL_PORT = '3306'
+    MYSQL_USER = 'root'
+    MYSQL_PASS = '****'
+    MYSQL_DB   = 'YOUR_DATABASE_NAME'
+
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
@@ -75,8 +84,12 @@ WSGI_APPLICATION = 'mysite.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        'ENGINE': 'django.db.backends.mysql', #'django.db.backends.sqlite3',
+        'NAME': MYSQL_FB, #os.path.join(BASE_DIR, 'db.sqlite3'),
+        'USER' : MYSQL_USER,
+        'PASSWORD': MYSQL_PASS,
+        'HOST': MYSQL_HOST,
+        'PORT': MYSQL_PORT,
     }
 }
 
