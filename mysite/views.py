@@ -48,7 +48,7 @@ class WeixinInterfaceView(View):
 		               'fromUserName': toUserName,
 		               'createTime': time.time(),
 		               'msgType': msgType,
-		               'content': content,
+		               'content': content
 		              },
 		              content_type = 'application/xml'
 		)
