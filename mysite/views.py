@@ -25,7 +25,6 @@ class WeixinInterfaceView(View):
 		tmpList = [token, timestamp, nonce]
 		tmpList.sort()
 		tmpstr = '%s%s%s' % tuple(tmpList)
-                print tmpstr, echostr		
 		#sha1 encode method
 		tmpstr = hashlib.sha1(tmpstr).hexdigest()
 		
@@ -43,6 +42,7 @@ class WeixinInterfaceView(View):
 		msgType = xml.find('MsgType').text
 		content = xml.find('Content').text
 		msgId = xml.find('MsgId').text
+                print msgType, content
 		return render(request, 'reply_text.xml',
 		              {'toUserName': fromUserName,
 		               'fromUserName': toUserName,
