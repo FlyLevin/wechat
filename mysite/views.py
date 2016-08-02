@@ -25,7 +25,8 @@ class WeixinInterfaceView(View):
 		tmpList = [token, timestamp, nonce]
 		tmpList.sort()
 		tmpstr = '%s%s%s' % tuple(tmpList)
-		
+                print tmplist
+                print echostr		
 		#sha1 encode method
 		tmpstr = hashlib.sha1(tmpstr).hexdigest()
 		
