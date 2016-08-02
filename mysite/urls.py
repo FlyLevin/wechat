@@ -20,4 +20,4 @@ from django.views.decorators.csrf import csrf_exempt #remotve csrf
 
 urlpatterns = patterns('',
     url(r'^weixin/', csrf_exempt(WeixinInterfaceView.as_view())),
-]
+)
