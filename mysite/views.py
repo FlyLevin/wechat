@@ -43,13 +43,5 @@ class WeixinInterfaceView(View):
 		content = xml.find('Content').text
 		msgId = xml.find('MsgId').text
                 print msgType, content
-		return render(request, 'reply_text.xml',
-		              {'toUserName': fromUserName,
-		               'fromUserName': toUserName,
-		               'createTime': time.time(),
-		               'msgType': msgType,
-		               'content': content
-		              },
-		              content_type = 'application/xml'
-		)
+		return render(request, 'reply_text.xml', {'toUserName': fromUserName, 'fromUserName': toUserName, 'createTime': time.time(), 'msgType': msgType, 'content': content}, content_type = 'application/xml')
 						
