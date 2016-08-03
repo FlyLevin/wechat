@@ -19,4 +19,4 @@ from mysite.views import WeixinInterfaceView
 from django.views.decorators.crsf import csrf_exempt
 
 
-urlpatterns = patterns('', url(r'^weixin/', csrf_exempt(WeixinInterfaceView.as_view()),)
+urlpatterns = patterns('', url(r'^weixin/', csrf_exempt(WeixinInterfaceView.as_view())),)
