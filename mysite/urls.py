@@ -17,4 +17,4 @@ from django.conf.urls import patterns, include, url
 from mysite.views import WeixinInterfaceView
 #from django.contrib import admin
 
-urlpatterns = patterns('', url(r'^weixin/$', WeixinInterfaceView.as_view()),)
+urlpatterns = patterns('', url(r'^weixin$', WeixinInterfaceView.as_view()),)
