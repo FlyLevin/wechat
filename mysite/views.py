@@ -11,9 +11,9 @@ import urllib2,json
 from lxml import etree
 from django.views.generic.base import View
 from django.shortcuts import render, render_to_response
-from django.views.decorators.csrf import csrf_exempt
+#from django.views.decorators.csrf import csrf_exempt
 
-@csrf_exempt
+#@csrf_exempt
 
 class WeixinInterfaceView(View):
 	def get(self, request):
