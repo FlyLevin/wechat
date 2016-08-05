@@ -15,4 +15,4 @@ Including another URLconf
 """
 from django.conf.urls import patterns, include, url
 
-urlpatterns = patterns('', url(r'^wechat/', include('wechat.urls', namespace'wechat')), )
+urlpatterns = patterns('', url(r'^wechat/', include('wechat.urls', namespace = 'wechat')), )
