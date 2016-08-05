@@ -25,7 +25,7 @@ class WechatService(object):
         textReply.setToUserName(fromUserName)
         textReply.setFromUserName(toUserName)
         textReply.setCreateTime(time.time())
-        textReply.setMsgType(MessageUtil.RESP_MESSAGE_TYPE_TEXT)
+        textReply.setMsgType(RESP_MESSAGE_TYPE_TEXT)
 
         if msgType == REQ_MESSAGE_TYPE_TEXT:
             content = requestMap.get('Content').decode('utf-8')
