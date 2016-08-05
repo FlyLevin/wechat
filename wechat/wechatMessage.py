@@ -6,7 +6,7 @@
 # Description: pack all the message type: text/image/voice/video/location/link
 
 """
-
+# -*- coding:utf-8 -*-
 
 class BaseMessage(object):
     """base message class"""

@@ -1,3 +1,4 @@
+# -*- coding:utf-8 -*-
 import time
 from wechatUtil import MessageUtil
 from wechatReply import TextReply

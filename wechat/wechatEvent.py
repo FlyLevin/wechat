@@ -1,3 +1,4 @@
+# -*- coding:utf-8 -*-
 """
 # Author: levin ding
 # Created Time : 2016/08/05 

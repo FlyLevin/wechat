@@ -6,6 +6,7 @@
 # Description: Reply function
 
 """
+# -*- coding:utf-8 -*-
 
 class BaseReply(object):
     """base reply message class"""

@@ -4,7 +4,7 @@ from django.shortcuts import render
 from django.http import HttpResponse
 from django.views.generic.base import View
 from .wechatUtil import checkSignature
-from .wechatService import wechatService
+from .wechatService import WechatService
 
 
 class WechatInterfaceView(View):
@@ -15,4 +15,4 @@ class WechatInterfaceView(View):
             return HttpResponse(echostr)
 
     def post(self, request):
-        return HttpResponse(wechatService.processRequest(request))
+        return HttpResponse(WechatService.processRequest(request))
