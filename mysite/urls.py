@@ -14,9 +14,5 @@ Including another URLconf
     2. Add a URL to urlpatterns:  url(r'^blog/', include('blog.urls'))
 """
 from django.conf.urls import patterns, include, url
-from mysite.views import WeixinInterfaceView
-#from django.contrib import admin
-from django.views.decorators.csrf import csrf_exempt
 
-
-urlpatterns = patterns('', url(r'^weixin/', csrf_exempt(WeixinInterfaceView.as_view())), )
+urlpatterns = patterns('', url(r'^wechat/', include('wechat.urls', namespace'wechat'))), )
