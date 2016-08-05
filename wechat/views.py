@@ -15,4 +15,5 @@ class WechatInterfaceView(View):
             return HttpResponse(echostr)
 
     def post(self, request):
+        print 'went into post'
         return HttpResponse(WechatService.processRequest(request))

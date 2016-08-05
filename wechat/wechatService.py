@@ -56,8 +56,6 @@ class WechatService(object):
                 # TODO
                 pass
 
-        print textReply
-
         textReply.setContent(respContent)
         respXml = MessageUtil.class2xml(textReply)
 
