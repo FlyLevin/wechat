@@ -30,7 +30,7 @@ TEMPLATE_DEBUG = False
 
 ALLOWED_HOSTS = '*'
 
-TOKEN = 'yimi'
+TOKEN = 'flylevin'
 
 # Application definition
 
@@ -69,7 +69,7 @@ debug = not environ.get("APP_NAME", "")
 if debug:
     MYSQL_DB = 'app_saepy'
     MYSQL_USER = 'root'
-    MYSQL_PASS = 'dlovew2009'
+    MYSQL_PASS = '********'
     MYSQL_HOST_M = '127.0.0.1'
     MYSQL_HOST_S = '127.0,0,1'
     MYSQL_PORT = '3306'
@@ -97,7 +97,7 @@ DATABASES = {
 # Internationalization
 # https://docs.djangoproject.com/en/1.6/topics/i18n/
 
-LANGUAGE_CODE = 'zh-cn'
+LANGUAGE_CODE = 'zh-Hans'
 
 TIME_ZONE = 'Asia/Shanghai'
 
