@@ -8,6 +8,8 @@ from yimi.settings import TOKEN
 from django.contrib import admin
 admin.autodiscover()
 
+from yimi.views import syncdb
+
 urlpatterns = patterns('',
     # Examples:
     url(r'^%s/(\d+)/$'%TOKEN, 'blog.views.weixin_api', name='weixin_api'),
