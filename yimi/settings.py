@@ -63,12 +63,34 @@ WSGI_APPLICATION = 'yimi.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/1.6/ref/settings/#databases
 
+import os.path
+from os import environ
+debug = not environ.get("APP_NAME", "")
+if debug:
+    MYSQL_DB = 'app_saepy'
+    MYSQL_USER = 'root'
+    MYSQL_PASS = 'dlovew2009'
+    MYSQL_HOST_M = '127.0.0.1'
+    MYSQL_HOST_S = '127.0,0,1'
+    MYSQL_PORT = '3306'
+else:
+    import sae.const
+    MYSQL_DB = sae.const.MYSQL_DB
+    MYSQL_USER = sae.const.MYSQL_USER
+    MYSQL_PASS = sae.const.MYSQL_PASS
+    MYSQL_HOST_M = sae.const.MYSQL_HOST
+    MYSQL_HOST_S = sae.const.MYSQL_HOST_S
+    MYSQL_PORT = sae.const.MYSQL_PORT
+
+
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.*',
-        'NAME': '*',
-        'USER': '*',
-        'PASSWORD': '*',
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': MYSQL_DB,
+        'USER': MYSQL_USER,
+        'PASSWORD': MYSQL_PASS,
+        'HOST': MYSQL_HOST_M,
+        'PORT': MYSQL_PORT,
     }
 }
 
