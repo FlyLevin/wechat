@@ -18,7 +18,7 @@ def syncdb(request):
     return HttpResponse(result.replace("\n","<br/>")) 
 
 def createUser(request):
-    from django.corntrib.auth.models import User
+    from django.contrib.auth.models import User
     user = User.object.create_user('admin', 'admin@123.com', 'dlovew2009') 
     user.is_staf = True
     user.save()
