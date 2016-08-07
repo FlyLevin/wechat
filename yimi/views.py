@@ -21,4 +21,5 @@ def createUser(request):
     from django.contrib.auth.models import User
     user = User.objects.get(username__exact='admin') 
     user.set_password('dlovew2009')
-    user.save()
+    a = user.save()
+    return HttpResponse(a)
