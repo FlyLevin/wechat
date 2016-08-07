@@ -17,9 +17,3 @@ def syncdb(request):
     sys.stdout = saveout  
     return HttpResponse(result.replace("\n","<br/>")) 
 
-def createUser(request):
-    from django.contrib.auth.models import User
-    user = User.objects.get(username='admin') 
-    user.set_password('dlovew2009')
-    a = user.save()
-    return HttpResponse(a)
