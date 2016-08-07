@@ -15,4 +15,10 @@ def syncdb(request):
     #获得“manage.py syncdb”的执行输出结果，并展示在页面  
     result = log_out.getvalue()  
     sys.stdout = saveout  
-    return HttpResponse(result.replace("\n","<br/>"))  
+    return HttpResponse(result.replace("\n","<br/>")) 
+
+def createUser():
+    from django.corntrib.auth.models import User
+    user = User.object.create_user('admin', 'admin@123.com', 'dlovew2009') 
+    user.is_staf = True
+    user.save()
