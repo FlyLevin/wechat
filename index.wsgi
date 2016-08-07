@@ -2,7 +2,7 @@
 import os
 
 import sae
-from yimi import wsgi
+#from yimi import wsgi
 
 from sae.ext.shell import ShellMiddleware
 
