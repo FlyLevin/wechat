@@ -2,6 +2,9 @@ name: wechat
 version: 1
 
 libraries:
+- name: "django"
+  version: "1.5"
+
 - name: lxml
   version: "2.3.4"
 
