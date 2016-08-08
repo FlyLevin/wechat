@@ -1,6 +1,7 @@
 #coding:utf8
 
-from django.db import models
+#from django.db import models
+import models
 from blog.utils import upload_file_handler
 from blog.models import Article, AppItem
 from django.contrib.auth.models import User
