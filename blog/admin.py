@@ -1,6 +1,5 @@
 from django.contrib import admin
-#from models import *
-import models
+from models import *
 
 class DataAdmin(admin.ModelAdmin):
     list_display = ['keyword', 'content']
