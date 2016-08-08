@@ -37,6 +37,9 @@ def mylogin(request):
         context_instance=RequestContext(request))
 def get_appitem(user):
     if user:
+        print user
+        a = AppItem.objects.filter(user=user)
+        print a.__dict__
         return AppItem.objects.filter(user=user).first()
 
 def page_turning(list_obj, request, count=10):
