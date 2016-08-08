@@ -17,3 +17,7 @@ def syncdb(request):
     sys.stdout = saveout  
     return HttpResponse(result.replace("\n","<br/>")) 
 
+def createUser(request):
+    from django.contrib.auth.models import User
+    User.objects.create_user('admin', 'admin@123.com', 'dlovew2009')
+    return HttpResponse('Success')
