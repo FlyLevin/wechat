@@ -6,7 +6,7 @@ from django.db.models.aggregates import *  # NOQA
 from django.db.models.deletion import (  # NOQA
     CASCADE, DO_NOTHING, PROTECT, SET, SET_DEFAULT, SET_NULL, ProtectedError,
 )
-from django.db.models.expressions import (  # NOQA
+from models16.expressions import (  # NOQA
     Case, Expression, ExpressionWrapper, F, Func, Value, When,
 )
 from django.db.models.fields import *  # NOQA
