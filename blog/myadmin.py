@@ -38,8 +38,7 @@ def mylogin(request):
 def get_appitem(user):
     if user:
         print user
-        a = AppItem.objects.filter(user=user)
-        print a.__dict__
+        print dir(AppItem.objects)
         return AppItem.objects.filter(user=user).first()
 
 def page_turning(list_obj, request, count=10):
