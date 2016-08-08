@@ -42,16 +42,6 @@ SUB_BUTTON_CHOICES = (
     ('view', '跳转'),
 )
 
-class QuerySet(models.QuerySet):
-    def first(self):
-        """
-        Returns the first object of a query, returns None if no match is found.
-        """
-        objects = list((self if self.ordered else self.order_by('pk'))[:1])
-        if objects:
-            return objects[0]
-        return None
-
 class Message(models.Model):
     type = models.CharField(max_length=100, blank=True, null=True, verbose_name='收到信息类型', choices=TYPE_LIST)
     keyword = models.CharField(max_length=100, blank=True, null=True, verbose_name='关键字')
