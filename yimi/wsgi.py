@@ -5,6 +5,9 @@ import os
 import sys
 reload(sys)
 
+import django
+django.setup()
+
 sys.setdefaultencoding('utf-8')
 
 os.environ.setdefault("DJANGO_SETTINGS_MODULE", "yimi.settings")
