@@ -42,6 +42,8 @@ SUB_BUTTON_CHOICES = (
     ('view', '跳转'),
 )
 
+print dir(models)
+
 class QuerySet(models.QuerySet):
     def first(self):
         """
