@@ -21,3 +21,10 @@ def createUser(request):
     from django.contrib.auth.models import User
     User.objects.create_user('admin', 'admin@123.com', 'dlovew2009')
     return HttpResponse('Success')
+
+def createCacheTable(request):
+    import os, subprocess
+    BASE_DIR = os.path.dirname(os.path.dirname(__file__))
+    Manage = os.path.join(BASE_DIR, 'manage.py')
+    Handle = subprocess.Popen('ls -al '+Manage, shell=True)
+    return HttpResponse(Handle.read())
