@@ -26,5 +26,6 @@ def createCacheTable(request):
     import os, subprocess
     BASE_DIR = os.path.dirname(os.path.dirname(__file__))
     Manage = os.path.join(BASE_DIR, 'manage.py')
-    Handle = subprocess.Popen('ls -al '+Manage, shell=True)
-    return HttpResponse(Handle.read())
+    CMD = 'ls -al '+Manage
+    Handle = subprocess.call(CMD, shell=True)
+    return HttpResponse(Handle)
