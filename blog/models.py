@@ -6,8 +6,8 @@ import datetime
 import urllib2
 import os
 
-from django.db import models
-#import models16 as models
+#from django.db import models
+import models16 as models
 from django.contrib.auth.models import User
 from django.db.models.signals import post_save, m2m_changed
 from django.core.cache import cache
@@ -42,17 +42,16 @@ SUB_BUTTON_CHOICES = (
     ('view', '跳转'),
 )
 
-print dir(models)
 
-class QuerySet(models.QuerySet):
-    def first(self):
-        """
-        Returns the first object of a query, returns None if no match is found.
-        """
-        objects = list((self if self.ordered else self.order_by('pk'))[:1])
-        if objects:
-            return objects[0]
-        return None
+#class NewManager(models.Manager):
+#    def first(self):
+#        """
+#        Returns the first object of a query, returns None if no match is found.
+#        """
+#        objects = list((self if self.ordered else self.order_by('pk'))[:1])
+#        if objects:
+#            return objects[0]
+#        return None
 
 class Message(models.Model):
     type = models.CharField(max_length=100, blank=True, null=True, verbose_name='收到信息类型', choices=TYPE_LIST)
