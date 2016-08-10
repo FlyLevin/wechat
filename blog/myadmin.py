@@ -202,13 +202,13 @@ def parse_listchoid(listchoid):
 @login_required(login_url=LOGIN_URL)
 def reply(request):
     '''关注回复，无匹配回复，关键字编辑'''
-    print tag
     appitem = get_appitem(request.user)
     tag = request.GET.get('tag')
     keyword = request.GET.get('keyword') #没有值时是：关注回复，无匹配回复
     mid = request.GET.get('mid') #没有值时是：关注回复，无匹配回复
     add = request.GET.get('add') #新增关键字符号
     news_show = None
+    print tag
     print appitem.messages.filter(tag=tag)
     if tag in ['keyword_default_recontent', 'subscribe']:
         message = appitem.messages.filter(tag=tag).first()
