@@ -204,6 +204,7 @@ def reply(request):
     '''关注回复，无匹配回复，关键字编辑'''
     appitem = get_appitem(request.user)
     print request.user
+    print appitem
     tag = request.GET.get('tag')
     keyword = request.GET.get('keyword') #没有值时是：关注回复，无匹配回复
     mid = request.GET.get('mid') #没有值时是：关注回复，无匹配回复
