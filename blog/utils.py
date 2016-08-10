@@ -31,6 +31,7 @@ def upload_file_handler(instance,filename):
 def method_get_api(url):
     response = urllib2.urlopen(url).read()
     dict_data = json.loads(response)
+    print dict_data
     return dict_data
 
 def method_post_api(url, post_data):
