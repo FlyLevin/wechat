@@ -211,7 +211,7 @@ def reply(request):
     add = request.GET.get('add') #新增关键字符号
     news_show = None
     print tag
-    print appitem.messages.filter(tag=tag)
+    print appitem.messages
     if tag in ['keyword_default_recontent', 'subscribe']:
         message = appitem.messages.filter(tag=tag).first()
     elif mid:
