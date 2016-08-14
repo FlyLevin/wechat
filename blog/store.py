@@ -26,7 +26,7 @@ class SaeStorage(Storage):
         raise sae.storage.PermissionDeniedError('Not allow to do this')
 
     def _save(self, name, content):
-        name = self.get_available_name()
+        name = self.get_available_name(name)
         data = ''.join(content.chunks())
         ob = sae.storage.Object(data)
         return self.client.put(self.domain, name, ob)
