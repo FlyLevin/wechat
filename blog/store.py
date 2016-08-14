@@ -10,11 +10,9 @@ from django.core.files.storage import Storage
 from django.utils.http import urlquote
 
 class SaeStorage(Storage):
-
-"""
-SAE Storage
-"""
-
+    """
+    SAE Storage
+    """
     def __init__(self, domain = None, app = None):
         if app is None:
             app = APP_NAME
