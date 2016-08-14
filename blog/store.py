@@ -64,5 +64,3 @@ class SaeStorage(Storage):
             file_root, file_ext = splitext(basename(name))
             name = '%s_%s%s' % (file_root, count.next(), file_ext)
         return name
-
-
