@@ -19,7 +19,7 @@ class SaeStorage(Storage):
         if domain is None:
             domain = settings.SAE_STORAGE_DOMAIN
         self.domain = domain
-        self.base_url = "http://%s-%s.stor.sinaapp.com/"% (app, self.domain)
+        self.base_url = "%s-%s.stor.sinaapp.com/"% (app, self.domain)
         self.client = sae.storage.Client()
 
     def _open(self, name, mode='rb'):
