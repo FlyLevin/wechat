@@ -3,7 +3,7 @@
 import itertools 
 import sae.storage
 from datetime import datetime
-from os.path import basename, splittext
+from os.path import basename, splitext
 from sae.const import APP_NAME
 from django.conf import settings
 from django.core.files.storage import Storage
