@@ -12,7 +12,8 @@ from django.contrib.auth.models import User
 from django.db.models.signals import post_save, m2m_changed
 from django.core.cache import cache
 from utils import upload_file_handler, method_get_api, method_post_api
-from yimi.settings import TIME_ZONE, TOKEN_CACHE_PRE, TOKEN
+from yimi.settings import TIME_ZONE, TOKEN_CACHE_PRE, TOKEN, SAE_STORAGE_DOMAIN, SAE_APPNAME
+from store import SaeStorage
 
 TYPE_LIST = (
     ('text', '文本回复'),
@@ -103,8 +104,9 @@ class Article(models.Model):
     description = models.TextField(blank=True, null=True, verbose_name='描述')
     picurl = models.CharField(max_length=500, blank=True, null=True, verbose_name='图片链接')
     url = models.CharField(max_length=500, blank=True, null=True, verbose_name='原文链接')
+    sae_storage = SaeStorage(domain = SAE_STORAGE_DOMAIN, app = SAE_APPNAME)
     image = models.FileField(
-        max_length=128, blank=True, null=True, upload_to=upload_file_handler, verbose_name="本地上传")
+        max_length=128, blank=True, null=True, upload_to=upload_file_handler, storage = sae_storage, verbose_name="本地上传")
     content = models.TextField(blank=True, null=True, verbose_name='正文')
     create_time = models.DateTimeField(auto_now_add=True,  blank=True, null=True,verbose_name='创建时间')
     class Meta:

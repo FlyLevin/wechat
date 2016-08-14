@@ -31,6 +31,10 @@ ALLOWED_HOSTS = '*'
 
 TOKEN = 'flylevin'
 
+SAE_STORAGE_DOMAIN = 'jiedianstorage'
+
+SAE_APPNAME = 'flylevin'
+
 # Application definition
 
 INSTALLED_APPS = (
