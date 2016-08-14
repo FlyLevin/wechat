@@ -125,7 +125,7 @@ class Article(models.Model):
         elif self.image:
             appitem = self.get_appitem()
             domain = appitem.domain
-            url_prefix = 'http://%s/media/' % domain
+            url_prefix = 'http://%s/' % domain
             return url_prefix + self.image.name
         else:
             return '/'

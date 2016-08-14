@@ -132,7 +132,7 @@ TEMPLATE_DIRS = (
 )
 
 MEDIA_ROOT = '*'
-MEDIA_URL = '//'
+MEDIA_URL = '/media/'
 
 TOKEN_CACHE_PRE = 'yimi_access_token'
 
