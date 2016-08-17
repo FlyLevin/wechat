@@ -770,7 +770,7 @@ def open_account_list(request):
         'appitem': appitem,
         'tag': 'open_account',
     }
-    return render_to_response('yimi_admin/account_list.html', context,
+    return render_to_response('yimi_admin/open_account_list.html', context,
         context_instance=RequestContext(request))
 
 @login_required(login_url=LOGIN_URL)
@@ -782,7 +782,7 @@ def sim_account_list(request):
         'accounts': sim_accounts,
         'tag': 'sim_account',
     }
-    return render_to_response('yimi_admin/account_list.html', context,
+    return render_to_response('yimi_admin/sim_account_list.html', context,
         context_instance=RequestContext(request))
 
 @login_required(login_url=LOGIN_URL)
