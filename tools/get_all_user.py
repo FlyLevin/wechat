@@ -9,12 +9,12 @@ from blog.models import AppItem, AppUser
 
 
 def update_all_user(appitem):
-    next_id = 1
-    while next_id:
+    while True:
         all_user = appitem.get_all_user()
         print all_user.get("total")
         print all_user.get("count")
-        next_id = all_user.get('next_openid')
+        if all_user.get('next_openid'):
+            break
         openid_list = all_user.get("data").get("openid")
     
         for openid in openid_list:
