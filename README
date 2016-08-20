@@ -1,0 +1,3 @@
+开通账号流程
+1.admin后台开通账号，并新建app_item，并绑定
+2.客户账号登陆http://mp.weixin.qq.com/,填写url (token,app_item.id)，token验证得到appid, app_secrect, 填入app_item中
