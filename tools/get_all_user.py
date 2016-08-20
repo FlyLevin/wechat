@@ -8,7 +8,7 @@ sys.path.append("/var/www/sites/yimi")
 from blog.models import AppItem, AppUser
 
 
-def update_all_user(appitem)
+def update_all_user(appitem):
     next_id = 1
     while next_id:
         all_user = appitem.get_all_user()
