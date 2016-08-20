@@ -9,8 +9,7 @@ from blog.models import AppItem, AppUser
 
 
 
-if __name__ == '__main__':
-    appitem = AppItem.objects.get(slug='xueersi')
+def get_all_user_info(appitem):
     
     users = appitem.app_users.all()
     for user in users:
@@ -30,3 +29,5 @@ if __name__ == '__main__':
             user.save()
         except:
             print '!!!===', user.openid
+if __name__ == '__main__':
+    get_all_user_info('xueersi')

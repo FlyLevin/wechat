@@ -14,6 +14,8 @@ from utils import convert_get_data, get_entry_page
 from models import *
 from yimi_forms import *
 from tools.get_all_user import update_all_user
+from tools.get_users_info import get_all_user_info
+
 
 LOGIN_URL = '/yimi-admin/login/'
 
@@ -331,6 +333,7 @@ def users_list(request):
     group_id = request.GET.get('group_id')
     appitem = get_appitem(request.user)
     update_all_user(appitem)
+    get_all_user_info(appitem)
     app_users = None
     if group_id:
         group = appitem.app_groups.get(id=group_id)
