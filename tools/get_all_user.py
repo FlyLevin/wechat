@@ -34,3 +34,4 @@ def update_all_user(appitem):
 def main():
     update_all_user('xueersi')
 if __name__ == '__main__':
+    main()
