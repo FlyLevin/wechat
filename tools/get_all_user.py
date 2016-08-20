@@ -31,6 +31,6 @@ def update_all_user(appitem):
                 print 'join in!'
                 appitem.app_users.add(appuser)
         
-def main()
+def main():
     update_all_user('xueersi')
 if __name__ == '__main__':
