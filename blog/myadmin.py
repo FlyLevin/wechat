@@ -13,7 +13,7 @@ from django.core.urlresolvers import reverse
 from utils import convert_get_data, get_entry_page
 from models import *
 from yimi_forms import *
-from tool.get_all_user import update_all_user
+from tools.get_all_user import update_all_user
 
 LOGIN_URL = '/yimi-admin/login/'
 
