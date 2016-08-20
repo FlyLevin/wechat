@@ -331,14 +331,16 @@ def keyword_reply(request):
 @login_required(login_url=LOGIN_URL)
 def users_list(request):
     group_id = request.GET.get('group_id')
+    action_id = request.GET.get('action_id')
     appitem = get_appitem(request.user)
-    update_all_user(appitem)
-    get_all_user_info(appitem)
     app_users = None
     if group_id:
         group = appitem.app_groups.get(id=group_id)
         app_users = group.app_users.all()
     else:
+        if action_id:
+            update_all_user(appitem)
+            get_all_user_info(appitem)
         app_users = appitem.app_users.all()
     app_groups = appitem.app_groups.all()
     matchs, show_pages = page_turning(app_users, request, 10)
