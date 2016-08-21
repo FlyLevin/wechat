@@ -100,8 +100,11 @@ def open_account(request, slug):
         from django.db.models import Q
         openaccount = appitem.openaccount_set.filter(Q(cid=cid)|Q(openid=openid)).first()
         if not openaccount:
-            appitem.openaccount_set.create(name=name, cid=cid, tel=tel, lbs=lbs, openid=openid)
-            return HttpResponseRedirect(reverse_url(slug))
+            # check if the openid is in the subscribed user list if not can not do verification
+            openaccount = appitem.app_users.filter(openid=openid).first()
+            if openaccount:
+                appitem.openaccount_set.create(name=name, cid=cid, tel=tel, lbs=lbs, openid=openid)
+                return HttpResponseRedirect(reverse_url(slug))
     elif request.method == "GET":
         open_id = request.GET.get('open_id')
         if open_id:
