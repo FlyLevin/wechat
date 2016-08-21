@@ -100,7 +100,7 @@ def open_account(request, slug):
         if not simaccount:
             appitem.simaccount_set.create(name=name, cid=cid, tel=tel, bank=bank, openid=openid)
             return HttpResponseRedirect(reverse_url(slug))
-    elif request.methon == "GET":
+    elif request.method == "GET":
         open_id = request.GET.get('open_id')
         if open_id:
             context = {
