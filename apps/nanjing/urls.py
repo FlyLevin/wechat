@@ -10,6 +10,7 @@ urlpatterns = patterns('',
     url(r'^(\w+)/sim-account/$', views.sim_account, name='sim_account'),
     url(r'^(\w+)/activity-user/(\d+)/$', views.activity_user, name='activity_user'),
     url(r'^(\w+)/commit-success/$', views.commit_success, name='commit_success'),
+    url(r'^(\w+)/commit-fail/$', views.commit_fail, name='commit_fail'),
     url(r'^(\w+)/activity-list/$', views.activity_list, name='activity_list'),
     url(r'^(\w+)/show_question/$', views.show_question, name='show_question'),
 )
