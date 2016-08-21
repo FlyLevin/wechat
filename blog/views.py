@@ -54,7 +54,10 @@ def gen_xml(instance, app_item):
         if not resource:
             return ''
         articles_str = ''
+        # add the user openid in the every return article, for the 订阅号 can not get user openid as 服务号 
+        open_id = instance.from_user
         for article in resource.articles.all():
+            article_url = article.get_url() + '?open_id=' + open_id
             art_param = (
                 article.title, 
                 article.description, 
