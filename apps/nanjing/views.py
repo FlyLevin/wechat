@@ -70,7 +70,10 @@ def articles_list(request, slug, id):
 def reverse_url(slug):
     return reverse("nanjing:commit_success", args=(slug,))
 
-def open_account(request, slug):
+def reverse_fail_url(slug):
+    return reverse("nanjing:commit_fail", args=(slug,))
+
+def sim_account(request, slug):
     appitem = get_appitem(slug)
     if request.method == "POST":
         name = request.POST.get('name')
@@ -82,24 +85,32 @@ def open_account(request, slug):
             return HttpResponseRedirect(reverse_url(slug))
     context = {'appitem': appitem}
     
-    return render_to_response('nanjing/open_account_form.html', context,
+    return render_to_response('nanjing/sim_account_form.html', context,
         context_instance=RequestContext(request))
 
-def sim_account(request, slug):
+def open_account(request, slug):
     appitem = get_appitem(slug)
     if request.method == "POST":
         name = request.POST.get('name')
         cid = request.POST.get('cid')
         tel = request.POST.get('tel')
         bank = request.POST.get('bank')
+        openid = request.POST.get('openid')
         simaccount = appitem.simaccount_set.filter(cid=cid).first()
         if not simaccount:
-            appitem.simaccount_set.create(name=name, cid=cid, tel=tel, bank=bank)
+            appitem.simaccount_set.create(name=name, cid=cid, tel=tel, bank=bank, openid=openid)
             return HttpResponseRedirect(reverse_url(slug))
-    context = {'appitem': appitem}
-    
-    return render_to_response('nanjing/sim_account_form.html', context,
-        context_instance=RequestContext(request))
+    elif request.methon == "GET":
+        open_id = request.GET.get('open_id')
+        if open_id:
+            context = {
+                'appitem': appitem,
+                'openid' : open_id,
+            }
+            return render_to_response('nanjing/open_account_form.html', context,
+            context_instance=RequestContext(request))
+    else:
+        return HttpResponseRedirect(reverse_fail_url(slug))
 
 def activity_user(request, slug, cid):
     appitem = get_appitem(slug)
@@ -120,6 +131,11 @@ def activity_user(request, slug, cid):
 def commit_success(request, slug):
     return render_to_response('nanjing/commit_success.html', {},
         context_instance=RequestContext(request))
+
+def commit_success(request, slug):
+    return render_to_response('nanjing/commit_fail.html', {},
+        context_instance=RequestContext(request))
+
 def activity_list(request, slug):
     appitem = get_appitem(slug)
     activities = appitem.activity_set.filter(status=True)

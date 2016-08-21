@@ -11,7 +11,7 @@
 
 <body >
 	<div class="formWrap">
-	    <form action="{% url 'nanjing:open_account' appitem.slug %}" method="post">{%csrf_token%}
+	    <form action="{% url 'nanjing:sim_account' appitem.slug %}" method="post">{%csrf_token%}
     	<ul class="formList">
         	<li class="title">预约开户：</li>
             <li><input name="name" type="text"  class="inputTxt" placeholder="姓名"/></li>

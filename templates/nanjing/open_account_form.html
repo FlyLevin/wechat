@@ -11,13 +11,14 @@
 
 <body >
 	<div class="formWrap">
-	    <form action="{% url 'nanjing:sim_account' appitem.slug %}" method="post">{%csrf_token%}
+	    <form action="{% url 'nanjing:open_account' appitem.slug %}" method="post">{%csrf_token%}
     	<ul class="formList">
         	<li class="title">申请认证：</li>
             <li><input name="name" type="text"  class="inputTxt" placeholder="姓名"/></li>
             <li><input name="cid" type="text"  class="inputTxt" placeholder="身份证号"/></li>
             <li><input name="tel" type="text"  class="inputTxt" placeholder="手机号"/></li>
             <li><input name="bank" type="text"  class="inputTxt" placeholder="居住房号 ex:15#2101"/></li>
+            <li><input name="openid" type="text"  class="inputTxt" value="{{openid}}"/></li>
             <li><input name="" type="submit" class="inputBut" value="提交" /></li>
         </ul>
         </form>
