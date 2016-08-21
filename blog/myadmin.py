@@ -771,7 +771,6 @@ def activity_list(request):
 @login_required(login_url=LOGIN_URL)
 def open_account_list(request):
     appitem = get_appitem(request.user)
-    print appitem.openaccount_set.all()
     open_accounts = appitem.openaccount_set.all()
     context = {
         'open_accounts': open_accounts,
