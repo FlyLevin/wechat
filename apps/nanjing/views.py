@@ -96,6 +96,7 @@ def open_account(request, slug):
         tel = request.POST.get('tel')
         lbs = request.POST.get('lbs')
         openid = request.POST.get('openid')
+        # add the openaccount weixin open id unique check
         from django.db.models import Q
         openaccount = appitem.openaccount_set.filter(Q(cid=cid)|Q(openid=openid)).first()
         if not openaccount:
