@@ -62,7 +62,8 @@ def gen_xml(instance, app_item):
                 article.title, 
                 article.description, 
                 article.get_image_url(), 
-                article.get_url(),
+                article_url,
+#                article.get_url(),
             )
             articles_str += ARTICLES % art_param
         content = type_content % (resource.articles.count(), articles_str)
