@@ -22,7 +22,8 @@ def article_detail(request, slug, id):
     article = Article.objects.filter(id=id).first()
     # get open id from open URL
     open_id = request.GET.get('open_id')
-    article.url = article.url + '?open_id=' + open_id
+    if open_id:
+        article.url = article.url + '?open_id=' + open_id
     if not article:
         raise Http404
     context = { 
