@@ -131,7 +131,7 @@ def commit_success(request, slug):
     return render_to_response('nanjing/commit_success.html', {},
         context_instance=RequestContext(request))
 
-def commit_success(request, slug):
+def commit_fail(request, slug):
     return render_to_response('nanjing/commit_fail.html', {},
         context_instance=RequestContext(request))
 
