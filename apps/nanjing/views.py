@@ -79,9 +79,9 @@ def sim_account(request, slug):
         name = request.POST.get('name')
         cid = request.POST.get('cid')
         tel = request.POST.get('tel')
-        openaccount = appitem.openaccount_set.filter(cid=cid).first()
-        if not openaccount:
-            appitem.openaccount_set.create(name=name, cid=cid, tel=tel)
+        simaccount = appitem.simaccount_set.filter(cid=cid).first()
+        if not simaccount:
+            appitem.simaccount_set.create(name=name, cid=cid, tel=tel)
             return HttpResponseRedirect(reverse_url(slug))
     context = {'appitem': appitem}
     
@@ -94,11 +94,12 @@ def open_account(request, slug):
         name = request.POST.get('name')
         cid = request.POST.get('cid')
         tel = request.POST.get('tel')
-        bank = request.POST.get('bank')
+        lbs = request.POST.get('lbs')
         openid = request.POST.get('openid')
-        simaccount = appitem.simaccount_set.filter(cid=cid).first()
-        if not simaccount:
-            appitem.simaccount_set.create(name=name, cid=cid, tel=tel, bank=bank, openid=openid)
+        from django.db.models import Q
+        openaccount = appitem.openaccount_set.filter(Q(cid=cid)|Q(openid=openid)).first()
+        if not openaccount:
+            appitem.openaccount_set.create(name=name, cid=cid, tel=tel, lbs=lbs, openid=openid)
             return HttpResponseRedirect(reverse_url(slug))
     elif request.method == "GET":
         open_id = request.GET.get('open_id')
