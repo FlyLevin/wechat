@@ -109,8 +109,7 @@ def open_account(request, slug):
             }
             return render_to_response('nanjing/open_account_form.html', context,
             context_instance=RequestContext(request))
-    else:
-        return HttpResponseRedirect(reverse_fail_url(slug))
+    return HttpResponseRedirect(reverse_fail_url(slug))
 
 def activity_user(request, slug, cid):
     appitem = get_appitem(slug)
