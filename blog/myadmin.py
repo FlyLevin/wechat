@@ -771,10 +771,10 @@ def activity_list(request):
 @login_required(login_url=LOGIN_URL)
 def open_account_list(request):
     appitem = get_appitem(request.user)
-    print appitem.openaccount_set
+    print appitem.openaccount_set.all()
     open_accounts = appitem.openaccount_set.all()
     context = {
-        'accounts': open_accounts,
+        'open_accounts': open_accounts,
         'appitem': appitem,
         'tag': 'open_account',
     }
@@ -787,7 +787,7 @@ def sim_account_list(request):
     sim_accounts = appitem.simaccount_set.all()
     context = {
         'appitem': appitem,
-        'accounts': sim_accounts,
+        'sim_accounts': sim_accounts,
         'tag': 'sim_account',
     }
     return render_to_response('yimi_admin/sim_account_list.html', context,
