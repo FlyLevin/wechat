@@ -73,6 +73,7 @@
 {% else %}
 <li>{{app_group.name}} <a href="{% url 'yimi_admin:group_remove' %}?userid={{user.id}}&groupid={{app_group.id}}">移除</a></li>
 {% endif %}
+{% endif %}
 {% endfor %}
                            </td>
                            <td>
