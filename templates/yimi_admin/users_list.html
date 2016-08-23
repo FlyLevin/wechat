@@ -69,7 +69,7 @@
 {% for app_group in app_groups %}
 {% if user in app_group.app_users.all %}
 {% if app_group.id < 3 %}
-<th>{{app_group.name}} </th>
+<li>{{app_group.name}} </li>
 {% else %}
 <li>{{app_group.name}} <a href="{% url 'yimi_admin:group_remove' %}?userid={{user.id}}&groupid={{app_group.id}}">移除</a></li>
 {% endif %}
