@@ -81,7 +81,9 @@
 <option>选择分组</option>
 {% for app_group in app_groups %}
 {% if user not in app_group.app_users.all %}
+{% if app_group.id > 2 %}
 <option value="{{app_group.id}}" >{{app_group.name}}</option>
+{%endif%}
 {% endif %}
 {% endfor %}
 </select>

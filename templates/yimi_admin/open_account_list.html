@@ -17,7 +17,12 @@
                 <ul class="options-bar">
                     <li>
                         <div class="  align-left">
-
+                            <div class="bar-button"><button type="button" class="btn" onclick="location.href='{% url 'yimi_admin:open_account_list' %}'" >全部用户</button></div>
+                            {% for app_group in app_groups %}
+                            {% if app_group.id < 3 %}
+                            <div class="bar-button"><button type="button" class="btn btn-success" onclick="location.href='{% url 'yimi_admin:open_account_list' %}?group_id={{app_group.id}}'">{{app_group.name}}</button></div>
+                            {% endif %}
+                            {% endfor %} 
                         
                         </div>  
                     </li>

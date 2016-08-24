@@ -772,10 +772,12 @@ def activity_list(request):
 def open_account_list(request):
     appitem = get_appitem(request.user)
     open_accounts = appitem.openaccount_set.all()
+    app_groups = appitem.app_groups.all()
     context = {
         'open_accounts': open_accounts,
         'appitem': appitem,
         'tag': 'open_account',
+        'app_groups': app_groups,
     }
     return render_to_response('yimi_admin/open_account_list.html', context,
         context_instance=RequestContext(request))
