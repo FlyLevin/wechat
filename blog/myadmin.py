@@ -875,7 +875,7 @@ def account_delete(request, tag, id):
         sim_account.delete()
     elif tag == 'open_account':
         open_account = appitem.openaccount_set.get(id=id)
-        app_user = appitem.appusers.get(openid = open_account.openid)
+        app_user = appitem.app_users.get(openid = open_account.openid)
         group = appitem.app_groups.filter(id=REGISTERED_GROUPID).first()
         if app_user in group.app_users.all():
             group.app_users.remove(app_user)
