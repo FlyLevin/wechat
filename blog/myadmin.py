@@ -461,11 +461,13 @@ def groups_add(request):
 def group_update(request):
     '''用户新加入组'''
     group_id = request.GET.get('groupid')
-    user_id = request.GET.get('userid')
-    if group_id and user_id:
+    open_id = request.GET.get('openid')
+    # change the identify from userid into openid
+#    user_id = request.GET.get('userid')
+    if group_id and open_id:
         appitem = get_appitem(request.user)
         group = appitem.app_groups.filter(id=group_id).first()
-        user = appitem.app_users.filter(id=user_id).first()
+        user = appitem.app_users.filter(openid=open_id).first()
         if user not in group.app_users.all():
             group.app_users.add(user)
         
@@ -474,11 +476,13 @@ def group_update(request):
 @login_required(login_url=LOGIN_URL)
 def group_remove(request):
     group_id = request.GET.get('groupid')
-    user_id = request.GET.get('userid')
-    if group_id and user_id:
+    open_id = request.GET.get('openid')
+    # change the identify from userid into openid
+#    user_id = request.GET.get('userid')
+    if group_id and open_id:
         appitem = get_appitem(request.user)
         group = appitem.app_groups.filter(id=group_id).first()
-        user = appitem.app_users.filter(id=user_id).first()
+        user = appitem.app_users.filter(openid=open_id).first()
         if user in group.app_users.all():
             group.app_users.remove(user)
         

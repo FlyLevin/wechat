@@ -68,22 +68,18 @@
                            <td>
 {% for app_group in app_groups %}
 {% if user in app_group.app_users.all %}
-{% if app_group.id < 3 %}
 <li>{{app_group.name}} </li>
-{% else %}
-<li>{{app_group.name}} <a href="{% url 'yimi_admin:group_remove' %}?userid={{user.id}}&groupid={{app_group.id}}">移除</a></li>
+<li>{{app_group.name}} <a href="{% url 'yimi_admin:group_remove' %}?openid={{user.openid}}&groupid={{app_group.id}}">移除</a></li>
 {% endif %}
 {% endif %}
 {% endfor %}
                            </td>
                            <td>
-<select class="app-group-select" uservalue="{{user.id}}">
+<select class="app-group-select" uservalue="{{user.openid}}">
 <option>选择分组</option>
 {% for app_group in app_groups %}
 {% if user not in app_group.app_users.all %}
-{% if app_group.id > 2 %}
 <option value="{{app_group.id}}" >{{app_group.name}}</option>
-{%endif%}
 {% endif %}
 {% endfor %}
 </select>
@@ -108,7 +104,7 @@ $('#submit-group').click(
 
 $(".app-group-select").change(
     function(){
-        location.href="{% url 'yimi_admin:group_update' %}?userid="+$(this).attr('uservalue')+'&groupid='+$(this).val();
+        location.href="{% url 'yimi_admin:group_update' %}?openid="+$(this).attr('uservalue')+'&groupid='+$(this).val();
     }   
 )
 
