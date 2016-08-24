@@ -15,7 +15,7 @@ from models import *
 from yimi_forms import *
 from tools.get_all_user import update_all_user
 from tools.get_users_info import get_all_user_info
-
+from tools.config import *
 
 LOGIN_URL = '/yimi-admin/login/'
 
@@ -875,6 +875,13 @@ def account_delete(request, tag, id):
         sim_account.delete()
     elif tag == 'open_account':
         open_account = appitem.openaccount_set.get(id=id)
+        app_user = appitem.appusers.get(openid = open_account.openid)
+        group = appitem.app_groups.filter(id=REGISTERED_GROUPID).first()
+        if app_user in group.app_users.all():
+            group.app_users.remove(app_user)
+        group = appitem.app_groups.filter(id=NOT_REGISTERED_GROUPID).first()
+        if app_user not in group.app_users.all():
+            group.app_users.add(app_user)
         open_account.delete()
     elif tag == 'activity_account':
         aa = ActivityUser.objects.get(id=id)
