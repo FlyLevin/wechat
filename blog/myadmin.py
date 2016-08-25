@@ -876,7 +876,7 @@ def account_delete(request, tag, id):
     elif tag == 'open_account':
         open_account = appitem.openaccount_set.get(id=id)
         app_user = appitem.app_users.get(openid = open_account.openid)
-        app_item_change_user_group(app_item, app_user, REGISTERED_GROUPID, NOT_REGISTERED_GROUPID)
+        app_item_change_user_group(appitem, app_user, REGISTERED_GROUPID, NOT_REGISTERED_GROUPID)
         open_account.delete()
     elif tag == 'activity_account':
         aa = ActivityUser.objects.get(id=id)
@@ -893,7 +893,7 @@ def account_update(request, tag, id):
     elif tag == 'open_account':
         open_account = appitem.openaccount_set.get(id=id)
         app_user = appitem.app_users.get(openid = open_account.openid)
-        app_item_change_user_group(app_item, app_user, NOT_REGISTERED_GROUPID, REGISTERED_GROUPID)
+        app_item_change_user_group(appitem, app_user, NOT_REGISTERED_GROUPID, REGISTERED_GROUPID)
     elif tag == 'activity_account':
         aa = ActivityUser.objects.get(id=id)
         activity = aa.activity_set.first()
