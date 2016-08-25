@@ -905,6 +905,8 @@ def account_update(request, tag, id):
         if app_user not in group.app_users.all():
             group.app_users.add(app_user)
     elif tag == 'activity_account':
+        aa = ActivityUser.objects.get(id=id)
+        activity = aa.activity_set.first()
     return HttpResponseRedirect(request.META.get('HTTP_REFERER', '/'))
 
 @login_required(login_url=LOGIN_URL)
