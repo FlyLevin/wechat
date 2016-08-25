@@ -890,6 +890,22 @@ def account_delete(request, tag, id):
             aa.delete()
     return HttpResponseRedirect(request.META.get('HTTP_REFERER', '/'))
 
+@login_required(login_url=LOGIN_URL)
+def account_update(request, tag, id):
+    appitem = get_appitem(request.user)
+    if tag == 'sim_account':
+        sim_account = appitem.simaccount_set.get(id=id)
+    elif tag == 'open_account':
+        open_account = appitem.openaccount_set.get(id=id)
+        app_user = appitem.app_users.get(openid = open_account.openid)
+        group = appitem.app_groups.filter(id=NOT_REGISTERED_GROUPID).first()
+        if app_user in group.app_users.all():
+            group.app_users.remove(app_user)
+        group = appitem.app_groups.filter(id=REGISTERED_GROUPID).first()
+        if app_user not in group.app_users.all():
+            group.app_users.add(app_user)
+    elif tag == 'activity_account':
+    return HttpResponseRedirect(request.META.get('HTTP_REFERER', '/'))
 
 @login_required(login_url=LOGIN_URL)
 def activity_status(request, id):

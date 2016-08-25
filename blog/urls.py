@@ -52,6 +52,7 @@ urlpatterns = patterns('',
 
 
     url(r'^account-delete/(\w+)/(\d+)/$', myadmin.account_delete, name='account_delete'),
+    url(r'^account-pass/(\w+)/(\d+)/$', myadmin.account_update, name='account_update')
     url(r'^activity-add/$', myadmin.activity_add, name='activity_add'),
     url(r'^activity-delete/(\d+)/$', myadmin.activity_delete, name='activity_delete'),
     url(r'^activity-account-list/(\d+)/$', myadmin.activity_account_list, name='activity_account_list'),

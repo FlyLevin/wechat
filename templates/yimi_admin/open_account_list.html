@@ -52,8 +52,8 @@
                            <td>{{account.tel}}</td>
                            <td>{{account.lbs}}</td>
                            <td>
-                            <button type="button" onclick="location.href='{% url 'yimi_admin:account_delete' 'open_account' account.id %}'">"删除"</button>
-                            <input type="button" value="通过认证" id="editor-group-name{{group.id}}"/>
+                            <button type="button" onclick="location.href='{% url 'yimi_admin:account_delete' 'open_account' account.id %}'">删除</button>
+                            <button type="button" onclick="location.href='{% url 'yimi_admin:account_update' 'open_account' account.id %}'">通过认证</button>
                            </td>
                         </tr>
 
