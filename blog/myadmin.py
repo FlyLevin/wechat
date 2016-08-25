@@ -779,7 +779,7 @@ def open_account_list(request):
     app_groups = appitem.app_groups.all()
     if group_id:
         group_openid = appitem.app_groups.get(id = group_id).app_users.values('openid')
-        open_accounts = appitem.openaccount_set.filter(openaccount_set__openid__in = group_openid)
+        open_accounts = appitem.openaccount_set.filter(openid__in = group_openid)
     else:
         open_accounts = appitem.openaccount_set.all()
     context = {
