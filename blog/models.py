@@ -509,3 +509,15 @@ def app_item_saved(sender, instance, created, **kwargs):
 #post_save.connect(menu_change_button, sender=MenuButton)
 #post_save.connect(app_item_saved, sender=AppItem)
 
+
+# def the group change function
+# input appitem, appuser, from_group, to_group
+# used for change the group from one group to another group
+# need to frist remove the fromer group and add to new group
+def app_item_change_user_group(appitem, app_user, from_group, to_group):
+    group = appitem.app_groups.filter(id=from_group).first()
+    if app_user in group.app_users.all():
+        group.app_users.remove(app_user)
+    group = appitem.app_groups.filter(id=to_group).first()
+    if app_user not in group.app_users.all():
+        group.app_users.add(app_user)
