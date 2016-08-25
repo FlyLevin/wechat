@@ -774,9 +774,14 @@ def activity_list(request):
 
 @login_required(login_url=LOGIN_URL)
 def open_account_list(request):
+    group_id = request.GET.get('group_id')
     appitem = get_appitem(request.user)
-    open_accounts = appitem.openaccount_set.all()
     app_groups = appitem.app_groups.all()
+    if group_id:
+        group_openid = appitem.app_groups.get(id = group_id).app_users.values('openid')
+        open_accounts = appitem.openaccount_set.filter(openaccount_set__openid__in = group_openid)
+    else:
+        open_accounts = appitem.openaccount_set.all()
     context = {
         'open_accounts': open_accounts,
         'appitem': appitem,
