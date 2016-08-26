@@ -13,5 +13,5 @@ urlpatterns = patterns('',
     url(r'^(\w+)/commit-fail/$', views.commit_fail, name='commit_fail'),
     url(r'^(\w+)/activity-list/$', views.activity_list, name='activity_list'),
     url(r'^(\w+)/show_question/$', views.show_question, name='show_question'),
-    url(r'^activity-add/$', myadmin.activity_add, name='activity_add'),
+    url(r'^activity-add/$', views.activity_add, name='activity_add'),
 )
