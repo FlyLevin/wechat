@@ -67,6 +67,42 @@ def articles_list(request, slug, id):
     return render_to_response('nanjing/articles_list.html', context,
         context_instance=RequestContext(request))
 
+def activity_add(request, slug):
+    appitem = get_appitem(slug)
+    aid = request.GET.get("aid")
+    if aid:
+        activity = appitem.activity_set.get(id=aid)
+    else:
+        activity = None
+    if request.method == 'POST':
+        title = request.POST.get('title')
+        a_time = request.POST.get('a_time')
+        count = request.POST.get('count')
+        xingshi = request.POST.get('xingshi')
+        place = request.POST.get('place')
+        speaker = request.POST.get('speaker')
+        content = request.POST.get('content')
+        if activity:
+            activity.title = title
+            activity.a_time = a_time
+            activity.xingshi = xingshi
+            activity.place = place
+            activity.speaker = speaker
+            activity.count = count
+            activity.content = content
+            activity.save()
+        else:
+            appitem.activity_set.create(
+                title=title, 
+                a_time=a_time, 
+                count=count,
+                xingshi = xingshi,
+                place = place,
+                speaker = speaker,
+                content = content,
+            )
+        return HttpResponseRedirect(reverse_url(slug))
+
 def reverse_url(slug):
     return reverse("nanjing:commit_success", args=(slug,))
 
