@@ -67,9 +67,8 @@ def articles_list(request, slug, id):
     return render_to_response('nanjing/articles_list.html', context,
         context_instance=RequestContext(request))
 
-def activity_add(request, slug):
+def activity_add(request, slug, aid):
     appitem = get_appitem(slug)
-    aid = request.GET.get("aid")
     if aid:
         activity = appitem.activity_set.get(id=aid)
     else:
