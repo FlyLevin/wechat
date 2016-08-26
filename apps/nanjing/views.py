@@ -92,7 +92,7 @@ def activity_add(request, slug):
         'appitem': appitem,
         'activity': activity,
     }
-    return render_to_response('nanjing/activity_add.html', context,
+    return render_to_response('nanjing/activity_add_form.html', context,
         context_instance=RequestContext(request))
 
 def reverse_url(slug):
