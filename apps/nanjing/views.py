@@ -102,6 +102,12 @@ def activity_add(request, slug):
                 content = content,
             )
         return HttpResponseRedirect(reverse_url(slug))
+    context = {
+        'appitem': appitem,
+        'activity': activity,
+    }
+    return render_to_response('nanjing/activity_add.html', context,
+        context_instance=RequestContext(request))
 
 def reverse_url(slug):
     return reverse("nanjing:commit_success", args=(slug,))
