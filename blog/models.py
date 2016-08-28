@@ -425,6 +425,7 @@ class ActivityUser(models.Model):
     create_time = models.DateTimeField(auto_now_add=True,  blank=True, null=True,verbose_name='创建时间')
 
 class ActivityImage(models.Model):
+    sae_storage = SaeStorage(domain = SAE_STORAGE_DOMAIN, app = SAE_APPNAME)
     image = models.FileField(
         max_length=128, blank=True, null=True, upload_to=upload_file_handler, storage = sae_storage, verbose_name="本地上传")
     create_time = models.DateTimeField(auto_now_add=True,  blank=True, null=True,verbose_name='创建时间')
