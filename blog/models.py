@@ -406,6 +406,7 @@ class Activity(models.Model):
     appitem = models.ForeignKey(AppItem, verbose_name='应用', blank=True, null=True)
     content = models.TextField(blank=True, null=True, verbose_name='内容')
     activity_users = models.ManyToManyField('ActivityUser', verbose_name='参与人', blank=True, null=True)
+    activity_images = models.ManyToManyField('ActivityImage', verbose_name = '活动照片', blank=True, null=True)
     status = models.BooleanField(default=False, verbose_name="是否显示")
     class Meta:
         ordering = ['-id']
@@ -422,6 +423,22 @@ class ActivityUser(models.Model):
     openid = models.CharField(
         max_length=256, blank=True, verbose_name="openid")
     create_time = models.DateTimeField(auto_now_add=True,  blank=True, null=True,verbose_name='创建时间')
+
+class ActivityImage(models.Model):
+    image = models.FileField(
+        max_length=128, blank=True, null=True, upload_to=upload_file_handler, storage = sae_storage, verbose_name="本地上传")
+    create_time = models.DateTimeField(auto_now_add=True,  blank=True, null=True,verbose_name='创建时间')
+    def get_image_url(self):
+        if self.picurl:
+            return self.picurl
+        elif self.image:
+            appitem = self.get_appitem()
+            domain = appitem.domain
+ #           url_prefix = 'http://%s/' % domain
+ #           print url_prefix, self.image.name
+ #           return url_prefix + self.image.name
+            return self.image.name         #in sae mode the image name is the image URL
+
 
 class KeFu(models.Model):
     question = models.TextField(blank=True, null=True, verbose_name='提问')

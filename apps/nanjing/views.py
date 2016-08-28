@@ -151,9 +151,10 @@ def activity_user(request, slug, cid):
         name = request.POST.get('name')
         cid = request.POST.get('cid')
         tel = request.POST.get('tel')
+        lbs = request.POST.get('lbs')
        # openid = request.POST.get("openid")
        # if openid and activity.activity_users.filter(openid=openid).exists():
-        activity.activity_users.create(name=name, cid=cid, tel=tel)
+        activity.activity_users.create(name=name, cid=cid, tel=tel, lbs=lbs)
         return HttpResponseRedirect(reverse_url(slug))
     context = {'appitem': appitem, 'activity': activity}
     

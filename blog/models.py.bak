@@ -12,7 +12,8 @@ from django.contrib.auth.models import User
 from django.db.models.signals import post_save, m2m_changed
 from django.core.cache import cache
 from utils import upload_file_handler, method_get_api, method_post_api
-from yimi.settings import TIME_ZONE, TOKEN_CACHE_PRE, TOKEN
+from yimi.settings import TIME_ZONE, TOKEN_CACHE_PRE, TOKEN, SAE_STORAGE_DOMAIN, SAE_APPNAME
+from store import SaeStorage
 
 TYPE_LIST = (
     ('text', '文本回复'),
@@ -41,6 +42,17 @@ SUB_BUTTON_CHOICES = (
     ('click', '单击动作'),
     ('view', '跳转'),
 )
+
+
+#class NewManager(models.Manager):
+#    def first(self):
+#        """
+#        Returns the first object of a query, returns None if no match is found.
+#        """
+#        objects = list((self if self.ordered else self.order_by('pk'))[:1])
+#        if objects:
+#            return objects[0]
+#        return None
 
 class Message(models.Model):
     type = models.CharField(max_length=100, blank=True, null=True, verbose_name='收到信息类型', choices=TYPE_LIST)
@@ -92,8 +104,9 @@ class Article(models.Model):
     description = models.TextField(blank=True, null=True, verbose_name='描述')
     picurl = models.CharField(max_length=500, blank=True, null=True, verbose_name='图片链接')
     url = models.CharField(max_length=500, blank=True, null=True, verbose_name='原文链接')
+    sae_storage = SaeStorage(domain = SAE_STORAGE_DOMAIN, app = SAE_APPNAME)
     image = models.FileField(
-        max_length=128, blank=True, null=True, upload_to=upload_file_handler, verbose_name="本地上传")
+        max_length=128, blank=True, null=True, upload_to=upload_file_handler, storage = sae_storage, verbose_name="本地上传")
     content = models.TextField(blank=True, null=True, verbose_name='正文')
     create_time = models.DateTimeField(auto_now_add=True,  blank=True, null=True,verbose_name='创建时间')
     class Meta:
@@ -112,8 +125,10 @@ class Article(models.Model):
         elif self.image:
             appitem = self.get_appitem()
             domain = appitem.domain
-            url_prefix = 'http://%s/media/' % domain
-            return url_prefix + self.image.name
+ #           url_prefix = 'http://%s/' % domain
+ #           print url_prefix, self.image.name
+ #           return url_prefix + self.image.name
+            return self.image.name         #in sae mode the image name is the image URL
         else:
             return '/'
     
@@ -494,3 +509,15 @@ def app_item_saved(sender, instance, created, **kwargs):
 #post_save.connect(menu_change_button, sender=MenuButton)
 #post_save.connect(app_item_saved, sender=AppItem)
 
+
+# def the group change function
+# input appitem, appuser, from_group, to_group
+# used for change the group from one group to another group
+# need to frist remove the fromer group and add to new group
+def app_item_change_user_group(appitem, app_user, from_group, to_group):
+    group = appitem.app_groups.filter(id=from_group).first()
+    if app_user in group.app_users.all():
+        group.app_users.remove(app_user)
+    group = appitem.app_groups.filter(id=to_group).first()
+    if app_user not in group.app_users.all():
+        group.app_users.add(app_user)
