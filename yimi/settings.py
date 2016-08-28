@@ -63,6 +63,10 @@ ROOT_URLCONF = 'yimi.urls'
 
 WSGI_APPLICATION = 'yimi.wsgi.application'
 
+# Define the session settings
+SESSION_SAVE_EVERY_REQUEST = True
+SESSION_EXPIRE_AT_BROWSER_CLOSE = True
+
 # Database
 # https://docs.djangoproject.com/en/1.6/ref/settings/#databases
 
