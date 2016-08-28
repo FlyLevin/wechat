@@ -127,6 +127,7 @@ def _detect_image_library():
                     _("The '_imaging' module for the PIL could not be "
                       "imported: %s") % err
                 )
+            from PIL import _imaging as PIL_imaging
 
     # Try to import ImageFile as well.
     try:
