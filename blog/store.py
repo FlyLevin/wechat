@@ -32,11 +32,14 @@ class SaeStorage(Storage):
         return self.client.put(self.domain, name, ob)
 
     def delete(self, name):
-        s = sae.storage.Client()
-        try:
-            s.delete('media', name)
-        except Exception,e:
-            pass
+        if not debug:
+            s = sae.storage.Client()
+            try:
+                s.delete('media', name)
+            except Exception,e:
+                pass
+        else:
+            super(SaeStorage, self).delete(name)
 
     def exists(self, name):
         return name in [ob['name'] for ob in self.client.list(self.domain)]
