@@ -146,6 +146,9 @@ class Article(models.Model):
     def get_category(self):
         return self.category_set.first()
 
+    def delete(self):
+        self.image.delete(self.image.name)
+
 class Category(models.Model):
     name = models.CharField(max_length=100, blank=True, null=True, verbose_name='名称')
     create_time = models.DateTimeField(auto_now_add=True, verbose_name='创建时间')
