@@ -20,6 +20,5 @@ urlpatterns = patterns('',
     url(r'^myueditor/upload/$', 'myueditor.views.upload', name='upload'),
     url(r'^admin/', include(admin.site.urls)),
     url(r'^syncdb/$', syncdb),#增加URL路径
-    url(r'^create/$', createUser),
-    url(r'^createCache/$', createCacheTable),
+    url(r'^migratedb/$', migratedb),#增加URL路径
 ) + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
