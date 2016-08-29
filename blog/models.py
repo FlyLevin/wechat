@@ -435,6 +435,7 @@ class ActivityUser(models.Model):
     create_time = models.DateTimeField(auto_now_add=True,  blank=True, null=True,verbose_name='创建时间')
 
 class ActivityImage(models.Model):
+    picurl = models.CharField(max_length=500, blank=True, null=True, verbose_name='图片链接')
     sae_storage = SaeStorage(domain = SAE_STORAGE_DOMAIN, app = SAE_APPNAME)
     image = models.FileField(
         max_length=128, blank=True, null=True, upload_to=upload_file_handler, storage = sae_storage, verbose_name="本地上传")
@@ -443,13 +444,23 @@ class ActivityImage(models.Model):
         if self.picurl:
             return self.picurl
         elif self.image:
-            appitem = self.get_appitem()
-            domain = appitem.domain
+ #           appitem = self.get_appitem()
+ #           domain = appitem.domain
+ #           print dir(self.image)
+ #           print dir(self.picurl)
  #           url_prefix = 'http://%s/' % domain
  #           print url_prefix, self.image.name
  #           return url_prefix + self.image.name
-            return self.image.name         #in sae mode the image name is the image URL
-
+            s = self.sae_storage.client
+            domain = self.sae_storage.domain
+            self.picurl = s.url(domain, self.image.name)
+            self.save()
+            return picurl
+        else:
+            return '/'
+    def delete(self):
+        self.image.delete(self.image.name)
+        super(Article, self).delete()
 
 class KeFu(models.Model):
     question = models.TextField(blank=True, null=True, verbose_name='提问')
