@@ -33,10 +33,9 @@ class SaeStorage(Storage):
 
     def delete(self, name):
         try:
-            self.client.delete(name)
+            self.client.delete(self.domain, name)
         except Exception,e:
             print e
-            pass
 
     def exists(self, name):
         return name in [ob['name'] for ob in self.client.list(self.domain)]
