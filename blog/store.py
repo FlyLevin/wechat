@@ -33,7 +33,7 @@ class SaeStorage(Storage):
 
     def delete(self, name):
         try:
-            self.delete(self.domain, name)
+            self.client.delete(name)
         except Exception,e:
             print e
             pass
