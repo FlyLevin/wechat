@@ -134,7 +134,7 @@ class Article(models.Model):
             domain = self.sae_storage.domain
             picurl = s.url(domain, self.image.name)
             appitem = self.get_appitem()
-            appitem.article.filter(image = self.image.name).first().set(picurl=picurl)
+            appitem.articles.filter(image = self.image.name).first().set(picurl=picurl)
             return picurl
         else:
             return '/'
