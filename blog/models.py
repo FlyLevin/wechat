@@ -148,6 +148,7 @@ class Article(models.Model):
 
     def delete(self):
         self.image.delete(self.image.name)
+        super(Article, self).delete()
 
 class Category(models.Model):
     name = models.CharField(max_length=100, blank=True, null=True, verbose_name='名称')
