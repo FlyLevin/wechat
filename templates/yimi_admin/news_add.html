@@ -44,7 +44,7 @@
       </tr>
       <tr>
         <td style="border-bottom:1px solid #fff;" class="txtRight">上传封面：</td>
-        <td ><input name="image" type="file" accept="image/png, image/gif, image/jpeg, image/jp2"/><span class="info">选择需要上传的图片文件，格式JPG、BMP、GIF、PNG</span></td>
+        <td ><input name="image" type="file" accept="image/*"/><span class="info">选择需要上传的图片文件，格式JPG、BMP、GIF、PNG</span></td>
       </tr>
       {%if article.get_image_url and article.get_image_url != '/'%}
       <tr>
