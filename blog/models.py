@@ -126,6 +126,7 @@ class Article(models.Model):
             appitem = self.get_appitem()
             domain = appitem.domain
             print dir(self.image)
+            print dir(self.picurl)
  #           url_prefix = 'http://%s/' % domain
  #           print url_prefix, self.image.name
  #           return url_prefix + self.image.name
