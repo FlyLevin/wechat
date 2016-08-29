@@ -123,14 +123,17 @@ class Article(models.Model):
         if self.picurl:
             return self.picurl
         elif self.image:
-            appitem = self.get_appitem()
-            domain = appitem.domain
-            print dir(self.image)
-            print dir(self.picurl)
+ #           appitem = self.get_appitem()
+ #           domain = appitem.domain
+ #           print dir(self.image)
+ #           print dir(self.picurl)
  #           url_prefix = 'http://%s/' % domain
  #           print url_prefix, self.image.name
  #           return url_prefix + self.image.name
-            return self.image.name         #in sae mode the image name is the image URL
+            s = self.sae_storage.client
+            domain = self.sae_storage.domain
+            self.picurl = s.url(domain, self.image.name)
+            return self.picurl         #in sae mode the image name is the image URL
         else:
             return '/'
     

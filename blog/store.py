@@ -29,7 +29,8 @@ class SaeStorage(Storage):
         name = self.get_available_name(name)
         data = ''.join(content.chunks())
         ob = sae.storage.Object(data)
-        return self.client.put(self.domain, name, ob)
+        self.client.put(self.domain, name, ob)
+        return name
 
     def delete(self, name):
         try:
