@@ -39,13 +39,10 @@ var ZXXFILE = {
 		// 获取文件列表对象
 		var files = e.target.files || e.dataTransfer.files;
 		//继续添加文件
-		if (this.fileFilter.length > self.MAXFILENUM){
+		if (this.fileFilter.length > this.MAXFILENUM){
 			alert('只允许提交三张图片')
                 }
                 else{
-			alert(this.fileFilter.length)
-			alert(this.MAXFILENUM)
-			alert(this.fileFilter.length > int(self.MAXFILENUM))
 			this.fileFilter = this.fileFilter.concat(this.filter(files));
                 }
 		this.funDealFiles();
