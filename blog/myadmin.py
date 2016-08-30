@@ -858,6 +858,7 @@ def activity_add(request):
         old_pics = activity.activity_images.all()
         old_pics.delete()
         print files
+        print request.FILES
         for f in files:
             activity.activity_images.create(image = f)
         return HttpResponseRedirect(reverse("yimi_admin:activity_list"))
