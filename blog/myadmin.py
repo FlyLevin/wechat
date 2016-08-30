@@ -835,7 +835,7 @@ def activity_add(request):
         place = request.POST.get('place')
         speaker = request.POST.get('speaker')
         content = request.POST.get('content')
-        files = request.FILES.getlist('image')
+        files = request.FILES.getlist('fileselect')
         if activity:
             activity.title = title
             activity.a_time = a_time

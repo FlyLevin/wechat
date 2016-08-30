@@ -69,7 +69,7 @@ $(function() {
             <!-- /options bar -->                            
 
 
-<form id="uploadForm" action="{% url 'yimi_admin:activity_add' %}?aid={{activity.id}}" method="post" >{% csrf_token %}
+<form id="uploadForm" action="{% url 'yimi_admin:activity_add' %}?aid={{activity.id}}" method="post" enctype='multipart/form-data' >{% csrf_token %}
 <table class="mainTable">
       
       <tr>
@@ -106,7 +106,7 @@ $(function() {
 <div class="upload_main">
     <div style="border-bottom:1px solid #fff;" class="txtRight">上传活动图片：</div>
     <div class="upload_choose">
-        <input id="Image" type="file" size="30" name="fileselect[]" multiple />
+        <input id="Image" type="file" size="30" name="fileselect" multiple />
     </div>
     <div id="preview" class="upload_preview"></div>
 </div>
@@ -129,7 +129,6 @@ $(function() {
 <script>
 var params = {
 	fileInput: $("#Image").get(0),
-	upButton: $("#fileSubmit").get(0),
 	url: $("#uploadForm").attr("action"),
 	filter: function(files) {
 		var arrFiles = [];
