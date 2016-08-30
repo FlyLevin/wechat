@@ -112,7 +112,7 @@ $(function() {
 </div>
 <table>
 <tr>
-    <td colspan="2" align="center"><input name="" type="submit" class="inputBut mr10 submit"  value=">提交"/></td>
+    <td colspan="2" align="center"><input name="fileSubmit" type="submit" class="inputBut mr10 submit"  value=">提交"/></td>
 </tr>
 </table>
 </form>
@@ -129,6 +129,7 @@ $(function() {
 <script>
 var params = {
 	fileInput: $("#Image").get(0),
+	upButton: $("#fileSubmit").get(0),
 	url: $("#uploadForm").attr("action"),
 	filter: function(files) {
 		var arrFiles = [];
