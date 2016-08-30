@@ -855,10 +855,10 @@ def activity_add(request):
                 speaker = speaker,
                 content = content,
             )
-        old_pics = activity.activityimage_set.all()
+        old_pics = activity.activity_image.all()
         old_pics.delete()
         for f in files:
-            activity.activityimage_set.create(image = f)
+            activity.activity_image.create(image = f)
         return HttpResponseRedirect(reverse("yimi_admin:activity_list"))
     
     context = {
