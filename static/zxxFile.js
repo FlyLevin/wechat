@@ -9,6 +9,7 @@ var ZXXFILE = {
 	upButton: null,					//提交按钮
 	url: "",						//ajax地址
 	fileFilter: [],					//过滤后的文件数组
+        MAXFILENUM: 3,
 	filter: function(files) {		//选择文件组的过滤方法
 		return files;	
 	},
@@ -38,7 +39,12 @@ var ZXXFILE = {
 		// 获取文件列表对象
 		var files = e.target.files || e.dataTransfer.files;
 		//继续添加文件
-		this.fileFilter = this.fileFilter.concat(this.filter(files));
+                if (this.fileFilter.length > MAXFILENUM){
+                        alert('只允许提交三张图片')
+                }
+                else{
+		        this.fileFilter = this.fileFilter.concat(this.filter(files));
+                }
 		this.funDealFiles();
 		return this;
 	},
