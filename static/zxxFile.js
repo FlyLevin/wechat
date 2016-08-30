@@ -43,7 +43,7 @@ var ZXXFILE = {
                         alert('只允许提交三张图片')
                 }
                 else{
-			alert(this.fileFilter)
+			alert(this.fileFilter.length)
 			this.fileFilter = this.fileFilter.concat(this.filter(files));
                 }
 		this.funDealFiles();
