@@ -136,9 +136,13 @@ var params = {
 			if (file.type.indexOf("image") == 0) {
 				if (file.size >= 512000) {
 					alert('您这张"'+ file.name +'"图片大小过大，应小于500k');	
-				} else {
-					arrFiles.push(file);	
-				}			
+				} else 
+                                        if (i>3){
+                                                      alert('只允许提交三张图片')
+                                        }
+                                        else{
+				                      arrFiles.push(file);	
+         				}
 			} else {
 				alert('文件"' + file.name + '"不是图片。');	
 			}
