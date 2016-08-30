@@ -134,7 +134,7 @@ class Article(models.Model):
             domain = self.sae_storage.domain
             self.picurl = s.url(domain, self.image.name)
             self.save()
-            return picurl
+            return self.picurl
         else:
             return '/'
     
@@ -455,7 +455,7 @@ class ActivityImage(models.Model):
             domain = self.sae_storage.domain
             self.picurl = s.url(domain, self.image.name)
             self.save()
-            return picurl
+            return self.picurl
         else:
             return '/'
     def delete(self):
