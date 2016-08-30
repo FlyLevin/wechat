@@ -835,6 +835,7 @@ def activity_add(request):
         place = request.POST.get('place')
         speaker = request.POST.get('speaker')
         content = request.POST.get('content')
+        files = request.FILES.getlist('Image')
         if activity:
             activity.title = title
             activity.a_time = a_time
@@ -845,7 +846,7 @@ def activity_add(request):
             activity.content = content
             activity.save()
         else:
-            appitem.activity_set.create(
+            activity = appitem.activity_set.create(
                 title=title, 
                 a_time=a_time, 
                 count=count,
@@ -854,6 +855,10 @@ def activity_add(request):
                 speaker = speaker,
                 content = content,
             )
+        old_pics = activity.activityimage_set.all()
+        old_pics.delete()
+        for f in files:
+            activity.activityimage_set.create(image = f)
         return HttpResponseRedirect(reverse("yimi_admin:activity_list"))
     
     context = {
