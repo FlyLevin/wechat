@@ -45,7 +45,7 @@ var ZXXFILE = {
                 else{
 			alert(this.fileFilter.length)
 			alert(this.MAXFILENUM)
-			alert(this.fileFilter.length > self.MAXFILENUM)
+			alert(this.fileFilter.length > int(self.MAXFILENUM))
 			this.fileFilter = this.fileFilter.concat(this.filter(files));
                 }
 		this.funDealFiles();
