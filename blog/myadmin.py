@@ -860,7 +860,7 @@ def activity_add(request):
         print files
         for f in files:
             image_obj = activity.activity_images.create(image = f)
-            image_obg.get_image_url()
+            image_obj.get_image_url()
         return HttpResponseRedirect(reverse("yimi_admin:activity_list"))
     
     context = {
