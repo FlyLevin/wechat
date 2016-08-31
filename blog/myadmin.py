@@ -855,9 +855,10 @@ def activity_add(request):
                 speaker = speaker,
                 content = content,
             )
+        # Manually delete the all files stored in this activity before
         for old_pics in activity.activity_images.all():
             old_pics.delete()
-        print files
+        # Manually add the new pics stored in this activity
         for f in files:
             image_obj = activity.activity_images.create(image = f)
             image_obj.get_image_url()
@@ -875,6 +876,7 @@ def activity_add(request):
 def activity_delete(request, id):
     appitem = get_appitem(request.user)
     activity = appitem.activity_set.filter(id=id)
+    print dir(activity)
     if activity:
         for old_pics in activity.activity_images.all():
             old_pics.delete()
