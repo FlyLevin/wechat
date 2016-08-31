@@ -855,13 +855,15 @@ def activity_add(request):
                 speaker = speaker,
                 content = content,
             )
-        # Manually delete the all files stored in this activity before
-        for old_pics in activity.activity_images.all():
-            old_pics.delete()
-        # Manually add the new pics stored in this activity
-        for f in files:
-            image_obj = activity.activity_images.create(image = f)
-            image_obj.get_image_url()
+        print dir(activity)
+        if files:
+            # Manually delete the all files stored in this activity before
+            for old_pics in activity.activity_images.all():
+                old_pics.delete()
+            # Manually add the new pics stored in this activity
+            for f in files:
+                image_obj = activity.activity_images.create(image = f)
+                image_obj.get_image_url()
         return HttpResponseRedirect(reverse("yimi_admin:activity_list"))
     
     context = {
