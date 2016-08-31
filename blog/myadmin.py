@@ -855,7 +855,6 @@ def activity_add(request):
                 speaker = speaker,
                 content = content,
             )
-        print dir(activity)
         if files:
             # Manually delete the all files stored in this activity before
             for old_pics in activity.activity_images.all():
@@ -878,9 +877,8 @@ def activity_add(request):
 def activity_delete(request, id):
     appitem = get_appitem(request.user)
     activity = appitem.activity_set.filter(id=id)
-    print dir(activity)
     if activity:
-        for old_pics in activity.activity_images.all():
+        for old_pics in activity[0].activity_images.all():
             old_pics.delete()
         activity.delete()
     return HttpResponseRedirect(request.META.get('HTTP_REFERER', '/'))
