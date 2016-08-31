@@ -19,9 +19,9 @@
            {% if activity.content %} <dd><b>内容：</b>{{activity.content|safe}}</dd> {% endif %}
            {% if activity.activity_images %} <dd><b>图片:</b> 
            {% for image in activity.activity_images.all %}
-              <img src= "{{image.get_image_url}}" />
+              <div class="listimg"><img src="{{image.get_image_url}}" height="180px"/></div>
            {% endfor %}
-           {% endif %}
+           </dd>{% endif %}
             <dd style="height:30px;"><button style="float:right;width:100px;height:45px;"
  onclick="window.location.href='http://{{appitem.domain}}{% url 'nanjing:activity_user' appitem.slug activity.id %}'">报名</button></dd>
         </dl>
