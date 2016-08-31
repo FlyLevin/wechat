@@ -459,6 +459,7 @@ class ActivityImage(models.Model):
         else:
             return '/'
     def delete(self):
+        print 'Now deleting'
         self.image.delete(self.image.name)
         super(Article, self).delete()
 
