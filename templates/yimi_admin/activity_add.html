@@ -102,7 +102,7 @@ $(function() {
         <script id="container-ueditor" name="content" type="text/plain">{{activity.content|safe}}</script>
         </td>      </tr>
     {% if activity.activity_images %}
-        {% for image in activity.activity_images %}
+        {% for image in activity.activity_images.all() %}
     <tr>
         <td>&nbsp;</td>
         <td><img src="{{image.get_image_url}}" width="157" height="104"/></td>
