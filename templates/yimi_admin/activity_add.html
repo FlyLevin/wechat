@@ -101,14 +101,12 @@ $(function() {
         <td>
         <script id="container-ueditor" name="content" type="text/plain">{{activity.content|safe}}</script>
         </td>      </tr>
-    {% if picture.get_image_url and picture.get_image_url != '/' %}
-        {% for image in picture %}
+    {% for image in picture %}
     <tr>
         <td>&nbsp;</td>
         <td><img src="{{image.get_image_url}}" width="157" height="104"/></td>
     </tr>
-        {% endfor %}
-    {% endif %}
+    {% endfor %}
  
 </table>
 <div class="upload_main">
