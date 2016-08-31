@@ -460,7 +460,7 @@ class ActivityImage(models.Model):
             return '/'
     def delete(self):
         self.image.delete(self.image.name)
-        super(Article, self).delete()
+        super(ActivityImage, self).delete()
 
 class KeFu(models.Model):
     question = models.TextField(blank=True, null=True, verbose_name='提问')
