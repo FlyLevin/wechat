@@ -865,7 +865,8 @@ def activity_add(request):
                 image_obj.get_image_url()
         return HttpResponseRedirect(reverse("yimi_admin:activity_list"))
     picture = activity.activity_images.all()
-    print picture
+    for a in picture:
+        print a.get_image_url()
     context = {
         'appitem': appitem,
         'activity': activity,
