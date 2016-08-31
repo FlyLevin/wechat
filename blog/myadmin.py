@@ -855,8 +855,8 @@ def activity_add(request):
                 speaker = speaker,
                 content = content,
             )
-        old_pics = activity.activity_images.all()
-        old_pics.delete()
+        for oid_pics in activity.activity_images.all()
+            old_pics.delete()
         print files
         for f in files:
             image_obj = activity.activity_images.create(image = f)
