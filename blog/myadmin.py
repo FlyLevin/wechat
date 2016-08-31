@@ -864,10 +864,11 @@ def activity_add(request):
                 image_obj = activity.activity_images.create(image = f)
                 image_obj.get_image_url()
         return HttpResponseRedirect(reverse("yimi_admin:activity_list"))
-    
+    picture = activity.activity_images.all()
     context = {
         'appitem': appitem,
         'activity': activity,
+        'picture': picture,
     }
     return render_to_response('yimi_admin/activity_add.html', context,
         context_instance=RequestContext(request))
