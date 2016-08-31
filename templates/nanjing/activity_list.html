@@ -20,7 +20,7 @@
            {% if activity.activity_images %} <dd><b>图片:</b></dd>{% endif %} 
            <div class="listimg">
            {% for image in activity.activity_images.all %}
-              <img src="{{image.get_image_url}}" />
+              <img src="{{image.get_image_url}}" height="180px"/>
            {% endfor %}
            </div>
            </dd>{% endif %}
