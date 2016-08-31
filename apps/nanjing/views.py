@@ -78,7 +78,8 @@ def activity_add(request, slug):
         place = request.POST.get('place')
         speaker = request.POST.get('speaker')
         content = request.POST.get('content')
-        appitem.activity_set.create(
+        files = request.FILES.getlist('fileselect')
+        activity = appitem.activity_set.create(
             title=title, 
             a_time=a_time, 
             count=count,
@@ -87,6 +88,9 @@ def activity_add(request, slug):
             speaker = speaker,
             content = content,
         )
+        for f in files:
+            image_obj = activity.activity_images.create(image = f)
+            image_obj.get_image_url()
         return HttpResponseRedirect(reverse_url(slug))
     context = {
         'appitem': appitem,
