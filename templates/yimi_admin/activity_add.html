@@ -101,7 +101,15 @@ $(function() {
         <td>
         <script id="container-ueditor" name="content" type="text/plain">{{activity.content|safe}}</script>
         </td>      </tr>
-   
+    {% if activity.activity_images %}
+        {% for image in activity.activity_images %}
+    <tr>
+        <td>&nbsp;</td>
+        <td><img src="{{image.get_image_url}}" width="157" height="104"/></td>
+    </tr>
+        {% endfor %}
+    {% endif %}
+ 
 </table>
 <div class="upload_main">
     <div style="border-bottom:1px solid #fff;" class="txtRight">上传活动图片：</div>
