@@ -21,11 +21,9 @@
             <dd style="height:30px;"><button style="float:right;width:100px;height:45px;"
  onclick="window.location.href='http://{{appitem.domain}}{% url 'nanjing:activity_user' appitem.slug activity.id %}'">报名</button></dd>
            <div class="listimg">
-           <ul>
            {% for image in activity.activity_images.all %}
-              <li style="float:left"><img src="{{image.get_image_url}}" height="180px"/></li>
+              <img src="{{image.get_image_url}}" height="180px"/>
            {% endfor %}
-           </ul>
            </div>
         </dl>
         {% endfor %}
