@@ -5,7 +5,7 @@ div,form,img,ul,ol,li,dl,dt,dd{margin:0px;padding:0px;border:0px}
 h1,h2,h3,h4,h5,h6{margin:0px;padding:0px;}
 table,td,tr,th{font-family:"微软雅黑", Verdana, arial;margin:0px;padding:0px;color:#000; }
 ul,dl,ol,form{margin:0px;border:0px; padding:0px}
-ul li,ol li{list-style-type:none}
+ul li,ol li{float:left}
 dl dt,dl dd{margin:0px;padding:0px;}
 p{margin:0px;padding:0px;line-height:18px}
 img{border:0px;}
