@@ -472,13 +472,11 @@ class ProposalThreshold(models.Model):
     discuss_date = models.IntegerField(default = 7, verbose_name="辩论阶段持续时间", blank=True, null=True)
     voting_date = models.IntegerField(default = 30, verbose_name="投票阶段持续时间", blank=True, null=True)
 
-'''
-class ProposalStage(models.Model):
-    name = models.TextField(blank=True, null=True, verbose_name='状态名')
-    proposals = models.ManyToManyField('Proposal', verbose_name='议案状态', blank=True, null=True)
-    count = models.IntegerField(verbose_name="状态议案数量", default=0)
-    status = models.BooleanField(default=False, verbose_name="议案状态权限控制")
-'''
+#class ProposalStage(models.Model):
+#    name = models.TextField(blank=True, null=True, verbose_name='状态名')
+#    proposals = models.ManyToManyField('Proposal', verbose_name='议案状态', blank=True, null=True)
+#    count = models.IntegerField(verbose_name="状态议案数量", default=0)
+#    status = models.BooleanField(default=False, verbose_name="议案状态权限控制")
 
 class ProposalImage(models.Model):
     picurl = models.CharField(max_length=500, blank=True, null=True, verbose_name='图片链接')
