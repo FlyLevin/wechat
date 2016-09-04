@@ -551,7 +551,7 @@ class Proposal(models.Model):
     proposal_stage = models.IntegerField(
         max_length=5, default=PROPOSAL_STAGE_PENDING, verbose_name='议案状态', blank=True, null=True)
     proposal_discuss = models.ManyToManyField('ProposalDiscuss', verbose_name='议案辩论', blank=True, null=True)
-    proposal_vote = models.ManyToManyField('ProposalDiscuss', verbose_name='议案投票', blank=True, null=True)
+    proposal_vote = models.ManyToManyField('ProposalVote', verbose_name='议案投票', blank=True, null=True)
     proposal_images = models.ManyToManyField('ProposalImage', verbose_name='议案图片', blank=True, null=True)
     proposal_threshold = models.ManyToManyField('ProposalThreshold', verbose_name='议案阈值', blank=True, null=True)
 
