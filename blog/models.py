@@ -14,6 +14,7 @@ from django.core.cache import cache
 from utils import upload_file_handler, method_get_api, method_post_api
 from yimi.settings import TIME_ZONE, TOKEN_CACHE_PRE, TOKEN, SAE_STORAGE_DOMAIN, SAE_APPNAME
 from store import SaeStorage
+from tools.config import *
 
 TYPE_LIST = (
     ('text', '文本回复'),
@@ -216,6 +217,8 @@ class AppItem(models.Model):
     categories = models.ManyToManyField('Category', blank=True, null=True, verbose_name='分类') 
     articles = models.ManyToManyField('Article', blank=True, null=True, verbose_name='元素材') 
     news = models.ManyToManyField('News', blank=True, null=True, verbose_name='图文素材') 
+#    proposal_stage = models.ManyToManyField('ProposalStage', blank=True, null=True, verbose_name='议案状态')
+#    proposal = models.ManyToManyField('Proposal', blank=True, null=True, verbose_name='议案')
     is_valid = models.BooleanField(default=False, verbose_name="是否验证")
     def __unicode__(self):
         return self.name or self.appid
@@ -462,6 +465,146 @@ class ActivityImage(models.Model):
         self.image.delete(self.image.name)
         super(ActivityImage, self).delete()
 
+class ProposalThreshold(models.Model):
+    appitem = models.ForeignKey(AppItem, verbose_name='应用', blank=True, null=True)
+    seconded_number = models.IntegerField(default = 50, verbose_name="复议阶段复议人数", blank=True, null=True)
+    pending_date = models.IntegerField(default = 30, verbose_name="复议阶段持续时间", blank=True, null=True)
+    discuss_date = models.IntegerField(default = 7, verbose_name="辩论阶段持续时间", blank=True, null=True)
+    voting_date = models.IntegerField(default = 30, verbose_name="投票阶段持续时间", blank=True, null=True)
+
+'''
+class ProposalStage(models.Model):
+    name = models.TextField(blank=True, null=True, verbose_name='状态名')
+    proposals = models.ManyToManyField('Proposal', verbose_name='议案状态', blank=True, null=True)
+    count = models.IntegerField(verbose_name="状态议案数量", default=0)
+    status = models.BooleanField(default=False, verbose_name="议案状态权限控制")
+'''
+
+class ProposalImage(models.Model):
+    picurl = models.CharField(max_length=500, blank=True, null=True, verbose_name='图片链接')
+    sae_storage = SaeStorage(domain = SAE_STORAGE_DOMAIN, app = SAE_APPNAME)
+    image = models.FileField(
+        max_length=128, blank=True, null=True, upload_to=upload_file_handler, storage = sae_storage, verbose_name="本地上传")
+    create_time = models.DateTimeField(auto_now_add=True,  blank=True, null=True,verbose_name='创建时间')
+    def get_image_url(self):
+        if self.picurl:
+            return self.picurl
+        elif self.image:
+ #           appitem = self.get_appitem()
+ #           domain = appitem.domain
+ #           print dir(self.image)
+ #           print dir(self.picurl)
+ #           url_prefix = 'http://%s/' % domain
+ #           print url_prefix, self.image.name
+ #           return url_prefix + self.image.name
+            s = self.sae_storage.client
+            domain = self.sae_storage.domain
+            self.picurl = s.url(domain, self.image.name)
+            self.save()
+            return self.picurl
+        else:
+            return '/'
+    def delete(self):
+        self.image.delete(self.image.name)
+        super(ProposalImage, self).delete()
+
+class ProposalDiscuss(models.Model):
+    name = models.CharField(
+        max_length=128, blank=True,null=True,verbose_name="房号")
+    openid = models.CharField(
+        max_length=256, blank=True, verbose_name="openid")
+    create_time = models.DateTimeField(auto_now_add=True,  blank=True, null=True,verbose_name='创建时间')
+    content = models.TextField(blank=True, null=True, verbose_name='内容')
+    attitude = models.BooleanField(blank=True, null=True, verbose_name='讨论赞成')
+    passed = models.BooleanField(blank=True, null=True, verbose_name='通过审核')
+
+class ProposalSeconded(models.Model):
+    name = models.CharField(
+        max_length=128, blank=True,null=True,verbose_name="房号")
+    openid = models.CharField(
+        max_length=256, blank=True, verbose_name="openid")
+    create_time = models.DateTimeField(auto_now_add=True,  blank=True, null=True,verbose_name='创建时间')
+
+class ProposalVote(models.Model):
+    name = models.CharField(
+        max_length=128, blank=True,null=True,verbose_name="房号")
+    openid = models.CharField(
+        max_length=256, blank=True, verbose_name="openid")
+    create_time = models.DateTimeField(auto_now_add=True,  blank=True, null=True,verbose_name='创建时间')
+    attitude = models.BooleanField(blank=True, null=True, verbose_name='投票赞成')
+
+class Proposal(models.Model):
+    title = models.CharField(
+        max_length=128, blank=True, null=True, verbose_name="标题")
+    submit_time = models.DateTimeField(auto_now_add=True,  blank=True, null=True,verbose_name='创建时间')
+    discuss_time = models.DateTimeField(blank=True, null=True, verbose_name='进入辩论时间')
+    vote_time = models.DateTimeField(blank=True, null=True, verbose_name='进入投票时间')
+    submitter = models.CharField(
+        max_length=128, blank=True, null=True, verbose_name="房号")
+    openid = models.CharField(
+        max_length=256, blank=True, verbose_name="openid")
+    description = models.TextField(blank=True, null=True, verbose_name='简介')
+    content = models.TextField(blank=True, null=True, verbose_name='内容')
+    appitem = models.ForeignKey(AppItem, verbose_name='应用', blank=True, null=True)
+    amendment = models.IntegerField(blank=True, null=True, verbose_name='原提案id')
+    proposal_seconded = models.ManyToManyField('ProposalSeconded', verbose_name='复议人数', blank=True, null=True)
+    proposal_stage = models.IntegerField(
+        max_length=5, default=PROPOSAL_STAGE_PENDING, verbose_name='议案状态', blank=True, null=True)
+    proposal_discuss = models.ManyToManyField('ProposalDiscuss', verbose_name='议案辩论', blank=True, null=True)
+    proposal_vote = models.ManyToManyField('ProposalDiscuss', verbose_name='议案投票', blank=True, null=True)
+    proposal_images = models.ManyToManyField('ProposalImage', verbose_name='议案图片', blank=True, null=True)
+    proposal_threshold = models.ManyToManyField('ProposalThreshold', verbose_name='议案阈值', blank=True, null=True)
+
+    # change the prposal stage by different time thredhold and voting number logic
+    def app_item_change_proposal_stage(appitem, proposal): #, from_stage, to_stage
+        current_stage = self.proposal_stage
+        # change the stage from pending to discuss
+        if current_stage == PROPOSAL_STAGE_PENDING:
+            time_delta = datetime.now()-self.submit_time
+            if time_delta.days <= self.proposal_threshold.pending_date:
+                seconded_number = self.proposal_seconded.count()
+                if seconded_number > self.proposal_threshold.seconded_number:
+                    self.proposal_stage = PROPOSAL_STAGE_DISCUSS    
+                    self.discuss_time = datetime.now()
+                    # update the related proposal into freeze stage and start this proposal discussing
+                    related_proposal = self.appitem.proposal_set.filter(amendment=self.amendment).exclude(id=self.id).update(proposal_stage=PROPOSAL_STAGE_FREEZE)
+                    self.save()
+                    print "change from pending to discuss"
+                    return
+                else:
+                    print "Still in pending"
+                    return    
+            else:
+                # if the time longer than the pending date, the proposal run into FREEZE stage
+                self.proposal_stage = PROPOSAL_STAGE_FREEZE
+                self.save()
+                print "pending timeout change to freeze"
+                return
+        elif current_stage == PROPOSAL_STAGE_DISCUSS:
+            time_delta = datetime.now()-self.discuss_time
+            if time_delta.days > self.proposal_threshold.discuss_date:
+                self.proposal_stage = PROPOSAL_STAGE_VOTE
+                self.vote_time = datetime.now()
+                self.save()
+                print "change from discuss to vote"
+                return
+            else:
+                print "still in discuss"
+                return
+        elif current_stage == PROPOSAL_STAGE_VOTE:
+            time_delta = datetime.now()-self.vote_time
+            if time_delta.days > self.proposal_threshold.voting_date:
+                self.proposal_stage = PROPOSAL_STAGE_DONE
+                self.save()
+                print "change from vote to Done"
+                return
+            else:
+                print "still in vote"
+                return
+        else:
+            print "Always in freeze"
+            return
+
 class KeFu(models.Model):
     question = models.TextField(blank=True, null=True, verbose_name='提问')
     answer = models.TextField(blank=True, null=True, verbose_name='回答')
@@ -560,3 +703,23 @@ def app_item_change_user_group(appitem, app_user, from_group, to_group):
     group = appitem.app_groups.filter(id=to_group).first()
     if app_user not in group.app_users.all():
         group.app_users.add(app_user)
+
+
+'''
+# change the prposal stage by different time thredhold and voting number logic
+def app_item_change_proposal_stage(appitem, proposal, from_stage, to_stage): 
+    stage = appitem.proposalstage_set.filter(id=from_stage).first()
+    if proposal in stage.proposals.all():
+        stage.proposals.remove(proposal)
+    stage = appitem.proposalstage_set.filter(id=to_stage).first()
+    if proposal not in stage.proposals.all():
+        stage.proposals.add(proposal)
+
+'''
+
+
+
+
+
+
+
