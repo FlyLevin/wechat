@@ -513,8 +513,8 @@ class ProposalDiscuss(models.Model):
         max_length=256, blank=True, verbose_name="openid")
     create_time = models.DateTimeField(auto_now_add=True,  blank=True, null=True,verbose_name='创建时间')
     content = models.TextField(blank=True, null=True, verbose_name='内容')
-    attitude = models.BooleanField(blank=True, null=True, verbose_name='讨论赞成')
-    passed = models.BooleanField(blank=True, null=True, verbose_name='通过审核')
+    attitude = models.BooleanField(default=True, verbose_name='讨论赞成')
+    passed = models.BooleanField(default=True, verbose_name='通过审核')
 
 class ProposalSeconded(models.Model):
     name = models.CharField(
@@ -529,7 +529,7 @@ class ProposalVote(models.Model):
     openid = models.CharField(
         max_length=256, blank=True, verbose_name="openid")
     create_time = models.DateTimeField(auto_now_add=True,  blank=True, null=True,verbose_name='创建时间')
-    attitude = models.BooleanField(blank=True, null=True, verbose_name='投票赞成')
+    attitude = models.BooleanField(default=True, verbose_name='投票赞成')
 
 class Proposal(models.Model):
     title = models.CharField(
