@@ -554,7 +554,7 @@ class Proposal(models.Model):
     proposal_threshold = models.ManyToManyField('ProposalThreshold', verbose_name='议案阈值', blank=True, null=True)
 
     # change the prposal stage by different time thredhold and voting number logic
-    def update_proposal_stage(self): #, from_stage, to_stage
+    def update_proposal_stage(self): 
         current_stage = self.proposal_stage
         # change the stage from pending to discuss
         if current_stage == PROPOSAL_STAGE_PENDING:
