@@ -63,4 +63,6 @@ urlpatterns = patterns('',
     url(r'^answer-question/$', myadmin.answer_question, name='answer_question'),  #客服列表
     url(r'^kefu-delete/$', myadmin.kefu_delete, name='kefu_delete'),  #客服列表
 
+    url(r'proposal-list/$', myadmin.proposal_list, name='proposal_list')
+
 )
