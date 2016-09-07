@@ -12,6 +12,13 @@ def get_dict_value(dic, key):
         return ''
 
 @register.filter(is_safe=True)
+def get_list_value(lst, key):
+    if lst:
+        return lst[key]
+    else:
+        return ''
+
+@register.filter(is_safe=True)
 def cut_get_field(a, b):
     list_ = a.split('&')
     new_ = ''
