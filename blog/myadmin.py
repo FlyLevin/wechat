@@ -1008,6 +1008,6 @@ def proposal_status(request, pid):
     return HttpResponseRedirect(request.META.get('HTTP_REFERER', '/'))
 
 @login_required(login_url=LOGIN_URL)
-def proposal_threshold(request. pid):
+def proposal_threshold(request, pid):
     return HttpResponseRedirect(request.META.get('HTTP_REFERER', '/'))
 
