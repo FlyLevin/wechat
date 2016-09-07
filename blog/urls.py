@@ -64,13 +64,13 @@ urlpatterns = patterns('',
     url(r'^kefu-delete/$', myadmin.kefu_delete, name='kefu_delete'),  #客服列表
 
     url(r'proposal-list/$', myadmin.proposal_list, name='proposal_list')
-    url(r'proposal-add/$', myadmin.proposal_add, name='proposal_add')
-    url(r'proposal-delete/$', myadmin.proposal_delete, name='proposal_delete')
-    url(r'proposal-item-list/$', myadmin.proposal_item_list, name='proposal_item_list')
-    url(r'proposal-status/$', myadmin.proposal_status, name='proposal_status')
-    url(r'proposal-threshold/$', myadmin.proposal_threshold, name='proposal_threshold')
-#    url(r'proposal-seconded/$', myadmin.proposal_seconded, name='proposal_seconded')
-#    url(r'proposal-discuss/$', myadmin.proposal_discuss, name='proposal_discuss')
-#    url(r'proposal-vote/$', myadmin.proposal_vote, name='proposal_vote')
-#    url(r'proposal-done/$', myadmin.proposal_done, name='proposal_done')
+    url(r'proposal-add/$', myadmin.proposal_add, name='proposal_add'),
+    url(r'proposal-delete/$', myadmin.proposal_delete, name='proposal_delete'),
+    url(r'proposal-item-list/$', myadmin.proposal_item_list, name='proposal_item_list'),
+    url(r'proposal-status/$', myadmin.proposal_status, name='proposal_status'),
+    url(r'proposal-threshold/$', myadmin.proposal_threshold, name='proposal_threshold'),
+#    url(r'proposal-seconded/$', myadmin.proposal_seconded, name='proposal_seconded'),
+#    url(r'proposal-discuss/$', myadmin.proposal_discuss, name='proposal_discuss'),
+#    url(r'proposal-vote/$', myadmin.proposal_vote, name='proposal_vote'),
+#    url(r'proposal-done/$', myadmin.proposal_done, name='proposal_done'),
 )
