@@ -994,7 +994,36 @@ def proposal_list(request):
 
 @login_required(login_url=LOGIN_URL)
 def proposal_add(request):
-    return HttpResponseRedirect(request.META.get('HTTP_REFERER', '/'))
+    proposal_id = request.Get.get('pid')
+    appitem = get_appitem(request.user)
+    registered_client = appitem.openaccount_set.all()
+    if proposal_id :
+        proposal = appitem.proposal_set.get(id = proposal_id)
+        if proposal.proposal_stage != proposal_stages['PROPOSAL_STAGE_CLOSE']:
+            return HttpResponseRedirect(request.META.get('HTTP_REFERER', '/'))
+    else:
+        proposal = None
+    if request.method == 'POST':
+        title = request.POST.get('title')
+        description = request.POST.get('description')
+        content = request.POST.content('content')
+        
+        if proposal:
+            proposalform = ProposalForm(request.POST, request.FILES, instance=proposal)
+        else:
+            proposalform = ProposalForm(request.POST, request.FILES)
+        if proposalform.is_valid():
+            proposal = proposalform.save()
+            appitem.proposal_set.add(proposal)
+            return HttpResponseRedirect(reverse("yimi_admin:proposal_list"))
+
+    context = {
+        'appitem': appitem,
+        'proposal': proposal,
+        'registered_client': registered_client,
+    }
+    return render_to_response('yimi_admin/proposal_add.html', context,
+        context_instance=RequestContext(request))
 
 
 @login_required(login_url=LOGIN_URL)
