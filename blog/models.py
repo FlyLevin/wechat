@@ -589,7 +589,7 @@ class Proposal(models.Model):
             else:
                 print "still in discuss"
                 return
-        elif current_stage == proposal_stages['PROPOSAL_STAGE_VOTE:']
+        elif current_stage == proposal_stages['PROPOSAL_STAGE_VOTE']:
             time_delta = datetime.now()-self.vote_time
             if time_delta.days > self.proposal_threshold.voting_date:
                 self.proposal_stage = proposal_stages['PROPOSAL_STAGE_DONE']
