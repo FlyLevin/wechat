@@ -63,7 +63,7 @@ urlpatterns = patterns('',
     url(r'^answer-question/$', myadmin.answer_question, name='answer_question'),  #客服列表
     url(r'^kefu-delete/$', myadmin.kefu_delete, name='kefu_delete'),  #客服列表
 
-    url(r'proposal-list/$', myadmin.proposal_list, name='proposal_list')
+    url(r'proposal-list/$', myadmin.proposal_list, name='proposal_list'),
     url(r'proposal-add/$', myadmin.proposal_add, name='proposal_add'),
     url(r'proposal-delete/$', myadmin.proposal_delete, name='proposal_delete'),
     url(r'proposal-item-list/$', myadmin.proposal_item_list, name='proposal_item_list'),
