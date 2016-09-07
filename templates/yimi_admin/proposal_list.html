@@ -21,7 +21,7 @@
 						<div class="bar-button"><button type="button" class="btn" onclick="location.href='{% url 'yimi_admin:proposal_list' %}'" >全部议题</button></div>
 						<div class="bar-button"><button type="button" class="btn" onclick="location.href='{% url 'yimi_admin:proposal_list' %}?action_id=1'" >更新议题</button></div>
 						{% for proposal_stage in proposal_stages %}
-                            <div class="bar-button"><button type="button" class="btn btn-success" onclick="location.href='{% url 'yimi_admin:proposal_list' %}?stage_id={{proposal_stage}}'">{{proposal_stage_name[proposal_stage]}}</button></div>
+                            <div class="bar-button"><button type="button" class="btn btn-success" onclick="location.href='{% url 'yimi_admin:proposal_list' %}?stage_id={{proposal_stage}}'">{{proposal_stage_name[{{proposal_stage}}]}}</button></div>
                         {% endfor %}
                         </div>  
                     </li>
@@ -65,7 +65,7 @@
                            <td><a href="{% url 'yimi_admin:proposal_item_list' proposal.id %}">{{proposal.title}}</a></td>
                            <td>{{proposal.description}}</td>
                            <td>{{proposal.submitter}}</td>
-                           <td>{{proposal_stage_name[proposal.proposal_stage]}}</td>
+                           <td>{{proposal_stage_name[{{proposal.proposal_stage}}]}}</td>
                            <td>
                             <input type="button" value="删除" onclick="location.href='{% url 'yimi_admin:proposal_delete' proposal.id %}'" />
                             <input type="button" value="编辑" onclick="location.href='{% url 'yimi_admin:proposal_add' %}?pid={{proposal.id}}'"/>
