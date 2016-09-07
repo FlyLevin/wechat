@@ -565,7 +565,7 @@ class Proposal(models.Model):
                     self.proposal_stage = proposal_stages['PROPOSAL_STAGE_DISCUSS']
                     self.discuss_time = datetime.now()
                     # update the related proposal into freeze stage and start this proposal discussing
-                    self.appitem.proposal_set.filter(amendment=self.amendment).exclude(id=self.id).update(proposal_stage=proposal_stages.['PROPOSAL_STAGE_FREEZE'])
+                    self.appitem.proposal_set.filter(amendment=self.amendment).exclude(id=self.id).update(proposal_stage=proposal_stages['PROPOSAL_STAGE_FREEZE'])
                     self.save()
                     print "change from pending to discuss"
                     return
