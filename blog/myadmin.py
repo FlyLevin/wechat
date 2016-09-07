@@ -978,6 +978,8 @@ def proposal_list(request):
                 proposal.update_proposal_stage()
     matchs, show_pages = page_turning(proposals, request, 20)
 
+    print proposal_stage_name
+
     context = {
         'appitem': appitem,
         'proposals': proposals,
