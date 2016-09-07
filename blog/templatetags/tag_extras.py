@@ -5,7 +5,7 @@ import re
 register = template.Library()
 
 @register.filter(is_safe=True)
-def get_dict_value(key, dic):
+def get_dict_value(dic, key):
     if dic:
         return dic.get(key)
     else:
