@@ -56,7 +56,7 @@ def news_list(request):
     appitem = get_appitem(request.user)
     articles = appitem.articles.all()
     
-    matchs, show_pages = page_turning(articles, request, 10)
+    matchs, show_pages = page_turning(articles, request, 20)
     context = {
         'articles': articles,
         'matchs': matchs,
@@ -160,7 +160,7 @@ def articles_list(request):
         articles = category.articles.all()
     else:
         articles = appitem.articles.all()
-    matchs, show_pages = page_turning(articles, request, 10)
+    matchs, show_pages = page_turning(articles, request, 20)
     context = {
         'articles': articles,
         'category': category,
@@ -343,7 +343,7 @@ def users_list(request):
             get_all_user_info(appitem)
         app_users = appitem.app_users.all()
     app_groups = appitem.app_groups.all()
-    matchs, show_pages = page_turning(app_users, request, 10)
+    matchs, show_pages = page_turning(app_users, request, 20)
 
     context = {
         'appitem': appitem,
@@ -960,3 +960,54 @@ def kefu_delete(request):
     kefu = appitem.kefu_set.get(id=gid)
     kefu.delete()
     return HttpResponseRedirect(request.META.get('HTTP_REFERER', '/'))
+
+@login_required(login_url=LOGIN_URL)
+# the proposal management control web page
+# return the html page to the front
+def proposal_list(request):
+    stage_id = request.GET.get('stage_id')
+    action_id = request.GET.get('action_id')
+    appitem = get_appitem(request.user)
+    proposals = None
+    if stage_id:
+        proposals = appitem.proposal_set.filter(proposal_stage = stage_id).all()
+    else:
+        proposals = appitem.proposal_set.all()
+        if action_id:
+            for proposal in proposals:
+                proposal.update_proposal_stage()
+    matchs, show_pages = page_turning(proposals, request, 20)
+
+    context = {
+        'appitem': appitem,
+        'proposals': proposals,
+        'proposal_stages': proposal_stages.values(),
+        'proposal_stage_name': proposal_stage_name,
+        'matchs': matchs,
+        'show_pages': show_pages,
+    }
+    return render_to_response('yimi_admin/proposal_list.html', context,
+        context_instance=RequestContext(request))
+
+
+@login_required(login_url=LOGIN_URL)
+def proposal_add(request):
+    return HttpResponseRedirect(request.META.get('HTTP_REFERER', '/'))
+
+
+@login_required(login_url=LOGIN_URL)
+def proposal_delete(request, pid):
+    return HttpResponseRedirect(request.META.get('HTTP_REFERER', '/'))
+
+@login_required(login_url=LOGIN_URL)
+def proposal_item_list(request, pid):
+    return HttpResponseRedirect(request.META.get('HTTP_REFERER', '/'))
+
+@login_required(login_url=LOGIN_URL)
+def proposal_status(request, pid):
+    return HttpResponseRedirect(request.META.get('HTTP_REFERER', '/'))
+
+@login_required(login_url=LOGIN_URL)
+def proposal_threshold(request. pid):
+    return HttpResponseRedirect(request.META.get('HTTP_REFERER', '/'))
+

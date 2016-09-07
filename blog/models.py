@@ -547,7 +547,7 @@ class Proposal(models.Model):
     amendment = models.IntegerField(blank=True, null=True, verbose_name='原提案id')
     proposal_seconded = models.ManyToManyField('ProposalSeconded', verbose_name='复议人数', blank=True, null=True)
     proposal_stage = models.IntegerField(
-        max_length=5, default=PROPOSAL_STAGE_PENDING, verbose_name='议案状态', blank=True, null=True)
+        max_length=5, default=proposal_stages{'PROPOSAL_STAGE_CLOSE'}, verbose_name='议案状态', blank=True, null=True)
     proposal_discuss = models.ManyToManyField('ProposalDiscuss', verbose_name='议案辩论', blank=True, null=True)
     proposal_vote = models.ManyToManyField('ProposalVote', verbose_name='议案投票', blank=True, null=True)
     proposal_images = models.ManyToManyField('ProposalImage', verbose_name='议案图片', blank=True, null=True)
@@ -557,15 +557,15 @@ class Proposal(models.Model):
     def update_proposal_stage(self): 
         current_stage = self.proposal_stage
         # change the stage from pending to discuss
-        if current_stage == PROPOSAL_STAGE_PENDING:
+        if current_stage == proposal_stages{'PROPOSAL_STAGE_PENDING'}:
             time_delta = datetime.now()-self.submit_time
             if time_delta.days <= self.proposal_threshold.pending_date:
                 seconded_number = self.proposal_seconded.count()
                 if seconded_number > self.proposal_threshold.seconded_number:
-                    self.proposal_stage = PROPOSAL_STAGE_DISCUSS    
+                    self.proposal_stage = proposal_stages{'PROPOSAL_STAGE_DISCUSS'}
                     self.discuss_time = datetime.now()
                     # update the related proposal into freeze stage and start this proposal discussing
-                    related_proposal = self.appitem.proposal_set.filter(amendment=self.amendment).exclude(id=self.id).update(proposal_stage=PROPOSAL_STAGE_FREEZE)
+                    related_proposal = self.appitem.proposal_set.filter(amendment=self.amendment).exclude(id=self.id).update(proposal_stage=proposal_stages.{'PROPOSAL_STAGE_FREEZE'})
                     self.save()
                     print "change from pending to discuss"
                     return
@@ -574,14 +574,14 @@ class Proposal(models.Model):
                     return    
             else:
                 # if the time longer than the pending date, the proposal run into FREEZE stage
-                self.proposal_stage = PROPOSAL_STAGE_FREEZE
+                self.proposal_stage = proposal_stages{'PROPOSAL_STAGE_FREEZE'}
                 self.save()
                 print "pending timeout change to freeze"
                 return
-        elif current_stage == PROPOSAL_STAGE_DISCUSS:
+        elif current_stage == proposal_stages{'PROPOSAL_STAGE_DISCUSS'}:
             time_delta = datetime.now()-self.discuss_time
             if time_delta.days > self.proposal_threshold.discuss_date:
-                self.proposal_stage = PROPOSAL_STAGE_VOTE
+                self.proposal_stage = proposal_stages{'PROPOSAL_STAGE_VOTE'}
                 self.vote_time = datetime.now()
                 self.save()
                 print "change from discuss to vote"
@@ -589,10 +589,10 @@ class Proposal(models.Model):
             else:
                 print "still in discuss"
                 return
-        elif current_stage == PROPOSAL_STAGE_VOTE:
+        elif current_stage == proposal_stages{'PROPOSAL_STAGE_VOTE:'}
             time_delta = datetime.now()-self.vote_time
             if time_delta.days > self.proposal_threshold.voting_date:
-                self.proposal_stage = PROPOSAL_STAGE_DONE
+                self.proposal_stage = proposal_stages{'PROPOSAL_STAGE_DONE'}
                 self.save()
                 print "change from vote to Done"
                 return

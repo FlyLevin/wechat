@@ -5,9 +5,16 @@ REGISTERED_GROUPID = 2
 
 # For the proposal table change, correspond to the different proposal stage
 
-PROPOSAL_STAGE_PENDING = 0
-PROPOSAL_STAGE_DISCUSS = 1
-PROPOSAL_STAGE_VOTE = 2
-PROPOSAL_STAGE_FREEZE = 3
-PROPOSAL_STAGE_DONE = 4
+proposal_stages = {
+    'PROPOSAL_STAGE_PENDING': 0,
+    'PROPOSAL_STAGE_DISCUSS': 1,
+    'PROPOSAL_STAGE_VOTE': 2,
+    'PROPOSAL_STAGE_FREEZE': 3,
+    'PROPOSAL_STAGE_DONE': 4,
+    'PROPOSAL_STAGE_CLOSE': 5
+}
 
+proposal_stage_name = ['']*len(proposal_stages)
+
+for i in range(len(proposal_stages)):
+    proposal_stage_name[proposal_stages[proposal_stages.keys()[i]]] = proposal_stages.keys()[i].split('_')[2]
