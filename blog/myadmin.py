@@ -1000,6 +1000,7 @@ def proposal_add(request):
     # check if it is amendment / new proposal / edit the original one
     if proposal_id :
         proposal = appitem.proposal_set.get(id = proposal_id)
+        picture = proposal.proposal_images.all()
         # only the CLOSE stage proposal can be altered.
         if proposal.proposal_stage == proposal_stages['PROPOSAL_STAGE_CLOSE']:
             amendment = proposal.amendment
@@ -1012,6 +1013,7 @@ def proposal_add(request):
     else:
         proposal = None
         amendment = 0
+        picture = None
     if request.method == 'POST':
         title = request.POST.get('title')
         description = request.POST.get('description')
@@ -1046,7 +1048,6 @@ def proposal_add(request):
                 image_obj = proposal.proposal_images.create(image = f)
                 image_obj.get_image_url()
             return HttpResponseRedirect(reverse("yimi_admin:proposal_list"))
-    picture = proposal.proposal_images.all()
     context = {
         'appitem': appitem,
         'proposal': proposal,
