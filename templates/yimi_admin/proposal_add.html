@@ -88,6 +88,7 @@ $(function() {
 		{% if proposal %}
         <td><input name="openid" type="text" class="inputTxt w240 sh_nes" value="{{proposal.openid}}" resdonly="true"/>{{proposal.submitter}}</td>
 		{% else %}
+                <select class="app-group-select">
 		<option>选择提案人</option>
 		{% for users in registered_client %}
 		<option value="{{user.openid}}" >{{user.lbs}}</option>
@@ -98,20 +99,21 @@ $(function() {
       <tr>
         <td class="txtRight">修正案</td>
 		{% if amendment == 0 %}
-		     <td><input name="amendment" type="text" class="inputTxt w240 sh_nes" value="{{amendment}}" resdonly="true"/>否</td>
+		     <td><input name="amendment" type="text" value="{{amendment}}" resdonly="true"/>否</td>
 		{% else %}
-		     <td><input name="amendment" type="text" class="inputTxt w240 sh_nes" value="{{amendment}}" resdonly="true"/>是</td>
+		     <td><input name="amendment" type="text" value="{{amendment}}" resdonly="true"/>是</td>
 		{% endif %}
       </tr>
       <tr>
         <td class="txtRight">简介：</td>
-        <td><input name="description" type="text" class="inputTxt w240 sh_nes" value="{{proposal.description}}" maxlength="140"/>*<span class="sh_error">请正确填写形式(最大长度140)</span></td>
+        <td><input name="description" type="text" class="inputTxtLarge w240 sh_nes" value="{{proposal.description}}" maxlength="140"/>*<span class="sh_error">请正确填写形式(最大长度140)</span></td>
       </tr>
       <tr>
         <td class="txtRight">内容：</td>
         <td>
-        <script id="container-ueditor" name="content" type="text/plain">{{activity.content|safe}}</script>
-        </td>      </tr>
+        <script id="container-ueditor" name="content" type="text/plain">{{proposal.content|safe}}</script>
+        </td>
+      </tr>
     <tr>
         <td>&nbsp;</td>
         <td>
