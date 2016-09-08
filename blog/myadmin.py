@@ -994,7 +994,7 @@ def proposal_list(request):
 
 @login_required(login_url=LOGIN_URL)
 def proposal_add(request):
-    proposal_id = request.Get.get('pid')
+    proposal_id = request.GET.get('pid')
     appitem = get_appitem(request.user)
     registered_client = appitem.openaccount_set.all()
     # check if it is amendment / new proposal / edit the original one
@@ -1017,7 +1017,7 @@ def proposal_add(request):
         description = request.POST.get('description')
         openid = request.POST.get('openid')
         content = request.POST.get('content')
-        amendment = request.post.get('amendment_id')
+        amendment = request.POST.get('amendment_id')
         files = request.FILES.getlist('fileselect')
         submitter = registered_client.get(openid = openid).lbs
         if proposal:
