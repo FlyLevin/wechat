@@ -997,30 +997,62 @@ def proposal_add(request):
     proposal_id = request.Get.get('pid')
     appitem = get_appitem(request.user)
     registered_client = appitem.openaccount_set.all()
+    # check if it is amendment / new proposal / edit the original one
     if proposal_id :
         proposal = appitem.proposal_set.get(id = proposal_id)
-        if proposal.proposal_stage != proposal_stages['PROPOSAL_STAGE_CLOSE']:
+        # only the CLOSE stage proposal can be altered.
+        if proposal.proposal_stage == proposal_stages['PROPOSAL_STAGE_CLOSE']:
+            amendment = proposal.amendment
+        # if it is in the discuss stage, the edit means add a new proposal
+        elif proposal.proposal_stage == proposal_stages['PROPOSAL_STAGE_DISCUSS']:
+            amendment = proposal.id
+        # other stage can not alter the proposal content
+        else:
             return HttpResponseRedirect(request.META.get('HTTP_REFERER', '/'))
     else:
         proposal = None
+        amendment = 0
     if request.method == 'POST':
         title = request.POST.get('title')
         description = request.POST.get('description')
-        content = request.POST.content('content')
-        
+        openid = request.POST.get('openid')
+        content = request.POST.get('content')
+        amendment = request.post.get('amendment_id')
+        files = request.FILES.getlist('fileselect')
+        submitter = registered_client.get(openid = openid).lbs
         if proposal:
-            proposalform = ProposalForm(request.POST, request.FILES, instance=proposal)
+            proposal.title = title
+            proposal.description = description
+            proposal.content = content
+            proposal.amendment = amendment
+            proposal.submitter = submitter
+            proposal.openid = openid
+            proposal.save()
         else:
-            proposalform = ProposalForm(request.POST, request.FILES)
-        if proposalform.is_valid():
-            proposal = proposalform.save()
-            appitem.proposal_set.add(proposal)
+            proposal = appitem.proposal_set.create(
+                title=title,
+                description = description,
+                amendment = amendment,
+                content = content,
+                submitter = submitter,
+                openid = openid,
+            )
+        if files:
+            # Manually delete the all files stored in this activity before
+            for old_pics in proposal.proposal_images.all():
+                old_pics.delete()
+            # Manually add the new pics stored in this activity
+            for f in files:
+                image_obj = proposal.proposal_images.create(image = f)
+                image_obj.get_image_url()
             return HttpResponseRedirect(reverse("yimi_admin:proposal_list"))
-
+    picture = proposal.proposal_images.all()
     context = {
         'appitem': appitem,
         'proposal': proposal,
         'registered_client': registered_client,
+        'amendment': amendment,
+        'picture': picture,
     }
     return render_to_response('yimi_admin/proposal_add.html', context,
         context_instance=RequestContext(request))
