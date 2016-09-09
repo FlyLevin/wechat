@@ -89,7 +89,7 @@ $(function() {
         <td><input name="openid" type="text" class="inputTxt w240 sh_nes" value="{{proposal.openid}}" resdonly="true"/>{{proposal.submitter}}</td>
 		{% else %}
         <td>
-                <select class="app-group-select">
+                <select name = "openid" class="app-group-select">
 		<option>选择提案人</option>
 		{% for users in registered_client.all %}
 		<option value="{{users.openid}}" >{{users.lbs}}</option>
