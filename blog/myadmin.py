@@ -1063,11 +1063,11 @@ def proposal_add(request):
 @login_required(login_url=LOGIN_URL)
 def proposal_delete(request, pid):
     appitem = get_appitem(request.user)
-    proposal = appitem.proposal_set.filter(id = pid)
+    proposal = appitem.proposal_set.get(id = pid)
     if proposal.proposal_stage == proposal_stages['PROPOSAL_STAGE_CLOSE']:
-        for old_pics in proposal[0].proposal_images.all():
+        for old_pics in proposal.proposal_images.all():
             old_pics.delete()
-        proposal[0].proposal_threshold.delete()
+        proposal.proposal_threshold.delete()
         proposal.delete()
     return HttpResponseRedirect(request.META.get('HTTP_REFERER', '/'))
 
