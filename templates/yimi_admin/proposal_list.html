@@ -60,8 +60,6 @@
                     <tbody>
                         {% for proposal in proposals %}
                         <tr>
-                            <th><input type="checkbox" name="artwork_ids[]" class="styled" style="width:16px"  /></th>
-
                            <td><a href="{% url 'myadmin.proposal_item_list' proposal.id %}">{{proposal.title}}</a></td>
                            <td>{{proposal.description}}</td>
                            <td>{{proposal.submitter}}</td>
