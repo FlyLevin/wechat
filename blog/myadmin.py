@@ -1039,6 +1039,7 @@ def proposal_add(request):
                 submitter = submitter,
                 openid = openid,
             )
+            proposal.proposal_threshold.create()
         if files:
             # Manually delete the all files stored in this activity before
             for old_pics in proposal.proposal_images.all():
@@ -1061,6 +1062,12 @@ def proposal_add(request):
 
 @login_required(login_url=LOGIN_URL)
 def proposal_delete(request, pid):
+    appitem = getappitem(request.user)
+    proposal = appitem.proposal_set.get(id = pid)
+    if proposal:
+        for old_pics in proposal[0].proposal_images.all():
+            old_pics.delete()
+        proposal.delete()
     return HttpResponseRedirect(request.META.get('HTTP_REFERER', '/'))
 
 @login_required(login_url=LOGIN_URL)
