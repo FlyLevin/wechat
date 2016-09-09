@@ -92,7 +92,7 @@ $(function() {
                 <select class="app-group-select">
 		<option>选择提案人</option>
 		{% for users in registered_client.all %}
-		<option value="{{user.openid}}" >{{user.lbs}}</option>
+		<option value="{{users.openid}}" >{{users.lbs}}</option>
 		{% endfor %}
 		</select>
 		{% endif %}
