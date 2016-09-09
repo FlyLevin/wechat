@@ -50,20 +50,20 @@
                 <table class="table table-striped table-bordered table-checks media-table" width="90%" >
                     <thead>
                         <tr>
-                            <th><input type="checkbox" name="artwork_ids[]" class="styled" style="width:16px" value="{{artwork.id}}" /></th>
                             <th>议案名称</th>
                             <th>议案简介</th>
                             <th>提案人</th>
                             <th>状态</th>
-                            <th>操作</th>
+                            <th class = "actions-column">操作</th>
                         </tr>
                     </thead>
                     <tbody>
                         {% for proposal in proposals %}
                         <tr>
-                           <td width = "100px" nowrap><a href="{% url 'yimi_admin:proposal_item_list' proposal.id %}">{{proposal.title}}</a></td>
-                           <td nowrap style="table-layout:fixed;">{{proposal.description}}</td>
-                           <td width = "100px" nowrap>{{proposal.submitter}}</td>
+                           <th><input type="checkbox" name="artwork_ids[]" class="styled" style="width:16px" value="{{artwork.id}}" /></th>
+                           <td style = "width:100px;height:200px"><a href="{% url 'yimi_admin:proposal_item_list' proposal.id %}">{{proposal.title}}</a></td>
+                           <td style = "width:100px;height:200px">{{proposal.description}}</td>
+                           <td style = "width:100px;height:200px">{{proposal.submitter}}</td>
                            <td width = "100px" nowrap>{{proposal_stage_name|get_list_value:proposal.proposal_stage}}</td>
                            <td width = "200px" nowrap>
                             <input type="button" value="删除" onclick="location.href='{% url 'yimi_admin:proposal_delete' proposal.id %}'" />
