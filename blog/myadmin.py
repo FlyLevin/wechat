@@ -1062,7 +1062,7 @@ def proposal_add(request):
 
 @login_required(login_url=LOGIN_URL)
 def proposal_delete(request, pid):
-    appitem = getappitem(request.user)
+    appitem = get_appitem(request.user)
     proposal = appitem.proposal_set.get(id = pid)
     if proposal:
         for old_pics in proposal[0].proposal_images.all():
