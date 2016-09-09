@@ -60,9 +60,9 @@
                     <tbody>
                         {% for proposal in proposals %}
                         <tr>
-                           <td style = "width:100px;height:200px"><a href="{% url 'yimi_admin:proposal_item_list' proposal.id %}">{{proposal.title}}</a></td>
-                           <td style = "width:100px;height:200px">{{proposal.description}}</td>
-                           <td style = "width:100px;height:200px">{{proposal.submitter}}</td>
+                           <td style = "width:100px;"><a href="{% url 'yimi_admin:proposal_item_list' proposal.id %}">{{proposal.title}}</a></td>
+                           <td style = "table-layout:fixed;">{{proposal.description}}</td>
+                           <td style = "width:100px;">{{proposal.submitter}}</td>
                            <td width = "100px" nowrap>{{proposal_stage_name|get_list_value:proposal.proposal_stage}}</td>
                            <td width = "200px" nowrap>
                             <input type="button" value="删除" onclick="location.href='{% url 'yimi_admin:proposal_delete' proposal.id %}'" />
