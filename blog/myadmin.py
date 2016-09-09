@@ -1048,7 +1048,7 @@ def proposal_add(request):
             for f in files:
                 image_obj = proposal.proposal_images.create(image = f)
                 image_obj.get_image_url()
-            return HttpResponseRedirect(reverse("yimi_admin:proposal_list"))
+        return HttpResponseRedirect(reverse("yimi_admin:proposal_list"))
     context = {
         'appitem': appitem,
         'proposal': proposal,
