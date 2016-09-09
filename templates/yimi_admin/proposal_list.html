@@ -64,7 +64,7 @@
                            <td nowrap style="table-layout:fixed;">{{proposal.description}}</td>
                            <td width = "100px" nowrap>{{proposal.submitter}}</td>
                            <td width = "100px" nowrap>{{proposal_stage_name|get_list_value:proposal.proposal_stage}}</td>
-                           <td width = "100px" nowrap>
+                           <td width = "200px" nowrap>
                             <input type="button" value="删除" onclick="location.href='{% url 'yimi_admin:proposal_delete' proposal.id %}'" />
                             <input type="button" value="编辑" onclick="location.href='{% url 'yimi_admin:proposal_add' %}?pid={{proposal.id}}'"/>
                             <input type="button" value="发布" onclick="location.href='{% url 'yimi_admin:proposal_status' proposal.id %}'"/>
