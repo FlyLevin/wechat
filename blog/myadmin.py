@@ -1064,7 +1064,7 @@ def proposal_delete(request, pid):
     return HttpResponseRedirect(request.META.get('HTTP_REFERER', '/'))
 
 @login_required(login_url=LOGIN_URL)
-def proposal_itemlist(request, pid):
+def proposal_item_list(request, pid):
     return HttpResponseRedirect(request.META.get('HTTP_REFERER', '/'))
 
 @login_required(login_url=LOGIN_URL)
