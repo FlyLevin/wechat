@@ -88,13 +88,15 @@ $(function() {
 		{% if proposal %}
         <td><input name="openid" type="text" class="inputTxt w240 sh_nes" value="{{proposal.openid}}" resdonly="true"/>{{proposal.submitter}}</td>
 		{% else %}
+        <td>
                 <select class="app-group-select">
 		<option>选择提案人</option>
-		{% for users in registered_client %}
+		{% for users in registered_client.all %}
 		<option value="{{user.openid}}" >{{user.lbs}}</option>
 		{% endfor %}
 		</select>
 		{% endif %}
+        </td>
       </tr>
       <tr>
         <td class="txtRight">修正案</td>
