@@ -1096,7 +1096,7 @@ def proposal_threshold(request, pid):
         pending_date = request.POST.get('pending_date')
         discuss_date = request.POST.get('discuss_date')
         voting_date = request.POST.get('voting_date')
-        if porposal:
+        if proposal:
             threshold.seconded_number = seconded_number
             threshold.pending_date = pending_date
             threshold.discuss_date = discuss_date
