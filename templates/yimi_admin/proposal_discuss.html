@@ -61,8 +61,8 @@
                            <td style = "width:100px;">NOT PASSED</td>
                            {% endif %}
                            <td width = "200px" nowrap>
-                            <input type="button" value="删除" onclick="location.href='{% url 'yimi_admin:proposal_discuss_action' proposal.id proposal_discuss.id %}?action=1'" />
-                            <input type="button" value="通过" onclick="location.href='{% url 'yimi_admin:proposal_discuss_action' proposal.id proposal_discuss.id %}?action=0'"/>
+                            <input type="button" value="删除" onclick="location.href='{% url 'yimi_admin:proposal_discuss_action' proposal.id %}?action=1&discussid=proposal_discuss.id'" />
+                            <input type="button" value="通过" onclick="location.href='{% url 'yimi_admin:proposal_discuss_action' proposal.id %}?action=0&discussid=proposal_discuss.id'"/>
                            </td>
                         </tr>
                     </tbody>

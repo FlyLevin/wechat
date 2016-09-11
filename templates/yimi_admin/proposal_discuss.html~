@@ -47,7 +47,7 @@
                     </thead>
                     <tbody>
                         <tr>
-                           <td style = "width:100px;">{{proposal_vote.name}}</a></td>
+                           <td style = "width:100px;">{{proposal_vote.name}}</td>
                            {% if proposal_discuss.attitude == Ture %}
                            <td style = "width:100px;">赞成</td>
                            {% else %}

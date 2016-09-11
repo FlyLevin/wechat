@@ -1188,11 +1188,12 @@ def proposal_discuss(request, pid):
 
 
 @login_required(login_url=LOGIN_URL)
-def proposal_discuss_action(request, pid, did):
+def proposal_discuss_action(request, pid):
+    action = request.GET.get('action')
+    did = request.GET.get('discussid')
     appitem = get_appitem(request.user)
     proposal = appitem.proposal_set.get(id = pid)
     discuss = proposal.proposal_discuss.get(id = did)
-    action = request.GET.get('action')
     if proposal.proposal_stage == proposal_stages['PROPOSAL_STAGE_DISCUSS']:
         if action == 1:
             discuss.delete()
