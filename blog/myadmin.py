@@ -2,6 +2,7 @@
 
 import json
 import re
+import datetime
 
 from django.http import HttpResponseRedirect, Http404, HttpResponse
 from django.shortcuts import render_to_response
@@ -1082,6 +1083,7 @@ def proposal_status(request, pid):
     if proposal.proposal_stage == proposal_stages['PROPOSAL_STAGE_CLOSE']:
         proposal.proposal_stage = proposal_stages['PROPOSAL_STAGE_PENDING']
         proposal.submit_time = datetime.now()
+        proposal.save()
     return HttpResponseRedirect(request.META.get('HTTP_REFERER', '/'))
 
 @login_required(login_url=LOGIN_URL)
