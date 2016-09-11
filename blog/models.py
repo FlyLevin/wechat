@@ -534,7 +534,8 @@ class ProposalVote(models.Model):
 class Proposal(models.Model):
     title = models.CharField(
         max_length=128, blank=True, null=True, verbose_name="标题")
-    submit_time = models.DateTimeField(auto_now_add=True,  blank=True, null=True,verbose_name='创建时间')
+    create_time = models.DateTimeField(auto_now_add=True,  blank=True, null=True,verbose_name='创建时间')
+    submit_time = models.DateTimeField(blank=True, null=True,verbose_name='复议时间')
     discuss_time = models.DateTimeField(blank=True, null=True, verbose_name='进入辩论时间')
     vote_time = models.DateTimeField(blank=True, null=True, verbose_name='进入投票时间')
     submitter = models.CharField(
