@@ -52,8 +52,6 @@
                            {% endif %}
                            <td style = "width:100px;">{{proposal_vote.create_time}}</td>
                         </tr>
-
-                        {% endfor %}
                     </tbody>
                 </table>
             </div>

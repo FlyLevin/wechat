@@ -41,6 +41,7 @@
                             <th>赞成/反对</th>
                             <th>辩论信息</th>
                             <th>辩论时间</th>
+                            <th>状态</th>
                             <th class = "actions-column">操作</th>
                         </tr>
                     </thead>
@@ -52,8 +53,13 @@
                            {% else %}
                            <td style = "width:100px;">反对</td>
                            {% endif %}
-                           <td style = "width:100px;">{{proposal_vote.content}}</td>
+                           <td style = "table-layout:fixed;">{{proposal_vote.content}}</td>
                            <td style = "width:100px;">{{proposal_vote.create_time}}</td>
+                           {% if proposal_discuss.passed == Ture %}
+                           <td style = "width:100px;">PASSED</td>
+                           {% else %}
+                           <td style = "width:100px;">NOT PASSED</td>
+                           {% endif %}
                            <td width = "200px" nowrap>
                             <input type="button" value="删除" onclick="location.href='{% url 'yimi_admin:proposal_discuss_action' proposal.id proposal_discuss.id %}?action=1'" />
                             <input type="button" value="通过" onclick="location.href='{% url 'yimi_admin:proposal_discuss_action' proposal.id proposal_discuss.id %}?action=0'"/>
