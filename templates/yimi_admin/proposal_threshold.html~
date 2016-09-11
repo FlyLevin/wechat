@@ -68,7 +68,7 @@ $(function() {
             <!-- /options bar -->                            
 
 
-<form id="uploadForm" action="{% url 'yimi_admin:proposal__item_list' proposal.id" method="post" enctype='multipart/form-data' >{% csrf_token %}
+<form id="uploadForm" action="{% url 'yimi_admin:proposal_threshold' proposal.id" method="post" enctype='multipart/form-data' >{% csrf_token %}
 <table class="mainTable">
       
       <tr>
