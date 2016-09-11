@@ -1187,8 +1187,19 @@ def proposal_discuss(request, pid):
     return HttpResponseRedirect(request.META.get('HTTP_REFERER', '/'))
 
 
-
-
+@login_required(login_url=LOGIN_URL)
+def proposal_discuss_action(request, pid, did):
+    appitem = get_appitem(request.user)
+    proposal = appitem.proposal_set.get(id = pid)
+    discuss = proposal.proposal_discuss.get(id = did)
+    action = request.GET.get('action')
+    if proposal:
+        if action = 1:
+            discuss.delete()
+            proposal.proposal_discuss.delete(id = did)
+        elif action = 0:
+            discuss.passed = True
+    return HttpResponseRedirect(request.META.get('HTTP_REFERER', '/'))
 
 
 

@@ -1193,7 +1193,7 @@ def proposal_discuss_action(request, pid, did):
     proposal = appitem.proposal_set.get(id = pid)
     discuss = proposal.proposal_discuss.get(id = did)
     action = request.GET.get('action')
-    if proposal:
+    if proposal.proposal_stage == proposal_stages['PROPOSAL_STAGE_DISCUSS']:
         if action = 1:
             discuss.delete()
             proposal.proposal_discuss.delete(id = did)

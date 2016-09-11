@@ -50,8 +50,6 @@
                            <td style = "width:100px;"><a href="{% url 'yimi_admin:proposal_discuss' proposal.id %}">辩论</td>
                            <td width = "width:100px;"><a href="{% url 'yimi_admin:proposal_vote' proposal.id %}">投票</td>
                         </tr>
-
-                        {% endfor %}
                     </tbody>
                 </table>
             </div>
