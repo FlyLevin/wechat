@@ -72,5 +72,5 @@ urlpatterns = patterns('',
     url(r'proposal-seconded/(\d+)/$', myadmin.proposal_seconded, name='proposal_seconded'),
     url(r'proposal-discuss/(\d+)/$', myadmin.proposal_discuss, name='proposal_discuss'),
     url(r'proposal-vote/(\d+)/$', myadmin.proposal_vote, name='proposal_vote'),
-    url(r'proposal-discussaction/(\d+)/(\d+)/$', myadmin.proposal_discuss_action, name='proposal_discuss_action'),
+    url(r'proposal-discussaction/(\d+)/$', myadmin.proposal_discuss_action, name='proposal_discuss_action'),
 )
