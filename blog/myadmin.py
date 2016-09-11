@@ -1104,13 +1104,17 @@ def proposal_threshold(request, pid):
             threshold.save()
             proposal.update_proposal_stage()
         return HttpResponseRedirect(reverse("yimi_admin:proposal_list"))
-    context = {
-        'apptiem': appitem,
-        'proposal': proposal,
-        'threshold': threshold,
-    }
 
-    return HttpResponseRedirect(request.META.get('HTTP_REFERER', '/'))
+    if proposal.proposal_stage == proposal_stages['PROPOSAL_STAGE_CLOSE']:
+        context = {
+            'apptiem': appitem,
+            'proposal': proposal,
+            'threshold': threshold,
+        }
+        return render_to_response('yimi_admin/proposal_threshold.html', context,
+        context_instance=RequestContext(request))
+    else:
+        return HttpResponseRedirect(request.META.get('HTTP_REFERER', '/'))
 
 
 
