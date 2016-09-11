@@ -514,7 +514,7 @@ class ProposalDiscuss(models.Model):
     create_time = models.DateTimeField(auto_now_add=True,  blank=True, null=True,verbose_name='创建时间')
     content = models.TextField(blank=True, null=True, verbose_name='内容')
     attitude = models.BooleanField(default=True, verbose_name='讨论赞成')
-    passed = models.BooleanField(default=True, verbose_name='通过审核')
+    passed = models.BooleanField(default=False, verbose_name='通过审核')
 
 class ProposalSeconded(models.Model):
     name = models.CharField(

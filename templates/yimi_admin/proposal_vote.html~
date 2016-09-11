@@ -1,0 +1,67 @@
+{% extends "yimi_admin/base.html" %}
+{% block right_div %}
+<link href="/static/watch/css/change.css" rel="stylesheet" type="text/css" />
+
+{% load tag_extras %}
+<div id="content" class="span10">
+    <div class="wrapper">
+        <div class="widget">
+            <div class="navbar">
+                <div class="navbar-inner">
+                    <h6>{{proposal.title}}</h6>
+                    
+                </div>
+            </div>
+
+            <div class="widget">                             
+              
+            </div>
+            <!-- /options bar -->                            
+            <div class="table-overflow">
+<div class="digg"><div class="sh_page" style="float:right;margin-top:3px;margin-bottom:9px;margin-right:-10px;">
+{% if matchs.has_previous%}
+<span><a href="?p={{matchs.previous_page_number }}">&lt; </span>
+{%else%}
+<span class="disabled">&lt; </span>
+{%endif%}
+{% for p in show_pages %}
+<span ><a {% if p == matchs.number %} style="border:none; background-color:#333333;color:white;border-radius:5px;padding:5px 10px;"{% endif %}  href="?p={{p}}">{{p}}</a></span>
+{% endfor %}
+
+{% if matchs.has_next  %}  
+<span ><a href="?p={{ matchs.next_page_number }}">&gt; </a></span>
+{% else %}
+<span class="disabled">&gt; </span>
+{% endif %}
+</div>
+                <table class="table table-striped table-bordered table-checks media-table" width="90%" >
+                    <thead>
+                        <tr>
+                            <th>投票人</th>
+                            <th>投票信息</th>
+                            <th>投票时间</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                           <td style = "width:100px;">{{proposal_vote.name}}</a></td>
+                           {% if proposal_vote.attitude == Ture %}
+                           <td style = "width:100px;">赞成</td>
+                           {% else %}
+                           <td style = "width:100px;">反对</td>
+                           {% endif %}
+                           <td style = "width:100px;">{{proposal_vote.create_time}}</td>
+                        </tr>
+
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+<link rel="stylesheet" href="/static/myadmin/css/list.css" />
+
+
+{% endblock %}
