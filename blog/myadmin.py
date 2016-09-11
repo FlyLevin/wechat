@@ -1194,10 +1194,10 @@ def proposal_discuss_action(request, pid, did):
     discuss = proposal.proposal_discuss.get(id = did)
     action = request.GET.get('action')
     if proposal.proposal_stage == proposal_stages['PROPOSAL_STAGE_DISCUSS']:
-        if action = 1:
+        if action == 1:
             discuss.delete()
             proposal.proposal_discuss.delete(id = did)
-        elif action = 0:
+        elif action == 0:
             discuss.passed = True
     return HttpResponseRedirect(request.META.get('HTTP_REFERER', '/'))
 
