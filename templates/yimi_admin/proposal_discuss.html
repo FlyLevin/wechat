@@ -8,7 +8,7 @@
         <div class="widget">
             <div class="navbar">
                 <div class="navbar-inner">
-                    <h6>{{proposal.title}}</h6>
+                    <h6>{{proposal.title}} 辩论</h6>
                     
                 </div>
             </div>
@@ -46,25 +46,27 @@
                         </tr>
                     </thead>
                     <tbody>
+                        {% for discuss in proposal_discuss %}
                         <tr>
-                           <td style = "width:100px;">{{proposal_vote.name}}</td>
-                           {% if proposal_discuss.attitude == Ture %}
+                           <td style = "width:100px;">{{discuss.name}}</td>
+                           {% if discuss.attitude == Ture %}
                            <td style = "width:100px;">赞成</td>
                            {% else %}
                            <td style = "width:100px;">反对</td>
                            {% endif %}
-                           <td style = "table-layout:fixed;">{{proposal_vote.content}}</td>
-                           <td style = "width:100px;">{{proposal_vote.create_time}}</td>
-                           {% if proposal_discuss.passed == Ture %}
+                           <td style = "table-layout:fixed;">{{discuss.content}}</td>
+                           <td style = "width:100px;">{{discuss.create_time}}</td>
+                           {% if discuss.passed == Ture %}
                            <td style = "width:100px;">PASSED</td>
                            {% else %}
                            <td style = "width:100px;">NOT PASSED</td>
                            {% endif %}
                            <td width = "200px" nowrap>
-                            <input type="button" value="删除" onclick="location.href='{% url 'yimi_admin:proposal_discuss_action' proposal.id %}?action=1&discussid=proposal_discuss.id'" />
-                            <input type="button" value="通过" onclick="location.href='{% url 'yimi_admin:proposal_discuss_action' proposal.id %}?action=0&discussid=proposal_discuss.id'"/>
+                            <input type="button" value="删除" onclick="location.href='{% url 'yimi_admin:proposal_discuss_action' proposal.id %}?action=1&discussid=discuss.id'" />
+                            <input type="button" value="通过" onclick="location.href='{% url 'yimi_admin:proposal_discuss_action' proposal.id %}?action=0&discussid=discuss.id'"/>
                            </td>
                         </tr>
+                        {% endfor %}
                     </tbody>
                 </table>
             </div>

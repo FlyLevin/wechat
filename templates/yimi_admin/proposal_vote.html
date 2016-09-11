@@ -8,7 +8,7 @@
         <div class="widget">
             <div class="navbar">
                 <div class="navbar-inner">
-                    <h6>{{proposal.title}}</h6>
+                    <h6>{{proposal.title}}   投票</h6>
                     
                 </div>
             </div>
@@ -43,15 +43,17 @@
                         </tr>
                     </thead>
                     <tbody>
+                        {% for vote in proposal_vote %}
                         <tr>
-                           <td style = "width:100px;">{{proposal_vote.name}}</td>
-                           {% if proposal_vote.attitude == Ture %}
+                           <td style = "width:100px;">{{vote.name}}</td>
+                           {% if vote.attitude == Ture %}
                            <td style = "width:100px;">赞成</td>
                            {% else %}
                            <td style = "width:100px;">反对</td>
                            {% endif %}
-                           <td style = "width:100px;">{{proposal_vote.create_time}}</td>
+                           <td style = "width:100px;">{{vote.create_time}}</td>
                         </tr>
+                        {% endfor %}
                     </tbody>
                 </table>
             </div>

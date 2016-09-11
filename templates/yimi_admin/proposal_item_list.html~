@@ -29,12 +29,14 @@
                         </tr>
                     </thead>
                     <tbody>
+                        {% for proposal in proposals %}
                         <tr>
-                           <td style = "width:100px;">{{proposal.title}}</a></td>
+                           <td style = "width:100px;">{{proposal.title}}</td>
                            <td style = "width:100px;"><a href="{% url 'yimi_admin:proposal_seconded' proposal.id %}">附议</td>
                            <td style = "width:100px;"><a href="{% url 'yimi_admin:proposal_discuss' proposal.id %}">辩论</td>
                            <td width = "width:100px;"><a href="{% url 'yimi_admin:proposal_vote' proposal.id %}">投票</td>
                         </tr>
+                        {}
                     </tbody>
                 </table>
             </div>

@@ -8,7 +8,7 @@
         <div class="widget">
             <div class="navbar">
                 <div class="navbar-inner">
-                    <h6>{{proposal.title}}</h6>
+                    <h6>{{proposal.title}} 附议</h6>
                     
                 </div>
             </div>
@@ -42,10 +42,12 @@
                         </tr>
                     </thead>
                     <tbody>
+                        {% for seconded in proposal_seconded %}
                         <tr>
-                           <td style = "width:100px;">{{proposal_seconded.name}}</td>
-                           <td style = "width:100px;">{{proposal_seconded.create_time}}</td>
+                           <td style = "width:100px;">{{seconded.name}}</td>
+                           <td style = "width:100px;">{{seconded.create_time}}</td>
                         </tr>
+                        {% endfor %}
                     </tbody>
                 </table>
             </div>
