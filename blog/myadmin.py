@@ -1020,14 +1020,14 @@ def proposal_add(request):
         description = request.POST.get('description')
         openid = request.POST.get('openid')
         content = request.POST.get('content')
-        amendment = request.POST.get('amendment_id')
+#        amendment = request.POST.get('amendment_id')
         files = request.FILES.getlist('fileselect')
         submitter = registered_client.get(openid = openid).lbs
         if proposal:
             proposal.title = title
             proposal.description = description
             proposal.content = content
-            proposal.amendment = amendment
+#            proposal.amendment = amendment
             proposal.submitter = submitter
             proposal.openid = openid
             proposal.save()
@@ -1035,7 +1035,7 @@ def proposal_add(request):
             proposal = appitem.proposal_set.create(
                 title=title,
                 description = description,
-                amendment = amendment,
+#                amendment = amendment,
                 content = content,
                 submitter = submitter,
                 openid = openid,
@@ -1088,5 +1088,49 @@ def proposal_status(request, pid):
 
 @login_required(login_url=LOGIN_URL)
 def proposal_threshold(request, pid):
+    appitem = get_appitem(request.user)
+    proposal = appitem.proposal_set.get(id = pid)
+    threshold = proposal.proposal_threshold.first()
+    if request.method == 'POST':
+        seconded_number = request.POST.get('seconded_number')
+        pending_date = request.POST.get('pending_date')
+        discuss_date = request.POST.get('discuss_date')
+        voting_date = request.POST.get('voting_date')
+        if porposal:
+            threshold.seconded_number = seconded_number
+            threshold.pending_date = pending_date
+            threshold.discuss_date = discuss_date
+            threshold.voting_date = voting_date
+            threshold.save()
+            proposal.update_proposal_stage()
+        return HttpResponseRedirect(reverse("yimi_admin:proposal_list"))
+    context = {
+        'apptiem': appitem,
+        'proposal': proposal,
+        'threshold': threshold,
+    }
+
     return HttpResponseRedirect(request.META.get('HTTP_REFERER', '/'))
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 

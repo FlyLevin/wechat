@@ -545,7 +545,7 @@ class Proposal(models.Model):
     description = models.TextField(blank=True, null=True, verbose_name='简介')
     content = models.TextField(blank=True, null=True, verbose_name='内容')
     appitem = models.ForeignKey(AppItem, verbose_name='应用', blank=True, null=True)
-    amendment = models.IntegerField(blank=True, null=True, verbose_name='原提案id')
+    amendment = models.IntegerField(default=0, blank=True, null=True, verbose_name='原提案id')
     proposal_seconded = models.ManyToManyField('ProposalSeconded', verbose_name='复议人数', blank=True, null=True)
     proposal_stage = models.IntegerField(
         max_length=5, default=proposal_stages['PROPOSAL_STAGE_CLOSE'], verbose_name='议案状态', blank=True, null=True)
