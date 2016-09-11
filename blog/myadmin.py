@@ -1065,7 +1065,7 @@ def proposal_add(request):
 def proposal_delete(request, pid):
     appitem = get_appitem(request.user)
     proposal = appitem.proposal_set.get(id = pid)
-    if proposal.proposal_stage != proposal_stages['PROPOSAL_STAGE_CLOSE']:
+    if proposal.proposal_stage == proposal_stages['PROPOSAL_STAGE_CLOSE']:
         for old_pics in proposal.proposal_images.all():
             old_pics.delete()
         proposal.proposal_threshold.first().delete()
