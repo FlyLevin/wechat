@@ -1082,7 +1082,7 @@ def proposal_status(request, pid):
     proposal = appitem.proposal_set.get(id = pid)
     if proposal.proposal_stage == proposal_stages['PROPOSAL_STAGE_CLOSE']:
         proposal.proposal_stage = proposal_stages['PROPOSAL_STAGE_PENDING']
-        proposal.submit_time = datetime.now()
+        proposal.submit_time = datetime.datetime.now()
         proposal.save()
     return HttpResponseRedirect(request.META.get('HTTP_REFERER', '/'))
 

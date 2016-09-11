@@ -559,12 +559,12 @@ class Proposal(models.Model):
         current_stage = self.proposal_stage
         # change the stage from pending to discuss
         if current_stage == proposal_stages['PROPOSAL_STAGE_PENDING']:
-            time_delta = datetime.now()-self.submit_time
+            time_delta = datetime.datetime.now()-self.submit_time
             if time_delta.days <= self.proposal_threshold.pending_date:
                 seconded_number = self.proposal_seconded.count()
                 if seconded_number > self.proposal_threshold.seconded_number:
                     self.proposal_stage = proposal_stages['PROPOSAL_STAGE_DISCUSS']
-                    self.discuss_time = datetime.now()
+                    self.discuss_time = datetime.datetime.now()
                     # update the related proposal into freeze stage and start this proposal discussing
                     self.appitem.proposal_set.filter(amendment=self.amendment).exclude(id=self.id).update(proposal_stage=proposal_stages['PROPOSAL_STAGE_FREEZE'])
                     self.save()
@@ -580,10 +580,10 @@ class Proposal(models.Model):
                 print "pending timeout change to freeze"
                 return
         elif current_stage == proposal_stages['PROPOSAL_STAGE_DISCUSS']:
-            time_delta = datetime.now()-self.discuss_time
+            time_delta = datetime.datetime.now()-self.discuss_time
             if time_delta.days > self.proposal_threshold.discuss_date:
                 self.proposal_stage = proposal_stages['PROPOSAL_STAGE_VOTE']
-                self.vote_time = datetime.now()
+                self.vote_time = datetime.datetime.now()
                 self.save()
                 print "change from discuss to vote"
                 return
@@ -591,7 +591,7 @@ class Proposal(models.Model):
                 print "still in discuss"
                 return
         elif current_stage == proposal_stages['PROPOSAL_STAGE_VOTE']:
-            time_delta = datetime.now()-self.vote_time
+            time_delta = datetime.datetime.now()-self.vote_time
             if time_delta.days > self.proposal_threshold.voting_date:
                 self.proposal_stage = proposal_stages['PROPOSAL_STAGE_DONE']
                 self.save()
