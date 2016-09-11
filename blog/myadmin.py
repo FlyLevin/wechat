@@ -1077,7 +1077,7 @@ def proposal_item_list(request, pid):
 
 @login_required(login_url=LOGIN_URL)
 def proposal_status(request, pid):
-    appitem - get_appitem(request.user)
+    appitem = get_appitem(request.user)
     proposal = appitem.proposal_set.get(id = pid)
     if proposal.proposal_stage == proposal_stages['PROPOSAL_STAGE_CLOSE']:
         proposal.proposal_stage = proposal_stages['PROPOSAL_STAGE_PENDING']
