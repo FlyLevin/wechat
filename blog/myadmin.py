@@ -825,9 +825,11 @@ def activity_add(request):
     appitem = get_appitem(request.user)
     aid = request.GET.get("aid")
     if aid:
+        picture = activity.activity_images.all()
         activity = appitem.activity_set.get(id=aid)
     else:
         activity = None
+        picture = None
     if request.method == 'POST':
         title = request.POST.get('title')
         a_time = request.POST.get('a_time')
@@ -865,7 +867,6 @@ def activity_add(request):
                 image_obj = activity.activity_images.create(image = f)
                 image_obj.get_image_url()
         return HttpResponseRedirect(reverse("yimi_admin:activity_list"))
-    picture = activity.activity_images.all()
     context = {
         'appitem': appitem,
         'activity': activity,
