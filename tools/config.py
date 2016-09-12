@@ -1,3 +1,5 @@
+#coding:utf8
+
 # For the app group change func, correspond to the app_group table
 
 NOT_REGISTERED_GROUPID = 1
