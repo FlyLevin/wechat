@@ -105,7 +105,7 @@ def reverse_url(slug):
     return reverse("nanjing:commit_success", args=(slug,))
 
 def reverse_fail_url(slug, emsg):
-    return reverse("nanjing:commit_fail", args=(slug, emsg))
+    return reverse("nanjing:commit_fail", kwargs={'slug': slug, 'emsg': emsg})
 
 def sim_account(request, slug):
     appitem = get_appitem(slug)
