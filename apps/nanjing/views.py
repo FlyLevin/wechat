@@ -151,7 +151,7 @@ def open_account(request, slug):
 
     context = {
         'appitem': appitem,
-        'emsg': emsg,
+        'emsg': ERROR_NOTSUBSCRIBE_OR_ID_EXIST,
     }
     return render_to_response('nanjing/commit_fail.html', context,
         context_instance=RequestContext(request))
