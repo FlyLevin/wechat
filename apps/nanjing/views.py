@@ -172,7 +172,7 @@ def commit_success(request, slug):
         context_instance=RequestContext(request))
 
 def commit_fail(request, slug, emsg):
-    return render_to_response('nanjing/commit_fail.html', {emsg: emsg},
+    return render_to_response('nanjing/commit_fail.html', {'emsg': emsg},
         context_instance=RequestContext(request))
 
 def activity_list(request, slug):
