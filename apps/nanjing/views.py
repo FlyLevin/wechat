@@ -104,9 +104,6 @@ def activity_add(request, slug):
 def reverse_url(slug):
     return reverse("nanjing:commit_success", args=(slug,))
 
-def reverse_fail_url(slug, emsg):
-    return reverse("nanjing:commit_fail", args=(slug, emsg,))
-
 def sim_account(request, slug):
     appitem = get_appitem(slug)
     if request.method == "POST":
@@ -173,19 +170,12 @@ def activity_user(request, slug, cid):
         activity.activity_users.create(name=name, cid=cid, tel=tel, lbs=lbs)
         return HttpResponseRedirect(reverse_url(slug))
     context = {'appitem': appitem, 'activity': activity}
-    
+
     return render_to_response('nanjing/activity_user_form.html', context,
         context_instance=RequestContext(request))
 
 def commit_success(request, slug):
     return render_to_response('nanjing/commit_success.html', {},
-        context_instance=RequestContext(request))
-
-def commit_fail(request, slug, emsg):
-    context = {
-        'emsg': emsg,
-    }
-    return render_to_response('nanjing/commit_fail.html', context,
         context_instance=RequestContext(request))
 
 def activity_list(request, slug):
