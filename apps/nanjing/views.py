@@ -104,15 +104,8 @@ def activity_add(request, slug):
 def reverse_url(slug):
     return reverse("nanjing:commit_success", args=(slug,))
 
-def reverse_fail_url(appitem, emsg):
-    context = {
-        'appitem': appitem,
-        'emsg': emsg,
-    }
-    return render_to_response('nanjing/commit_fail.html', context,
-        context_instance=RequestContext(request))
- 
-#    return reverse("nanjing:commit_fail", args=(slug, emsg,))
+def reverse_fail_url(slug, emsg):
+    return reverse("nanjing:commit_fail", args=(slug, emsg,))
 
 def sim_account(request, slug):
     appitem = get_appitem(slug)
@@ -155,7 +148,15 @@ def open_account(request, slug):
             }
             return render_to_response('nanjing/open_account_form.html', context,
             context_instance=RequestContext(request))
-    return HttpResponseRedirect(reverse_fail_url(appitem, ERROR_NOTSUBSCRIBE_OR_ID_EXIST))
+
+    context = {
+        'appitem': appitem,
+        'emsg': emsg,
+    }
+    return render_to_response('nanjing/commit_fail.html', context,
+        context_instance=RequestContext(request))
+
+#    return HttpResponseRedirect(reverse_fail_url(slug, ERROR_NOTSUBSCRIBE_OR_ID_EXIST))
 
 def activity_user(request, slug, cid):
     appitem = get_appitem(slug)
