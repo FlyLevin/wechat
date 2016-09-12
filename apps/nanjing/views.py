@@ -11,6 +11,8 @@ from blog.utils import get_user_openid
 from blog.utils import get_entry_page, page_turning
 from models import *
 
+from tools.config import *
+
 def get_appitem(slug):
     appitem = AppItem.objects.filter(slug=slug).first()
     return appitem
@@ -102,8 +104,8 @@ def activity_add(request, slug):
 def reverse_url(slug):
     return reverse("nanjing:commit_success", args=(slug,))
 
-def reverse_fail_url(slug):
-    return reverse("nanjing:commit_fail", args=(slug,))
+def reverse_fail_url(slug, emsg):
+    return reverse("nanjing:commit_fail", args=(slug, emsg))
 
 def sim_account(request, slug):
     appitem = get_appitem(slug)
@@ -146,7 +148,7 @@ def open_account(request, slug):
             }
             return render_to_response('nanjing/open_account_form.html', context,
             context_instance=RequestContext(request))
-    return HttpResponseRedirect(reverse_fail_url(slug))
+    return HttpResponseRedirect(reverse_fail_url(slug, ERROR_NOTSUBSCRIBE_OR_ID_EXIST))
 
 def activity_user(request, slug, cid):
     appitem = get_appitem(slug)
@@ -169,8 +171,8 @@ def commit_success(request, slug):
     return render_to_response('nanjing/commit_success.html', {},
         context_instance=RequestContext(request))
 
-def commit_fail(request, slug):
-    return render_to_response('nanjing/commit_fail.html', {},
+def commit_fail(request, slug, emsg):
+    return render_to_response('nanjing/commit_fail.html', {emsg: emsg},
         context_instance=RequestContext(request))
 
 def activity_list(request, slug):
@@ -209,4 +211,19 @@ def show_question(request, slug):
     }
     return render_to_response('nanjing/show_question.html', context,
         context_instance=RequestContext(request))
+
+def proposal_add(request, slug):
+    return HttpResponseRedirect(request.META.get('HTTP_REFERER', '/'))
+
+def proposal_list(request, slug):
+    return HttpResponseRedirect(request.META.get('HTTP_REFERER', '/'))
+
+def proposal_seconded(request, slug, pid):
+    HttpResponseRedirect(request.META.get('HTTP_REFERER', '/'))
+
+def proposal_discuss(request, slug, pid):
+    HttpResponseRedirect(request.META.get('HTTP_REFERER', '/'))
+
+def proposal_vote(request, slug, pid):
+    return HttpResponseRedirect(request.META.get('HTTP_REFERER', '/'))
 

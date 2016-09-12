@@ -16,5 +16,6 @@ proposal_stages = {
 
 proposal_stage_name = ['']*len(proposal_stages)
 
+# prepare the stage name for UI showing
 for i in range(len(proposal_stages)):
     proposal_stage_name[proposal_stages[proposal_stages.keys()[i]]] = proposal_stages.keys()[i].split('_')[2]

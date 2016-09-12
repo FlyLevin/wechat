@@ -8,7 +8,7 @@
 
 <body >
 	<div class="formWrap">
-    	<div class="cgBox">{{emsg}}</div>
+    	<div class="cgBox">该身份证号码已被实名或输入有误 请重新输入</div>
         
     </div>
     

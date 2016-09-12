@@ -19,3 +19,8 @@ proposal_stage_name = ['']*len(proposal_stages)
 # prepare the stage name for UI showing
 for i in range(len(proposal_stages)):
     proposal_stage_name[proposal_stages[proposal_stages.keys()[i]]] = proposal_stages.keys()[i].split('_')[2]
+
+
+# wechat error message UI, message information showing
+
+ERROR_NOTSUBSCRIBE_OR_ID_EXIST = "该身份证号码已被实名或输入有误 请重新输入"
