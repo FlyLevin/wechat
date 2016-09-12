@@ -148,15 +148,17 @@ def open_account(request, slug):
             }
             return render_to_response('nanjing/open_account_form.html', context,
             context_instance=RequestContext(request))
+    return return_fail(request, appitem, ERROR_NOTSUBSCRIBE_OR_ID_EXIST)
 
+
+def return_fail(request, appitem, emsg)
     context = {
         'appitem': appitem,
-        'emsg': ERROR_NOTSUBSCRIBE_OR_ID_EXIST,
+        'emsg': emsg,
     }
     return render_to_response('nanjing/commit_fail.html', context,
         context_instance=RequestContext(request))
 
-#    return HttpResponseRedirect(reverse_fail_url(slug, ERROR_NOTSUBSCRIBE_OR_ID_EXIST))
 
 def activity_user(request, slug, cid):
     appitem = get_appitem(slug)
