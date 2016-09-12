@@ -151,7 +151,7 @@ def open_account(request, slug):
     return return_fail(request, appitem, ERROR_NOTSUBSCRIBE_OR_ID_EXIST)
 
 
-def return_fail(request, appitem, emsg)
+def return_fail(request, appitem, emsg):
     context = {
         'appitem': appitem,
         'emsg': emsg,
