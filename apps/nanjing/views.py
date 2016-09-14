@@ -223,7 +223,7 @@ def proposal_add(request, slug):
         openid = request.POST.get('openid')
         content = request.POST.get('content')
         files = request.FILES.getlist('fileselect')
-        openaccount = appitem.openaccoutn_set.get(openid=openid)
+        openaccount = appitem.openaccount_set.get(openid=openid)
         if openaccount:
             submitter = openaccount.lbs
             proposal = appitem.proposal_set.create(
