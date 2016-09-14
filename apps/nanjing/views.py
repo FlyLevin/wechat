@@ -263,7 +263,7 @@ def proposal_list(request, slug):
     appitem = get_appitem(slug)
     open_id = request.GET.get('open_id')
     from django.db.models import Q
-    proposals = appitem.proposal_set.filter(~Q(proposal_stage = PROPOSAL_STAGE_PENDING)).all()
+    proposals = appitem.proposal_set.filter(~Q(proposal_stage = proposal_stages['PROPOSAL_STAGE_CLOSE'])).all()
 #    proposals = appitem.proposal_set.all()
     context = {
         'appitem': appitem,
