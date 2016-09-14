@@ -238,8 +238,9 @@ def proposal_add(request, slug):
             return HttpResponseRedirect(reverse_url(slug))
     elif request.method == "GET":
         open_id = request.GET.get('open_id')
-        openaccount = appitem.openaccount_set.get(openid=open_id)
+        openaccount = appitem.openaccount_set.filter(openid=open_id)
         if openaccount:
+           openaccount = openaccount.first()
             context = {
                 'appitem': appitem,
                 'openid' : open_id,
