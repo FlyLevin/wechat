@@ -216,7 +216,38 @@ def show_question(request, slug):
         context_instance=RequestContext(request))
 
 def proposal_add(request, slug):
-    return HttpResponseRedirect(request.META.get('HTTP_REFERER', '/'))
+    appitem = get_appitem(slug)
+    if request.method == "POST":
+        name = request.POST.get('title')
+        cid = request.POST.get('description')
+        tel = request.POST.get('submitter')
+        lbs = request.POST.get('content')
+        openid = request.POST.get('openid')
+        files = request.FILES.getlist('fileselect')
+        openaccount = appitem.openaccoutn_set.get(openid=openid)
+        if openaccount:
+            proposal = appitem.proposal_set.create(
+                title=title,
+                openid=openid,
+                submitter=openaccount.name,
+                content = content,
+            )
+            for f in files:
+                image_obj = proposal.proposal_images.create(image = f)
+                image_obj.get_image_url()
+            return HttpResponseRedirect(reverse_url(slug))
+    elif request.method == "GET":
+        open_id = request.GET.get('open_id')
+        openaccount = appitem.openaccoutn_set.get(openid=openid)
+        if openaccount:
+            context = {
+                'appitem': appitem,
+                'openid' : open_id,
+                'openaccount': openaccount
+            }
+            return render_to_response('nanjing/proposal_add_form.html', context,
+            context_instance=RequestContext(request))
+    return return_fail(request, appitem, ERROR_NOTREGISTERED_USER)
 
 def proposal_list(request, slug):
     return HttpResponseRedirect(request.META.get('HTTP_REFERER', '/'))

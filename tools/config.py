@@ -26,3 +26,4 @@ for i in range(len(proposal_stages)):
 # wechat error message UI, message information showing
 
 ERROR_NOTSUBSCRIBE_OR_ID_EXIST = "该身份证号码已被实名或输入有误 请重新输入"
+ERROR_NOTREGISTERED_USER = "非认证用户 请首先实名认证"
