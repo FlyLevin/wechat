@@ -52,7 +52,7 @@ $(function() {
       <tr>
         <td class="txtRight">简介：</td>
         <td>
-            <textarea name="description" type="text/plain" cols=15 rows=20 value="{{proposal.description}}" maxlength="140"/>*<span class="sh_error">请正确填写形式(最大长度140)</span>
+            <textarea name="description" type="text/plain" cols=2 rows=20 value="{{proposal.description}}" maxlength="140"/>请正确填写形式(最大长度140)
             </textarea>
         </td>
       </tr>
@@ -71,7 +71,7 @@ $(function() {
       <tr>
         <td class="txtRight">内容：</td>
         <td>
-        <textarea id="textArea" name="content" type="text/plain" cols=40 rows=20>{{proposal.content|safe}}</textarea>
+        <textarea id="textArea" name="content" type="text/plain" cols=30 rows=20>{{proposal.content|safe}}</textarea>
         </td>
       </tr>
 </table>
