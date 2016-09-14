@@ -13,15 +13,15 @@
         <table class="list_box" style="padding:20px;" >
          <thead>
 			 <tr>
-				 <th style="font-size:40px;">议案名称</th>
-				 <th style="font-size:40px;">议案简介</th>
+				 <th style="font-size:20px;">议案名称</th>
+				 <th style="font-size:20px;">议案简介</th>
 			</tr>
 		</thead>
 	    {% for proposal in proposals %}
          <tbody>
              <tr>
-             <td style = "width:100px;"><a href="{% url 'nanjing:proposal_show' appitem.slug proposal.id%}?open_id={{openid}}">{{proposal.title}}</td>
-             <td style = "width:100px;">{{proposal.description}}</td>
+             <td style = "width:100;"><a href="{% url 'nanjing:proposal_show' appitem.slug proposal.id%}?open_id={{openid}}">{{proposal.title}}</td>
+             <td style = "width:200px;">{{proposal.description}}</td>
              </tr>
          </tbody>
         {% endfor %}
