@@ -274,7 +274,11 @@ def proposal_list(request, slug):
     return render_to_response('nanjing/proposal_list_form.html', context,
     context_instance=RequestContext(request))
 
-def proposal_show(request, slug):
+def proposal_show(request, slug, pid):
+    appitem = get_appitem(slug)
+    open_id = request.GET.get('open_id')
+    proposal = appitem.proposal_set.get(id = pid)
+    
     return HttpResponseRedirect(request.META.get('HTTP_REFERER', '/'))
 
 '''
