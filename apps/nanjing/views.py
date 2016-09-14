@@ -238,16 +238,16 @@ def proposal_add(request, slug):
             return HttpResponseRedirect(reverse_url(slug))
     elif request.method == "GET":
         open_id = request.GET.get('open_id')
-        openaccount = appitem.openaccount_set.filter(openid=open_id)
-        if openaccount:
-           openaccount = openaccount.first()
-            context = {
-                'appitem': appitem,
-                'openid' : open_id,
-                'openaccount': openaccount
-            }
-            return render_to_response('nanjing/proposal_add_form.html', context,
-            context_instance=RequestContext(request))
+        if openid:
+            openaccount = appitem.openaccount_set.get(openid=open_id)
+            if openaccount:
+                context = {
+                    'appitem': appitem,
+                    'openid' : open_id,
+                    'openaccount': openaccount
+                }
+                return render_to_response('nanjing/proposal_add_form.html', context,
+                context_instance=RequestContext(request))
     return return_fail(request, appitem, ERROR_NOTREGISTERED_USER)
 
 def proposal_list(request, slug):
