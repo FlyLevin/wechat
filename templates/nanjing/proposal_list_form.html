@@ -18,7 +18,7 @@
 	    {% for proposal in proposals %}
          <tbody>
              <tr>
-             <td style = "width:100px;"><a href="{% url 'nanjing:proposal_show' appitem.slug proposal.id & open_id={{openid}}%}">{{proposal.title}}</td>
+             <td style = "width:100px;"><a href="{% url 'nanjing:proposal_show' appitem.slug proposal.id ?open_id={{openid}}%}">{{proposal.title}}</td>
              <td style = "width:100px;">{{proposal.description}}</td>
              </tr>
          </tbody>
