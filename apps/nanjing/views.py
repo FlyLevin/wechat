@@ -260,8 +260,24 @@ def proposal_add(request, slug):
     return return_fail(request, appitem, ERROR_NOTREGISTERED_USER)
 
 def proposal_list(request, slug):
+    appitem = get_appitem(slug)
+    open_id = request.GET.get('open_id')
+    from django.db.models import Q
+#    proposals = appitem.proposal_set.filter(~Q(proposal_stage = PROPOSAL_STAGE_PENDING)).all()
+    proposals = appitem.proposal_set.all()
+    context = {
+        'appitem': appitem,
+        'openid': open_id,
+        'proposals': proposals,
+        'stages': proposal_stages,
+    }
+    return render_to_response('nanjing/proposal_list_form.html', context,
+    context_instance=RequestContext(request))
+
+def proposal_show(request, slug):
     return HttpResponseRedirect(request.META.get('HTTP_REFERER', '/'))
 
+'''
 def proposal_seconded(request, slug, pid):
     HttpResponseRedirect(request.META.get('HTTP_REFERER', '/'))
 
@@ -270,4 +286,4 @@ def proposal_discuss(request, slug, pid):
 
 def proposal_vote(request, slug, pid):
     return HttpResponseRedirect(request.META.get('HTTP_REFERER', '/'))
-
+'''
