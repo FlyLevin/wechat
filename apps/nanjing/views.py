@@ -218,24 +218,27 @@ def show_question(request, slug):
 def proposal_add(request, slug):
     appitem = get_appitem(slug)
     if request.method == "POST":
-        name = request.POST.get('title')
-        cid = request.POST.get('description')
-        tel = request.POST.get('submitter')
-        lbs = request.POST.get('content')
+        title = request.POST.get('title')
+        description = request.POST.get('description')
         openid = request.POST.get('openid')
+        content = request.POST.get('content')
         files = request.FILES.getlist('fileselect')
+        submitter = registered_client.get(openid = openid).lbs
         openaccount = appitem.openaccoutn_set.get(openid=openid)
         if openaccount:
             proposal = appitem.proposal_set.create(
                 title=title,
                 openid=openid,
-                submitter=openaccount.name,
+                submitter=submitter,
                 content = content,
+                description = description,
             )
-            for f in files:
-                image_obj = proposal.proposal_images.create(image = f)
-                image_obj.get_image_url()
-            return HttpResponseRedirect(reverse_url(slug))
+            proposal.proposal_threshold.create()
+            if files:
+                for f in files:
+                    image_obj = proposal.proposal_images.create(image = f)
+                    image_obj.get_image_url()
+                return HttpResponseRedirect(reverse_url(slug))
     elif request.method == "GET":
         open_id = request.GET.get('open_id')
         if open_id:
