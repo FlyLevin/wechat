@@ -86,7 +86,7 @@ $(function() {
 	  <tr>
         <td class="txtRight">提案人</td>
 		{% if proposal %}
-        <td><input name="openid" type="text" class="inputTxt w240 sh_nes" value="{{proposal.openid}}" resdonly="true"/>{{proposal.submitter}}</td>
+        <td><input name="openid" type="text" class="inputTxt w240 sh_nes" value="{{proposal.openid}}" resdonly="true" type="hidden"/>{{proposal.submitter}}</td>
 		{% else %}
         <td>
                 <select name = "openid" class="app-group-select">
