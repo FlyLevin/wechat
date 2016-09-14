@@ -9,11 +9,11 @@
 <body>
 
 	<div class="wrap">
-        <table class="table table-striped table-bordered table-checks media-table" width="90%" >
+        <table class="list_box" style="padding:30px;" >
          <thead>
 			 <tr>
-				 <th>议案名称</th>
-				 <th>议案简介</th>
+				 <th style="font-size:40px;">议案名称</th>
+				 <th style="font-size:40px;">议案简介</th>
 			</tr>
 		</thead>
 	    {% for proposal in proposals %}
