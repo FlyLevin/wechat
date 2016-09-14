@@ -240,7 +240,7 @@ def proposal_add(request, slug):
                 for f in files:
                     image_obj = proposal.proposal_images.create(image = f)
                     image_obj.get_image_url()
-                return HttpResponseRedirect(reverse_url(slug))
+            return HttpResponseRedirect(reverse_url(slug))
     elif request.method == "GET":
         open_id = request.GET.get('open_id')
         amendment = request.GET.get('amendment_id')
