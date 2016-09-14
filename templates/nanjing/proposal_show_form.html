@@ -1,0 +1,77 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<title>{{appitem.name}}</title>
+<link href="/static/nanjing/css/base.css" rel="stylesheet" type="text/css" />
+</head>
+
+{% load tag_extras %}
+<body>
+	<div class="wrap">
+    	<dl class="list_box" style="padding:30px;">
+           <dt style="font-size:40px;">{{proposal.title}}</dt>
+           <dt style="font-size:9px;">{{proposal.create_time}}</dt>
+           <dd><b>内容：</b>{{proposal.content|safe}}</dd>
+           <dd><b>提交人：</b>{{proposal.submitter}}</dd>
+           <dd><b>附议人数：</b>{{proposal_seconded_num}}</dd>
+           
+           {% if proposal_discuss %} 
+                <table >
+                    <thead>
+                        <tr>
+                            <th>正方</th>
+                            <th>反方</th>
+                        </tr>
+                    </thead>
+                <tr>
+                    <td style = "width:100px;">
+                    {% for discuss in proposal_discuss %}
+                        {% if discuss.attitude %}
+                        {{ discuss.content }} <br/>
+                        {% endif %}
+                    {% endfor %}
+                    </td>
+                    <td style = "width:100px;">
+                    {% for discuss in proposal_discuss %}
+                        {% if not discuss.attitude %}
+                        {{ discuss.content }} <br/>
+                        {% endif %}
+                    {% endfor %}
+                    </td>
+                </tr>
+                </table>
+           {% endif %}
+
+           {% if proposal_vote_positive_num or proposal_vote_negative_num %}  <dd><b>赞成人数 ： 反对人数</b>{{proposal_vote_positive_num}} : {{proposal_vote_negative_num}}</dd> {% endif %}
+           {% if proposal_image %} <dd><b>图片:</b></dd>{% endif %} 
+           <table>
+           <tr>
+           {% for image in activity.activity_images.all %}
+           <td style="listimg">   <img src="{{image.get_image_url}}" height="180px"/> </td>
+           {% endfor %}
+           <tr>
+           <table>
+           {% if proposal_stage== 'PENDING'%}
+           <dd style="height:30px;"><button style="float:right;width:200px;height:45px;"
+ onclick="window.location.href='http://{{appitem.domain}}{% url 'nanjing:proposal_seconded' appitem.slug proposal.id %}?open_id=openid'">我附议</button></dd>
+           {% else %}
+               {% if proposal_stage== 'DISCUSS' %}               
+               <dd style="height:30px;"><button style="float:right;width:200px;height:45px;"
+ onclick="window.location.href='http://{{appitem.domain}}{% url 'nanjing:proposal_discuss' appitem.slug proposal.id %}?open_id=openid'">发言</button></dd>
+    
+               <dd style="height:30px;"><button style="float:right;width:200px;height:45px;"
+ onclick="window.location.href='http://{{appitem.domain}}{% url 'nanjing:proposal_add' appitem.slug proposal.id %}?open_id=openid&amendment_id=proposal.id'">提交修正案</button></dd>
+               {% else %}
+                   {% if proposal_stage=='VTOE' %}
+                   <dd style="height:30px;"><button style="float:right;width:200px;height:45px;"
+ onclick="window.location.href='http://{{appitem.domain}}{% url 'nanjing:proposal_vote' appitem.slug proposal.id %}?open_id=openid&vote_id=0'">赞成</button></dd>
+                   <dd style="height:30px;"><button style="float:right;width:200px;height:45px;"
+ onclick="window.location.href='http://{{appitem.domain}}{% url 'nanjing:proposal_vote' appitem.slug proposal.id %}?open_id=openid&vote_id=0'">反对</button></dd>
+                   {% endif %}
+               {% endif %}
+           {% endif %}
+       </dl>
+    </div>
+</body>
+</html>

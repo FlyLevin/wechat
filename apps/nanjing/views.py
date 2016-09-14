@@ -278,10 +278,31 @@ def proposal_show(request, slug, pid):
     appitem = get_appitem(slug)
     open_id = request.GET.get('open_id')
     proposal = appitem.proposal_set.get(id = pid)
+
+    if request.method == "GET":
+        proposal_image = proposal.proposal_images.all()
+        proposal_discuss = proposal.proposal_discuss.filter(passed=True).all()
+        proposal_seconded_num = proposal.proposal_seconded.count()
+        proposal_vote_positive_num = proposal.proposal_vote.filter(attitude=True).count()
+        proposal_vote_negative_num = proposal.proposal_vote.filter(attitude=False).count()
+        proposal_stage = proposal_stage_name[proposal.proposal_stage]
+        context = {
+            'appitem': appitem,
+            'openid': open_id,
+            'proposal': proposal,
+            'proposal_image': proposal_image,
+            'proposal_discuss': proposal_discuss,
+            'proposal_seconded_num': proposal_seconded_num,
+            'proposal_vote_positive_num': proposal_vote_positive_num,
+            'proposal_vote_negative_num': proposal_vote_negative_num,
+            'proposal_stage': proposal_stage,
+        }
+        return render_to_response('nanjing/proposal_show_form.html', context,
+        context_instance=RequestContext(request))
     
     return HttpResponseRedirect(request.META.get('HTTP_REFERER', '/'))
 
-'''
+
 def proposal_seconded(request, slug, pid):
     HttpResponseRedirect(request.META.get('HTTP_REFERER', '/'))
 
@@ -290,4 +311,4 @@ def proposal_discuss(request, slug, pid):
 
 def proposal_vote(request, slug, pid):
     return HttpResponseRedirect(request.META.get('HTTP_REFERER', '/'))
-'''
+
