@@ -220,7 +220,7 @@ def proposal_add(request, slug):
     if request.method == "POST":
         title = request.POST.get('title')
         description = request.POST.get('description')
-        openid = request.POST.get('openid')
+        openid = request.POST.get('submitter')
         content = request.POST.get('content')
         files = request.FILES.getlist('fileselect')
         openaccount = appitem.openaccount_set.get(openid=openid)
