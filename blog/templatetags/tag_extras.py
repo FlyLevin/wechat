@@ -6,7 +6,7 @@ register = template.Library()
 
 @register.filter(is_safe=True)
 def get_dict_value(key, dic):
-    if key:
+    if dic:
         return dic.get(key)
     else:
         return ''
