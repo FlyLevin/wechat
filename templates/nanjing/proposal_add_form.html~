@@ -31,14 +31,14 @@ $(function() {
         <div class="widget">
             <div class="navbar">
                 <div class="navbar-inner">
-                    <h6>提出议案</h6>
+                    <h6>提出议案/修正案</h6>
                     
                 </div>
             </div>
             <!-- /options bar -->                            
 
 
-<form action="{% url 'nanjing:activity_add' appitem.slug %}" method="post" enctype='multipart/form-data'>{% csrf_token %}
+<form action="{% url 'nanjing:proposal_add' appitem.slug %}" method="post" enctype='multipart/form-data'>{% csrf_token %}
 <table class="mainTable">
       
       <tr>
@@ -51,7 +51,10 @@ $(function() {
       </tr> -->
       <tr>
         <td class="txtRight">简介：</td>
-        <td><input name="description" type="text" class="inputTxt w240 sh_nes" value="{{proposal.description}}" maxlength="140"/>*<span class="sh_error">请正确填写形式(最大长度140)</span></td>
+        <td>
+            <textarea name="description" type="text/plain" cols=35 rows=2 value="{{proposal.description}}" maxlength="140"/>请正确填写形式(最大长度140)
+            </textarea>
+        </td>
       </tr>
 <!--      <tr>
         <td class="txtRight">地点：</td>
@@ -59,7 +62,17 @@ $(function() {
       </tr> -->
       <tr>
         <td class="txtRight">提案人：</td>
-        <td><input name="submitter" type="text" class="inputTxt w240" value="{{openid}}"/>{{openaccoutn.name}}</td>
+        <td><input name="submitter" type="text" class="inputTxt w240" value="{{openid}}"/>{{openaccount.name}}</td>
+      </tr>
+      <tr>
+        <td class="txtRight">修正案</td>
+		     <td class="txtLeft"> <input name="amendment_id" type="text" class="inputTxt w0" value="{{openid}}"/>
+                {% if amendment == 0 %}
+                否
+		{% else %}
+		是
+		{% endif %}
+        </td>
       </tr>
 <!--      <tr>
         <td class="txtRight">人数：</td>
@@ -68,7 +81,7 @@ $(function() {
       <tr>
         <td class="txtRight">内容：</td>
         <td>
-        <textarea id="textArea" name="content" type="text/plain" cols=40 rows=20>{{proposal.content|safe}}</textarea>
+        <textarea id="textArea" name="content" type="text/plain" cols=35 rows=15>{{proposal.content|safe}}</textarea>
         </td>
       </tr>
 </table>

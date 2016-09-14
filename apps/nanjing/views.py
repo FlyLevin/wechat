@@ -222,6 +222,7 @@ def proposal_add(request, slug):
         description = request.POST.get('description')
         openid = request.POST.get('submitter')
         content = request.POST.get('content')
+        amendment = request.POST.get('amendment_id')
         files = request.FILES.getlist('fileselect')
         openaccount = appitem.openaccount_set.get(openid=openid)
         if openaccount:
@@ -229,6 +230,7 @@ def proposal_add(request, slug):
             proposal = appitem.proposal_set.create(
                 title=title,
                 openid=openid,
+                amendment = amendment,
                 submitter=submitter,
                 content = content,
                 description = description,
@@ -241,13 +243,17 @@ def proposal_add(request, slug):
                 return HttpResponseRedirect(reverse_url(slug))
     elif request.method == "GET":
         open_id = request.GET.get('open_id')
+        amendment = request.GET.get('amendment_id')
+        if not amendment:
+            amendment = 0
         if open_id:
             openaccount = appitem.openaccount_set.get(openid=open_id)
             if openaccount:
                 context = {
                     'appitem': appitem,
                     'openid' : open_id,
-                    'openaccount': openaccount
+                    'openaccount': openaccount,
+                    'amendment': amendment
                 }
                 return render_to_response('nanjing/proposal_add_form.html', context,
                 context_instance=RequestContext(request))

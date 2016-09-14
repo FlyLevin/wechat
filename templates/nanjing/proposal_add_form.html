@@ -31,7 +31,7 @@ $(function() {
         <div class="widget">
             <div class="navbar">
                 <div class="navbar-inner">
-                    <h6>提出议案</h6>
+                    <h6>提出议案/修正案</h6>
                     
                 </div>
             </div>
@@ -63,6 +63,16 @@ $(function() {
       <tr>
         <td class="txtRight">提案人：</td>
         <td><input name="submitter" type="text" class="inputTxt w240" value="{{openid}}"/>{{openaccount.name}}</td>
+      </tr>
+      <tr>
+        <td class="txtRight">修正案</td>
+		     <td class="txtLeft"> <input name="amendment_id" type="text" class="inputTxt w0" value="{{amendment}}"/>
+                {% if amendment == 0 %}
+                否
+		{% else %}
+		是
+		{% endif %}
+        </td>
       </tr>
 <!--      <tr>
         <td class="txtRight">人数：</td>
