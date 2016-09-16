@@ -38,7 +38,7 @@ $(function() {
             <!-- /options bar -->                            
 
 
-<form action="{% url 'nanjing:proposal_discuss' appitem.slug proposal.id%}?open_id={{openid}}" method="post" enctype='multipart/form-data'>{% csrf_token %}
+<form action="{% url 'nanjing:proposal_discuss' appitem.slug proposal.id %}?open_id={{openid}}" method="post" enctype='multipart/form-data'>{% csrf_token %}
 <table class="mainTable">
       
       <tr>
@@ -65,8 +65,8 @@ $(function() {
       <tr>
         <td class="txtRight">赞成：反对</td>
         <td>
-        <input id="id_attitude" name="attitude" type="radio" value="0">赞成</input>
-        <input id="id_attitude" name="attitude" type="radio" value="1">反对</input>
+        <input id="id_attitude" name="attitude" type="radio" value="agree">赞成</input>
+        <input id="id_attitude" name="attitude" type="radio" value="disagree">反对</input>
         </td>
       </tr>
 

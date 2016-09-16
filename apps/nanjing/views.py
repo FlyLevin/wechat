@@ -332,18 +332,22 @@ def proposal_discuss(request, slug, pid):
     if not proposal or not openaccount:
         return return_fail(request, appitem, ERROR_USERID_PARAMETER)
     if request.method == 'POST':
-        if request.POST.get('attitude') == '0':
-            attitude = True
+        attitude_type = request.POST.get('attitude', None)
+        if attitude_type in ["agree", "disagree"]:
+            if attitude_type == "agree":
+                attitude = True
+            else:
+                attitude = False
+            content = request.POST.get('content')
+            proposal_discuss.create(
+                openid = open_id,
+                content = content,
+                attitude = attitude,
+                name = openaccount.lbs,
+            )
+            return HttpResponseRedirect(reverse_url(slug))
         else:
-            attitude = False
-        content = request.POST.get('content')
-        proposal_discuss.create(
-            openid = open_id,
-            content = content,
-            attitude = attitude,
-            name = openaccount.lbs,
-        )
-        return HttpResponseRedirect(reverse_url(slug))
+            return return_fail(request, appitem, ERROR_USERID_PARAMETER)
     else:
         context = {
             'appitem': appitem,
