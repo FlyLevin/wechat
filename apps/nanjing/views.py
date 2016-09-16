@@ -312,19 +312,16 @@ def proposal_seconded(request, slug, pid):
     if not openaccount:
         return return_fail(request, appitem, ERROR_NOTREGISTERED_USER)
     else:
-        if request.method == "POST":
-            proposal_seconded = proposal.proposal_seconded.all()
-            temp = proposal_seconded.get(openid=open_id)
-            if temp:
-                return return_fail(request, appitem, ERROR_USER_ALREADY_SECONDED)
-            else:
-                proposal = appitem.proposal_set.create(
-                    openid=open_id,
-                    name = openaccount.lbs,
-                )
-            return HttpResponseRedirect(reverse_url(slug))
+        proposal_seconded = proposal.proposal_seconded.all()
+        temp = proposal_seconded.get(openid=open_id)
+        if temp:
+            return return_fail(request, appitem, ERROR_USER_ALREADY_SECONDED)
         else:
-            return HttpResponseRedirect(request.META.get('HTTP_REFERER', '/'))
+            proposal = appitem.proposal_set.create(
+                openid=open_id,
+                name = openaccount.lbs,
+            )
+        return HttpResponseRedirect(reverse_url(slug))
 
 def proposal_discuss(request, slug, pid):
     return HttpResponseRedirect(request.META.get('HTTP_REFERER', '/'))
