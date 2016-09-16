@@ -346,6 +346,7 @@ def proposal_discuss(request, slug, pid):
         return HttpResponseRedirect(reverse_url(slug))
     else:
         context = {
+            'appitem': appitem,
             'proposal': proposal,
             'openaccount': openaccount,
             'openid': open_id,
