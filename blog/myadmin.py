@@ -1193,17 +1193,21 @@ def proposal_discuss_action(request, pid):
     action = request.GET.get('action')
     did = request.GET.get('discussid')
     appitem = get_appitem(request.user)
-    proposal = appitem.proposal_set.get(id = pid)
-    discuss = proposal.proposal_discuss.get(id = did)
-    if proposal.proposal_stage == proposal_stages['PROPOSAL_STAGE_DISCUSS']:
-        if action == "1":
-            print "now delete"
-            discuss.delete()
-            proposal.proposal_discuss.delete(id = did)
-        elif action == "0":
-            print "now update"
-            discuss.passed = True
-            discuss.save()
+    try:
+        proposal = appitem.proposal_set.get(id = pid)
+        discuss = proposal.proposal_discuss.get(id = did)
+        if proposal.proposal_stage == proposal_stages['PROPOSAL_STAGE_DISCUSS']:
+            if action == "1":
+                print "now delete"
+                discuss.delete()
+                proposal.proposal_discuss.delete(id = did)
+            elif action == "0":
+                print "now update"
+                discuss.passed = True
+                discuss.save()
+    except Exception,e:
+        print e
+
     context = {
             'appitem': appitem,
             'proposal': proposal,
