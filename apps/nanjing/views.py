@@ -331,7 +331,7 @@ def proposal_discuss(request, slug, pid):
     proposal_discuss = proposal.proposal_discuss
     if not proposal and not openaccount:
         return return_fail(request, appitem, ERROR_USERID_PARAMETER)
-    if request.method = 'POST':
+    if request.method == 'POST':
         if request.POST.get('attitude') == '0':
             attitude = True
         else:
