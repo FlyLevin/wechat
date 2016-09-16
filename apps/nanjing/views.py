@@ -375,7 +375,7 @@ def proposal_vote(request, slug, pid):
         if temp:
             return return_fail(request, appitem, ERROR_USER_ALREADY_VOTE)
         elif vote_id in ['0', '1']:
-            if vote_id == '0'
+            if vote_id == '0':
                 attitude = True
             else:
                 attitude = False
