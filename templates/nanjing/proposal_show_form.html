@@ -44,14 +44,15 @@
            {% endif %}
 
            {% if proposal_vote_positive_num or proposal_vote_negative_num %}  <dd><b>赞成人数 ： 反对人数</b>{{proposal_vote_positive_num}} : {{proposal_vote_negative_num}}</dd> {% endif %}
-           {% if proposal_image %} <dd><b>图片:</b></dd>{% endif %} 
+           {% if proposal_image %} <dd><b>图片:</b></dd>
            <table>
            <tr>
            {% for image in proposal_image %}
            <td style="listimg">   <img src="{{image.get_image_url}}" height="180px"/> </td>
            {% endfor %}
-           <tr>
-           <table>
+           </tr>
+           </table>
+           {% endif %}
            {% if proposal_stage == 'PENDING'%}
            <dd style="height:30px;"><button style="float:right;width:200px;height:45px;"
  onclick="window.location.href='http://{{appitem.domain}}{% url 'nanjing:proposal_seconded' appitem.slug proposal.id %}?open_id=openid'">我附议</button></dd>
