@@ -308,7 +308,7 @@ def proposal_seconded(request, slug, pid):
     open_id = request.GET.get('open_id')
     proposal = appitem.proposal_set.get(id = pid)
 
-    openaccount = appitem.openaccount_set.get(openid=open_id)
+    openaccount = appitem.openaccount_set.filter(openid=open_id).first()
     if not openaccount:
         return return_fail(request, appitem, ERROR_NOTREGISTERED_USER)
     else:
