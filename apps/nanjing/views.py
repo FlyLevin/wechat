@@ -312,8 +312,9 @@ def proposal_seconded(request, slug, pid):
     if not openaccount:
         return return_fail(request, appitem, ERROR_NOTREGISTERED_USER)
     else:
-        proposal_seconded = proposal.proposal_seconded.filter(openid=open_id)
-        if proposal_seconded:
+        proposal_seconded = proposal.proposal_seconded
+        temp = proposal_seconded.filter(openid=open_id)
+        if temp:
             return return_fail(request, appitem, ERROR_USER_ALREADY_SECONDED)
         else:
             proposal = appitem.proposal_set.create(
