@@ -59,16 +59,16 @@
  onclick="window.location.href='http://{{appitem.domain}}{% url 'nanjing:proposal_seconded' appitem.slug proposal.id %}?open_id={{openid}}'">我附议</button></dd>
            {% else %}
                {% if proposal_stage == 'DISCUSS' %}               
-               <dd style="height:30px;"><button style="float:right;width:200px;height:45px;"
+               <dd style="height:30px;"><button style="float:left;width:200px;height:45px;"
  onclick="window.location.href='http://{{appitem.domain}}{% url 'nanjing:proposal_discuss' appitem.slug proposal.id %}?open_id={{openid}}'">发言</button></dd>
     
-               <dd style="height:30px;"><button style="float:right;width:200px;height:45px;"
+               <dd style="height:30px;"><button style="float:left;width:200px;height:45px;"
  onclick="window.location.href='http://{{appitem.domain}}{% url 'nanjing:proposal_add' appitem.slug %}?open_id={{openid}}&amendment_id={{proposal.id}}'">提交修正案</button></dd>
                {% else %}
                    {% if proposal_stage == 'VOTE' %}
-                   <dd style="height:30px;"><button style="float:right;width:200px;height:45px;"
+                   <dd style="height:30px;"><button style="float:left;width:200px;height:45px;"
  onclick="window.location.href='http://{{appitem.domain}}{% url 'nanjing:proposal_vote' appitem.slug proposal.id %}?open_id=openid&vote_id=0'">赞成</button></dd>
-                   <dd style="height:30px;"><button style="float:right;width:200px;height:45px;"
+                   <dd style="height:30px;"><button style="float:left;width:200px;height:45px;"
  onclick="window.location.href='http://{{appitem.domain}}{% url 'nanjing:proposal_vote' appitem.slug proposal.id %}?open_id=openid&vote_id=0'">反对</button></dd>
                    {% endif %}
                {% endif %}
