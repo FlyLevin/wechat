@@ -362,5 +362,28 @@ def proposal_discuss(request, slug, pid):
 
 
 def proposal_vote(request, slug, pid):
+    appitem = get_appitem(slug)
+    open_id = request.GET.get('open_id')
+    vote_id = request.GET.get('vote_id')
+    proposal = appitem.proposal_set.get(id = pid)
+    openaccount = appitem.openaccount_set.filter(openid=open_id).first()
+    proposal_vote = proposal.proposal_vote
+    if not proposal or not openaccount:
+        return return_fail(request, appitem, ERROR_USERID_PARAMETER)
+    else:
+        temp = proposal_vote.filter(openid=open_id)
+        if temp:
+            return return_fail(request, appitem, ERROR_USER_ALREADY_VOTE)
+        elif vote_id in ['0', '1']:
+            if vote_id == '0'
+                attitude = True
+            else:
+                attitude = False
+            proposal_vote.create(
+                openid = open_id,
+                name = openaccount.lbs,
+                attitude = attitude,
+            )
+            return HttpResponseRedirect(reverse_url(slug))
     return HttpResponseRedirect(request.META.get('HTTP_REFERER', '/'))
 
