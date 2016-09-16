@@ -304,10 +304,30 @@ def proposal_show(request, slug, pid):
 
 
 def proposal_seconded(request, slug, pid):
-    HttpResponseRedirect(request.META.get('HTTP_REFERER', '/'))
+    appitem = get_appitem(slug)
+    open_id = request.GET.get('open_id')
+    proposal = appitem.proposal_set.get(id = pid)
+
+    openaccount = appitem.openaccount_set.get(openid=open_id)
+    if not openaccount:
+        return return_fail(request, appitem, ERROR_NOTREGISTERED_USER)
+    else:
+        if request.method == "POST":
+            proposal_seconded = proposal.proposal_seconded.all()
+            temp = proposal_seconded.get(openid=open_id)
+            if temp:
+                return return_fail(request, appitem, ERROR_USER_ALREADY_SECONDED)
+            else:
+                proposal = appitem.proposal_set.create(
+                    openid=open_id,
+                    name = openaccount.lbs,
+                )
+            return HttpResponseRedirect(reverse_url(slug))
+        else:
+            return HttpResponseRedirect(request.META.get('HTTP_REFERER', '/'))
 
 def proposal_discuss(request, slug, pid):
-    HttpResponseRedirect(request.META.get('HTTP_REFERER', '/'))
+    return HttpResponseRedirect(request.META.get('HTTP_REFERER', '/'))
 
 def proposal_vote(request, slug, pid):
     return HttpResponseRedirect(request.META.get('HTTP_REFERER', '/'))
