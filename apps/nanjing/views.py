@@ -324,7 +324,36 @@ def proposal_seconded(request, slug, pid):
         return HttpResponseRedirect(reverse_url(slug))
 
 def proposal_discuss(request, slug, pid):
-    return HttpResponseRedirect(request.META.get('HTTP_REFERER', '/'))
+    appitem = get_appitem(slug)
+    open_id = request.GET.get('open_id')
+    proposal = appitem.proposal_set.get(id = pid)
+    openaccount = appitem.openaccount_set.filter(openid=open_id).first()
+    proposal_discuss = proposal.proposal_discuss
+    if not (proposal and openaccount):
+        return return_fail(request, appitem, ERROR_USERID_PARAMETER)
+    if request.method = 'POST':
+        if request.POST.get('attitude') == '0':
+            attitude = True
+        else:
+            attitude = False
+        content = request.POST.get('content')
+        proposal.discuss.create(
+            openid = open_id,
+            content = content,
+            attitude = attitude,
+            name = openaccount.lbs,
+        )
+        return HttpResponseRedirect(reverse_url(slug))
+    else:
+        context = {
+            'proposal' = proposal,
+            'openaccount' = openaccount,
+            'openid' = open_id,
+            'discuss' = proposal_discuss,
+        }
+        return render_to_response('nanjing/proposal_discuss_form.html', context,
+    context_instance=RequestContext(request))
+
 
 def proposal_vote(request, slug, pid):
     return HttpResponseRedirect(request.META.get('HTTP_REFERER', '/'))

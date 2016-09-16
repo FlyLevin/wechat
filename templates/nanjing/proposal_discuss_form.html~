@@ -1,0 +1,95 @@
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link href="/static/watch/css/change.css" rel="stylesheet" type="text/css" />
+<script>
+$(function() {
+
+    $("input").blur(function() {
+        if ($(this).val() == '') {
+            $(this).next().addClass('visible');
+        } else {
+            $(this).next().removeClass('visible');
+        }
+    });
+
+    $('.submit').click(function() {
+        var a = 0;
+        $('.sh_nes').each(function() {
+            if ($(this).val() == '') {
+                a = 1;
+            }
+        });
+        if(a == 1){
+       	alert('请完整填写表单');
+        return false;
+        }
+    });
+});
+</script>
+
+<div id="content" class="span10">
+    <div class="wrapper">
+        <div class="widget">
+            <div class="navbar">
+                <div class="navbar-inner">
+                    <h6>发言</h6>
+                    
+                </div>
+            </div>
+            <!-- /options bar -->                            
+
+
+<form action="{% url 'nanjing:proposal_add' appitem.slug %}" method="post" enctype='multipart/form-data'>{% csrf_token %}
+<table class="mainTable">
+      
+      <tr>
+        <td class="txtRight">标题：</td>
+        <td class="txtLeft">{{proposal.title}}</td>
+      </tr>
+<!--      <tr>
+        <td class="txtRight">时间：</td>
+        <td><input name="a_time" type="text" class="inputTxt w240 sh_nes" value="{{activity.a_time}}"/>*<span class="sh_error">请正确填写时间</span></td>
+      </tr> -->
+<!--      <tr>
+        <td class="txtRight">地点：</td>
+        <td><input name="place" type="text" class="inputTxt w240 sh_nes" value="{{activity.place}}"/>*<span class="sh_error">请正确填写地点</span></td>
+      </tr> -->
+      <tr>
+        <td class="txtRight">提案人：</td>
+        <td><input name="submitter" type="hidden" class="inputTxt w240" value="{{openid}}"/>{{openaccount.lbs}}</td>
+      </tr>
+      <tr>
+<!--      <tr>
+        <td class="txtRight">人数：</td>
+        <td><input name="count" type="text" class="inputTxt w240 sh_nes" value="{{activity.count|default:0}}"/>*<span class="sh_error">请正确填写人数</span></td>
+      </tr> -->
+      <tr>
+        <td class="txtRight">赞成：反对</td>
+        <td>
+        <input id="id_attitude" name="attitude" type="radio" value="0">赞成</input>
+        <input id="id_attitude" name="attitude" type="radio" value="1">反对</input>
+        </td>
+      </tr>
+
+      <tr>
+        <td class="txtRight">内容：</td>
+        <td>
+        <textarea id="textArea" name="content" type="text/plain" cols=35 rows=15>{{discuss.content|safe}}</textarea>
+        </td>
+      </tr>
+</table>
+
+<table>
+<tr>
+    <td colspan="2" align="center"><input name="" type="submit" class="inputBut mr10 submit"  value=">提交"/></td>
+</tr>
+</table>
+</form>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<link rel="stylesheet" href="/static/myadmin/css/list.css" />
+
+

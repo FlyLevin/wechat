@@ -29,14 +29,14 @@
                     <td style = "width:100px;">
                     {% for discuss in proposal_discuss %}
                         {% if discuss.attitude %}
-                        {{ discuss.content }} <br/>
+                        {{ discuss.content }}  提出人: {{discuss.name}}<br/>
                         {% endif %}
                     {% endfor %}
                     </td>
                     <td style = "width:100px;">
                     {% for discuss in proposal_discuss %}
                         {% if not discuss.attitude %}
-                        {{ discuss.content }} <br/>
+                        {{ discuss.content }}  提出人: {{discuss.name}}<br/>
                         {% endif %}
                     {% endfor %}
                     </td>
@@ -67,9 +67,9 @@
                {% else %}
                    {% if proposal_stage == 'VOTE' %}
                    <dd style="height:45px;"><button style="float:left;width:200px;height:30px;"
- onclick="window.location.href='http://{{appitem.domain}}{% url 'nanjing:proposal_vote' appitem.slug proposal.id %}?open_id=openid&vote_id=0'">赞成</button></dd>
+ onclick="window.location.href='http://{{appitem.domain}}{% url 'nanjing:proposal_vote' appitem.slug proposal.id %}?open_id={{openid}}&vote_id=0'">赞成</button></dd>
                    <dd style="height:45px;"><button style="float:left;width:200px;height:30px;"
- onclick="window.location.href='http://{{appitem.domain}}{% url 'nanjing:proposal_vote' appitem.slug proposal.id %}?open_id=openid&vote_id=0'">反对</button></dd>
+ onclick="window.location.href='http://{{appitem.domain}}{% url 'nanjing:proposal_vote' appitem.slug proposal.id %}?open_id={{openid}}&vote_id=0'">反对</button></dd>
                    {% endif %}
                {% endif %}
            {% endif %}
