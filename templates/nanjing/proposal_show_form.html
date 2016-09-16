@@ -47,7 +47,7 @@
            {% if proposal_image %} <dd><b>图片:</b></dd>{% endif %} 
            <table>
            <tr>
-           {% for image in activity.activity_images.all %}
+           {% for image in proposal_image %}
            <td style="listimg">   <img src="{{image.get_image_url}}" height="180px"/> </td>
            {% endfor %}
            <tr>
