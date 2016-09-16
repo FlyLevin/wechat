@@ -317,7 +317,7 @@ def proposal_seconded(request, slug, pid):
         if temp:
             return return_fail(request, appitem, ERROR_USER_ALREADY_SECONDED)
         else:
-            proposal = appitem.proposal_set.create(
+            proposal_seconded.create(
                 openid=open_id,
                 name = openaccount.lbs,
             )
