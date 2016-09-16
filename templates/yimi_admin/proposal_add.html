@@ -72,7 +72,7 @@ $(function() {
             <!-- /options bar -->                            
 
 
-<form id="uploadForm" action="{% url 'yimi_admin:proposal_add' %}?pid={{pid.id}}" method="post" enctype='multipart/form-data' >{% csrf_token %}
+<form id="uploadForm" action="{% url 'yimi_admin:proposal_add' %}?pid={{proposal.id}}" method="post" enctype='multipart/form-data' >{% csrf_token %}
 <table class="mainTable">
       
       <tr>
