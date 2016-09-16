@@ -1204,6 +1204,12 @@ def proposal_discuss_action(request, pid):
             print "now update"
             discuss.passed = True
             discuss.save()
+        context = {
+                'appitem': appitem,
+                'proposal': proposal,
+        }
+        return render_to_response('yimi_admin/proposal_item_list.html', context,
+                context_instance=RequestContext(request))
     return HttpResponseRedirect(request.META.get('HTTP_REFERER', '/'))
 
 
