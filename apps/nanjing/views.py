@@ -329,7 +329,7 @@ def proposal_discuss(request, slug, pid):
     proposal = appitem.proposal_set.get(id = pid)
     openaccount = appitem.openaccount_set.filter(openid=open_id).first()
     proposal_discuss = proposal.proposal_discuss
-    if not (proposal and openaccount):
+    if not proposal and not openaccount:
         return return_fail(request, appitem, ERROR_USERID_PARAMETER)
     if request.method = 'POST':
         if request.POST.get('attitude') == '0':
