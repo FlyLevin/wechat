@@ -28,5 +28,5 @@ for i in range(len(proposal_stages)):
 ERROR_NOTSUBSCRIBE_OR_ID_EXIST = "该身份证号码已被实名或输入有误 请重新输入"
 ERROR_NOTREGISTERED_USER = "非认证用户 请首先实名认证"
 ERROR_USER_ALREADY_SECONDED = "你已经附议 请勿重复提交"
-ERROR_USER_ALREADY_SECONDED = "你已经投票 请勿重复提交"
+ERROR_USER_ALREADY_VOTE = "你已经投票 请勿重复提交"
 ERROR_USERID_PARAMETER = "参数错误 请求处理失败 请重新提交"
