@@ -333,6 +333,7 @@ def proposal_discuss(request, slug, pid):
         return return_fail(request, appitem, ERROR_USERID_PARAMETER)
     if request.method == 'POST':
         attitude_type = request.POST.get('attitude', None)
+        print attitude_type
         if attitude_type in ["agree", "disagree"]:
             if attitude_type == "agree":
                 attitude = True
