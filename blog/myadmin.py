@@ -1201,6 +1201,7 @@ def proposal_discuss_action(request, pid):
             proposal.proposal_discuss.delete(id = did)
         elif action == 0:
             discuss.passed = True
+            discuss.save()
     return HttpResponseRedirect(request.META.get('HTTP_REFERER', '/'))
 
 
