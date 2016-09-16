@@ -1197,9 +1197,11 @@ def proposal_discuss_action(request, pid):
     discuss = proposal.proposal_discuss.get(id = did)
     if proposal.proposal_stage == proposal_stages['PROPOSAL_STAGE_DISCUSS']:
         if action == 1:
+            print "now delete"
             discuss.delete()
             proposal.proposal_discuss.delete(id = did)
         elif action == 0:
+            print "now update"
             discuss.passed = True
             discuss.save()
     return HttpResponseRedirect(request.META.get('HTTP_REFERER', '/'))
