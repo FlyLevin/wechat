@@ -337,7 +337,7 @@ def proposal_discuss(request, slug, pid):
         else:
             attitude = False
         content = request.POST.get('content')
-        proposal.discuss.create(
+        proposal_discuss.create(
             openid = open_id,
             content = content,
             attitude = attitude,
