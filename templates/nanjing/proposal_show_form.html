@@ -69,7 +69,7 @@
                    <dd style="height:45px;"><button style="float:left;width:200px;height:30px;"
  onclick="window.location.href='http://{{appitem.domain}}{% url 'nanjing:proposal_vote' appitem.slug proposal.id %}?open_id={{openid}}&vote_id=0'">赞成</button></dd>
                    <dd style="height:45px;"><button style="float:left;width:200px;height:30px;"
- onclick="window.location.href='http://{{appitem.domain}}{% url 'nanjing:proposal_vote' appitem.slug proposal.id %}?open_id={{openid}}&vote_id=0'">反对</button></dd>
+ onclick="window.location.href='http://{{appitem.domain}}{% url 'nanjing:proposal_vote' appitem.slug proposal.id %}?open_id={{openid}}&vote_id=1'">反对</button></dd>
                    {% endif %}
                {% endif %}
            {% endif %}

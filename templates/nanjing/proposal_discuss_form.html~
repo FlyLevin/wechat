@@ -38,7 +38,7 @@ $(function() {
             <!-- /options bar -->                            
 
 
-<form action="{% url 'nanjing:proposal_add' appitem.slug %}" method="post" enctype='multipart/form-data'>{% csrf_token %}
+<form action="{% url 'nanjing:proposal_discuss' appitem.slug proposal.id %}?open_id={{openid}}" method="post" enctype='multipart/form-data'>{% csrf_token %}
 <table class="mainTable">
       
       <tr>
