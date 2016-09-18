@@ -217,7 +217,6 @@ def show_question(request, slug):
 
 def proposal_add(request, slug):
     appitem = get_appitem(slug)
-    openaccount = None
     if request.method == "POST":
         title = request.POST.get('title')
         description = request.POST.get('description')
@@ -225,8 +224,7 @@ def proposal_add(request, slug):
         content = request.POST.get('content')
         amendment = request.POST.get('amendment_id')
         files = request.FILES.getlist('fileselect')
-        if openid:
-            openaccount = appitem.openaccount_set.get(openid=openid)
+        openaccount = appitem.openaccount_set.get(openid=openid)
         if openaccount:
             submitter = openaccount.lbs
             proposal = appitem.proposal_set.create(
@@ -249,7 +247,7 @@ def proposal_add(request, slug):
         if not amendment:
             amendment = 0
         if open_id:
-            openaccount = appitem.openaccount_set.get(openid=open_id)
+            openaccount = appitem.openaccount_set.filter(openid=open_id).first()
             if openaccount:
                 context = {
                     'appitem': appitem,
