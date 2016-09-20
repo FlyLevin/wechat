@@ -18,8 +18,8 @@
 			</tr>
 		</thead>
 	    {% for proposal in proposals %}
-         <tbody>
-             <tr style = "border-top: dotted">
+         <tbody style = "border-top: dotted">
+             <tr>
              <td style = "width:100"><a href="{% url 'nanjing:proposal_show' appitem.slug proposal.id%}?open_id={{openid}}">{{proposal.title}}</td>
              <td style = "width:200px;">{{proposal.description}}</td>
              </tr>
