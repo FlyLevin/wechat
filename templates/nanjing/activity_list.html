@@ -23,7 +23,7 @@
            <table>
            <tr>
            {% for image in activity.activity_images.all %}
-           <td style="listimg">   <img src="{{image.get_image_url}}" height="180px"/> </td>
+           <td style="listimg">   <img src="{{image.get_image_url}}" style="max-width: 250px;"/> </td>
            {% endfor %}
            <tr>
            <table>
