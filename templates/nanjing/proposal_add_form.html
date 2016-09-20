@@ -87,7 +87,7 @@ $(function() {
 </table>
 
 <div class="upload_main">
-    <div style="border-bottom:1px solid #fff;" class="txtRight">上传活动图片(最多三张)：</div>
+    <div style="border-bottom:1px solid #fff;" class="txtRight">上传图片(最多三张,不大于5M)：</div>
     <div class="upload_choose">
         <input id="Image" type="file" size="30" name="fileselect" multiple />
     </div>
@@ -118,8 +118,8 @@ var params = {
 		for (var i = 0, file; file = files[i]; i++) {
                         if (i>2) break;
 			if (file.type.indexOf("image") == 0) {
-				if (file.size >= 512000) {
-					alert('您这张"'+ file.name +'"图片大小过大，应小于500k');	
+				if (file.size >= 5120000) {
+					alert('您这张"'+ file.name +'"图片大小过大，应小于5M');	
 				} else{ 
                                         arrFiles.push(file);	
                                 }

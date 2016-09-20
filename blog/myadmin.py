@@ -825,8 +825,8 @@ def activity_add(request):
     appitem = get_appitem(request.user)
     aid = request.GET.get("aid")
     if aid:
-        picture = activity.activity_images.all()
         activity = appitem.activity_set.get(id=aid)
+        picture = activity.activity_images.all()
     else:
         activity = None
         picture = None
