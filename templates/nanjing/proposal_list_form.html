@@ -10,7 +10,7 @@
 <body>
 
 	<div class="wrap">
-        <table class="list_box" style="padding:20px;border :solid; border-collapse:collapse; " >
+        <table class="list_box" style="padding:20px;" >
          <thead>
 			 <tr>
 				 <th style="font-size:15px;">议案名称</th>
@@ -19,8 +19,8 @@
 		</thead>
 	    {% for proposal in proposals %}
          <tbody>
-             <tr>
-             <td style = "width:100;"><a href="{% url 'nanjing:proposal_show' appitem.slug proposal.id%}?open_id={{openid}}">{{proposal.title}}</td>
+             <tr style = "border-top: dotted">
+             <td style = "width:100"><a href="{% url 'nanjing:proposal_show' appitem.slug proposal.id%}?open_id={{openid}}">{{proposal.title}}</td>
              <td style = "width:200px;">{{proposal.description}}</td>
              </tr>
          </tbody>
