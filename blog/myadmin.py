@@ -1091,7 +1091,7 @@ def proposal_threshold(request, pid):
             proposal.update_proposal_stage()
         return HttpResponseRedirect(reverse("yimi_admin:proposal_list"))
 
-    if proposal.proposal_stage == proposal_stages['PROPOSAL_STAGE_CLOSE']:
+    if proposal.proposal_stage in [proposal_stages['PROPOSAL_STAGE_PENDING'], proposal_stages['PROPOSAL_STAGE_CLOSE']]:
         context = {
             'apptiem': appitem,
             'proposal': proposal,
