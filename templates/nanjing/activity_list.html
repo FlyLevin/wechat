@@ -7,9 +7,9 @@
 </head>
 
 <body>
-	<div class="wrap">
+    <div id="wapper" class="wrap">
 	    {% for activity in matchs %}
-    	<dl class="list_box" style="padding:30px;">
+    	<dl id="main-content" class="list_box" style="padding:30px;">
         	<dt style="font-size:40px;">{{activity.title}}</dt>
            {% if activity.a_time %} <dd><b>时间：</b>{{activity.a_time}}</dd> {% endif %}
            {% if activity.xingshi %} <dd><b>形式：</b>{{activity.xingshi}}</dd> {% endif %}
@@ -23,14 +23,14 @@
            <table>
            <tr>
            {% for image in activity.activity_images.all %}
-           <td style="listimg">   <img src="{{image.get_image_url}}" style="max-width: 250px;"/> </td>
+           <td style="listimg">   <img src="{{image.get_image_url}}" style="max-width: 350px;"/> </td>
            {% endfor %}
            <tr>
            <table>
         </dl>
         {% endfor %}
     </div>
-    <div class="tools">
+    <div id="footer" class="tools">
     	<a href="{% if matchs.has_previous %}?p={{matchs.previous_page_number }}{% endif %}" class="left">上一页</a>
         <a href="{% if matchs.has_next %}?p={{matchs.next_page_number}}{% endif %}" class="right click">下一页</a>
     </div>
