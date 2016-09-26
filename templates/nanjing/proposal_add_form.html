@@ -52,7 +52,8 @@ $(function() {
       <tr>
         <td class="txtRight">简介：</td>
         <td>
-            <textarea name="description" type="text/plain" cols=35 rows=2 value="{{proposal.description}}" maxlength="140" placeholder="请正确填写形式(最大长度140)" /> </textarea>
+            <label for="description">请正确填写形式(最大长度140)</label>
+            <textarea name="description" id="description" type="text/plain" cols=35 rows=2 value="{{proposal.description}}" maxlength="140" /> </textarea>
         </td>
       </tr>
 <!--      <tr>
