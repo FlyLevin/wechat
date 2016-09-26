@@ -8,8 +8,9 @@
 
 <body >
 	<div class="formWrap">
-    	<div class="cgBox">{{emsg}}</div>
-        
+    	<div class="cgBox">
+             <input type="button" value={{emsg}} onclick = "WeixinJSBridge.call('closeWindow');"/>
+        </div>        
     </div>
     
 </body>
